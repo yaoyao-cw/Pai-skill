@@ -1,2 +1,24 @@
 # Pai-skill
-PAI agent skills — design.md, UI, and related coding-agent skills
+
+PAI 的 agent skill 仓库。按领域分目录存放可被 Grok / Claude / 其他 coding agent 加载的 `SKILL.md`。
+
+## 目录
+
+```
+设计和UI/
+  design-md/          把品牌判断写成 design.md，约束 CSS primitives，避免通用 SaaS 布局
+```
+
+## 安装
+
+把某个 skill 目录拷到 agent 的 skills 路径，例如：
+
+```bash
+cp -R 设计和UI/design-md ~/.grok/skills/design-md
+```
+
+或从本仓库安装：
+
+https://github.com/yaoyao-cw/Pai-skill/tree/main/设计和UI/design-md
+
+新开一轮对话后才会被发现。
