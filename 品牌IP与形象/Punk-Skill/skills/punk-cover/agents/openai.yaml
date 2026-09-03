@@ -1,0 +1,4 @@
+interface:
+  display_name: "Punk Cover"
+  short_description: "Generate cover images from curated visual templates"
+  default_prompt: "Use $punk-cover to turn this article or topic into a cover image."
