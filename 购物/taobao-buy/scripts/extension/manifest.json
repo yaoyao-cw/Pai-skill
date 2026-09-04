@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "淘宝抢购助手",
+  "version": "1.1.0",
+  "description": "开售整点备份点击「立即购买」/「提交订单」。不点规格、不点购物车、不开售前不下单。",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://item.taobao.com/*",
+        "https://item.tmall.com/*",
+        "https://buy.taobao.com/*",
+        "https://buy.tmall.com/*",
+        "https://buy.alitrip.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
