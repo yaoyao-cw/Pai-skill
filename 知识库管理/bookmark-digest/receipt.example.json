@@ -1,0 +1,7 @@
+{
+  "schema_version": "bookmark-digest.receipt.v1",
+  "status": "accepted",
+  "source_url": "https://x.com/example/status/123",
+  "consumer": "research",
+  "receipt_id": "research-123"
+}
