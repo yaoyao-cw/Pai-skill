@@ -7,6 +7,8 @@ PAI 的 agent skill 仓库。按领域分目录存放可被 Grok / Claude / 其�
 ```
 设计和UI/
   design-md/                      把品牌判断写成 design.md，约束 CSS primitives，避免通用 SaaS 布局
+  holo-card/                      分层全息卡片（LerSent001，MIT）
+  brands-design-md/               品牌 DESIGN.md 参考库（ricocc；无 SKILL.md）
 品牌IP与形象/
   ip-as-logo/                     极简圆角吉祥物方图（s1dashu，MIT）
   personal-ip-image-pack/         授权照片转个人卡通 IP（DoraRabbitYan）
@@ -15,6 +17,14 @@ PAI 的 agent skill 仓库。按领域分目录存放可被 Grok / Claude / 其�
   ip_illustration_for_yourself/   萌粒风个人 IP 全套（EverettFish）
   avatar-forge-skill/             风格锁定头像 AvatarForge（SeasonXue，MIT）
   Punk-Skill/                     punk-avatar + punk-cover（adrianpunk）
+知识库管理/
+  bookmark-digest/                X Bookmarks → 带回执的 agent inbox（runesleo，MIT）
+  afu-llm-todo/                   管家阿福：Obsidian inbox → wiki → todo（LearnPrompt，MIT）
+自媒体/
+  Easel/                          社媒智能体 skills/openclaw 包（ZJU-REAL，Apache-2.0）
+Skills工具/
+  luban/                          Skill 打磨工坊（LearnPrompt，MIT）
+  kitter/                         Skill 库管理 CLI（what1f，Apache-2.0）
 购物/
   taobao-buy/                     淘宝下单与限时抢购：真实鼠标选规格、整点立即购买、验证码与付款交接
 ```
@@ -29,6 +39,11 @@ cp -R 品牌IP与形象/pai-infinite-loop-ip ~/.grok/skills/pai-infinite-loop-ip
 cp -R 品牌IP与形象/avatar-forge-skill ~/.grok/skills/avatar-forge-skill
 cp -R 品牌IP与形象/Punk-Skill/skills/punk-avatar ~/.grok/skills/punk-avatar
 cp -R 购物/taobao-buy ~/.grok/skills/taobao-buy
+cp -R 设计和UI/holo-card ~/.grok/skills/holo-card
+cp -R 知识库管理/bookmark-digest ~/.grok/skills/bookmark-digest
+cp -R 知识库管理/afu-llm-todo ~/.grok/skills/afu-llm-todo
+cp -R Skills工具/luban ~/.grok/skills/luban
+cp -R Skills工具/kitter ~/.grok/skills/kitter
 ```
 
 新开一轮对话后才会被发现。
