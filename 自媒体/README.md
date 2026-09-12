@@ -7,6 +7,7 @@
 | 目录 | 用途 | 来源 |
 | --- | --- | --- |
 | `Easel/` | OpenClaw 自媒体 skill 包（优先 `skills/openclaw`） | [ZJU-REAL/Easel](https://github.com/ZJU-REAL/Easel) |
+| `summer-swimsuit-candid-pov/` | 成年人物夏季泳装、男友/朋友 POV 自然抓拍提示词（只交提示词） | [huangguoyang/summer-swimsuit-candid-pov](https://github.com/huangguoyang/summer-swimsuit-candid-pov) |
 
 ## 安装
 

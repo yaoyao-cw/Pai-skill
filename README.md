@@ -24,6 +24,7 @@ PAI 的 agent skill 仓库。按领域分目录存放可被 Grok / Claude / 其�
   afu-llm-todo/                   管家阿福 Inbox → Wiki → Todo Card → Calendar（LearnPrompt）
 自媒体/
   Easel/                          OpenClaw 自媒体 skill 包（ZJU-REAL）
+  summer-swimsuit-candid-pov/     成年人物夏季泳装 POV 抓拍提示词（huangguoyang）
 Skills工具/
   luban/                          鲁班：打磨可传播的 Skill 资产（LearnPrompt）
   kitter/                         Kitter CLI skill 库管理（what1f）
