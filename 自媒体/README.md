@@ -7,6 +7,7 @@
 | 目录 | 用途 | 来源 |
 | --- | --- | --- |
 | `Easel/` | OpenClaw 自媒体 skill 包（优先 `skills/openclaw`） | [ZJU-REAL/Easel](https://github.com/ZJU-REAL/Easel) |
+| `wedding-video-guided-wizard/` | 14 步婚礼真实故事视频引导式 Skill | [aaronyi97/wedding-video-guided-wizard](https://github.com/aaronyi97/wedding-video-guided-wizard) |
 
 ## 安装
 

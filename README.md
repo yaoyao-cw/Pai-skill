@@ -9,6 +9,7 @@ PAI 的 agent skill 仓库。按领域分目录存放可被 Grok / Claude / 其�
   design-md/                      把品牌判断写成 design.md，约束 CSS primitives，避免通用 SaaS 布局
   holo-card/                      从图片生成可交互全息卡（LerSent001）
   brands-design-md/               品牌 DESIGN.md / tokens 参考库（ricocc，无 SKILL.md）
+  jakubkrehel-skills/             界面工程 Skill 合集（jakubkrehel）
 品牌IP与形象/
   ip-as-logo/                     极简圆角吉祥物方图（s1dashu，MIT）
   personal-ip-image-pack/         授权照片转个人卡通 IP（DoraRabbitYan）
@@ -24,6 +25,7 @@ PAI 的 agent skill 仓库。按领域分目录存放可被 Grok / Claude / 其�
   afu-llm-todo/                   管家阿福 Inbox → Wiki → Todo Card → Calendar（LearnPrompt）
 自媒体/
   Easel/                          OpenClaw 自媒体 skill 包（ZJU-REAL）
+  wedding-video-guided-wizard/    14 步婚礼真实故事视频引导式 Skill（aaronyi97）
 Skills工具/
   luban/                          鲁班：打磨可传播的 Skill 资产（LearnPrompt）
   kitter/                         Kitter CLI skill 库管理（what1f）
