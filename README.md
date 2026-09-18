@@ -24,6 +24,7 @@ PAI 的 agent skill 仓库。按领域分目录存放可被 Grok / Claude / 其�
   afu-llm-todo/                   管家阿福 Inbox → Wiki → Todo Card → Calendar（LearnPrompt）
 自媒体/
   Easel/                          OpenClaw 自媒体 skill 包（ZJU-REAL）
+  yichen-jianying-edit/           剪映无界面草稿生成/修改与可选原生导出（mcncarl/yichen-skills；私有核心另装）
 Skills工具/
   luban/                          鲁班：打磨可传播的 Skill 资产（LearnPrompt）
   kitter/                         Kitter CLI skill 库管理（what1f）
@@ -42,6 +43,7 @@ cp -R 品牌IP与形象/Punk-Skill/skills/punk-avatar ~/.grok/skills/punk-avatar
 cp -R 购物/taobao-buy ~/.grok/skills/taobao-buy
 cp -R 知识库管理/bookmark-digest ~/.grok/skills/bookmark-digest
 cp -R 知识库管理/afu-llm-todo ~/.grok/skills/afu-llm-todo
+cp -R 自媒体/yichen-jianying-edit ~/.grok/skills/yichen-jianying-edit
 cp -R Skills工具/luban ~/.grok/skills/luban
 cp -R Skills工具/kitter ~/.grok/skills/kitter
 ```
