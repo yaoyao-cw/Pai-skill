@@ -8,6 +8,9 @@
 | --- | --- | --- |
 | `Easel/` | OpenClaw 自媒体 skill 包（优先 `skills/openclaw`） | [ZJU-REAL/Easel](https://github.com/ZJU-REAL/Easel) |
 | `yichen-jianying-edit/` | 匹配版剪映上无界面生成/修改原生草稿，或按明确要求导出原生 MP4 | [mcncarl/yichen-skills](https://github.com/mcncarl/yichen-skills/tree/main/yichen-jianying-edit) |
+| `qiaomu-download/` | 通用在线视频下载与媒体提取（yt-dlp） | [joeseesun/qiaomu-download](https://github.com/joeseesun/qiaomu-download) |
+| `post-production-skill/` | Seedance 2.5 后期 VFX / 转场提示词 | [huangbai-AI/post-production-skill](https://github.com/huangbai-AI/post-production-skill) |
+| `autoclip/` | 高光剪辑产品的 Agent Skill 入口（不含完整产品） | [zhouxiaoka/autoclip](https://github.com/zhouxiaoka/autoclip) |
 
 ## 安装
 
