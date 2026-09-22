@@ -1,0 +1,4 @@
+interface:
+  display_name: "复古科技后期特效"
+  short_description: "把创意或参考素材改写成复古工作室电影级后期特效视频提示词"
+  default_prompt: "使用 $sd-2-5-retro-vfx，把我的创意或参考素材改写成复古工作室电影级后期特效视频提示词。"

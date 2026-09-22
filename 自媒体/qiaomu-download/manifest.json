@@ -1,0 +1,107 @@
+{
+  "name": "qiaomu-download",
+  "version": "1.3.0",
+  "owner": "向阳乔木",
+  "updated_at": "2026-09-20",
+  "status": "release-candidate",
+  "maturity_tier": "governed",
+  "lifecycle_stage": "production-candidate",
+  "license": "MIT",
+  "entrypoint": "scripts/download.py",
+  "runtime": "python>=3.10",
+  "upstream_inspiration": "https://github.com/yt-dlp/yt-dlp",
+  "dependencies": [
+    "yt-dlp",
+    "ffmpeg",
+    "ffprobe",
+    "embedded WeChat Channels adapter",
+    "embedded Spotify public-metadata matcher",
+    "optional locked wx_channels_download backend"
+  ],
+  "platforms": [
+    "wechat-channels",
+    "spotify-track",
+    "youtube",
+    "bilibili",
+    "x",
+    "douyin",
+    "tiktok",
+    "xiaohongshu",
+    "instagram",
+    "facebook",
+    "vimeo",
+    "twitch",
+    "reddit",
+    "weibo",
+    "acfun",
+    "generic-yt-dlp"
+  ],
+  "intent": {
+    "job_to_be_done": "When the user expresses download intent and provides an HTTPS URL, dispatch WeChat Channels and Spotify tracks to governed embedded adapters or use yt-dlp for other sites, then return verified local artifacts.",
+    "target_users": [
+      "Qiaomu operator",
+      "public skill installer"
+    ],
+    "inputs": [
+      "explicit download or save intent plus one HTTPS URL",
+      "optional quality, subtitle language, cookie, and output preferences"
+    ],
+    "outputs": [
+      "verified video or MP3",
+      "downloaded subtitles",
+      "structured metadata",
+      "structured WeChat manual/setup state when a local connection is required",
+      "Spotify metadata-to-public-audio match evidence"
+    ],
+    "exclusions": [
+      "DRM bypass",
+      "access-control bypass",
+      "unbounded playlists",
+      "silent credential export",
+      "Xiaohongshu UI automation",
+      "automated login CAPTCHA or security verification",
+      "WeChat UI automation",
+      "silent sharing of WeChat URLs with third parties",
+      "silent certificate trust or proxy mutation",
+      "Spotify DRM or local cache extraction",
+      "unbounded Spotify album or playlist download"
+    ]
+  },
+  "qiaomu_defaults": {
+    "copyright": "Copyright (c) 向阳乔木",
+    "x": "https://x.com/vista8",
+    "github": "https://github.com/joeseesun/"
+  },
+  "release_gates": [
+    "package validation",
+    "trigger evaluation",
+    "secret scan",
+    "clean local install proof",
+    "YouTube Bilibili and X provider probes",
+    "verified X media download proof",
+    "Spotify public metadata and scored-match tests",
+    "human security review",
+    "embedded WeChat adapter unit tests",
+    "WeChat no-UI and explicit-resolver-consent contract",
+    "locked backend hash validation"
+  ],
+  "upstream_components": [
+    {
+      "name": "yt-dlp",
+      "source": "https://github.com/yt-dlp/yt-dlp",
+      "role": "general extractor runtime"
+    },
+    {
+      "name": "spotDL",
+      "source": "https://github.com/spotDL/spotify-downloader",
+      "role": "matching-strategy prior art; not a runtime dependency",
+      "license_note": "MIT"
+    },
+    {
+      "name": "wx_channels_download",
+      "source": "https://github.com/ltaoo/wx_channels_download",
+      "role": "optional pinned local WeChat backend",
+      "license_note": "MIT with Commons Clause in pinned release"
+    }
+  ]
+}
