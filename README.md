@@ -10,6 +10,7 @@ PAI 的 agent skill 仓库。按领域分目录存放可被 Grok / Claude / 其�
   holo-card/                      从图片生成可交互全息卡（LerSent001）
   answer-me-with-html/            复杂解释做成一页 HTML（QingYunA；模型写稿，CLI 渲染）
   brands-design-md/               品牌 DESIGN.md / tokens 参考库（ricocc，无 SKILL.md）
+  ux-ui-agent-skills/             UX/UI 指令层：DTCG token + 19 个 Claude skill（plugin87）
 品牌IP与形象/
   ip-as-logo/                     极简圆角吉祥物方图（s1dashu，MIT）
   personal-ip-image-pack/         授权照片转个人卡通 IP（DoraRabbitYan）
