@@ -11,6 +11,7 @@ PAI 的 agent skill 仓库。按领域分目录存放可被 Grok / Claude / 其�
   answer-me-with-html/            复杂解释做成一页 HTML（QingYunA；模型写稿，CLI 渲染）
   archify/                        想法或代码库画成可交互架构图（tt-a1i，MIT，v3.0.1）
   jakubkrehel-skills/             界面设计工程技能集合（UI/字体/颜色/无障碍/布局/文案 + review 工作流；jakubkrehel）
+  anatomy/                        一句话生成精细可交互等距机械图（物体即解释；SVG + WebGL / 3D；wheresryan22）
   brands-design-md/               品牌 DESIGN.md / tokens 参考库（ricocc，无 SKILL.md）
 品牌IP与形象/
   ip-as-logo/                     极简圆角吉祥物方图（s1dashu，MIT）
@@ -45,6 +46,7 @@ cp -R 设计和UI/holo-card ~/.grok/skills/holo-card
 cp -R 设计和UI/answer-me-with-html ~/.grok/skills/answer-me-with-html
 cp -R 设计和UI/archify ~/.grok/skills/archify
 cp -R 设计和UI/jakubkrehel-skills ~/.grok/skills/jakubkrehel-skills
+cp -R 设计和UI/anatomy ~/.grok/skills/anatomy
 cp -R 品牌IP与形象/pai-infinite-loop-ip ~/.grok/skills/pai-infinite-loop-ip
 cp -R 品牌IP与形象/avatar-forge-skill ~/.grok/skills/avatar-forge-skill
 cp -R 品牌IP与形象/Punk-Skill/skills/punk-avatar ~/.grok/skills/punk-avatar
