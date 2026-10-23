@@ -33,6 +33,7 @@ PAI 的 agent skill 仓库。按领域分目录存放可被 Grok / Claude / 其�
   cy-carousel/                    AI 科技类小红书图文轮播（封面＋10 页，真实素材 + 手排；chengyi-ai）
   openzine/                       PDF 或图片文件夹转 3D 翻页电子书（独立 HTML，离线可用；JosssphZhou）
   handraw-style/                  手绘风格编号画廊与双语提示词 Skill（329 风格 + 165 排版 + 36 单色；yang0）
+  cinetty/                        一份 project.yaml 生成在终端里播放的架构动画（6 个成品模板；JosssphZhou，MIT）
 Skills工具/
   luban/                          鲁班：打磨可传播的 Skill 资产（LearnPrompt）
   kitter/                         Kitter CLI skill 库管理（what1f）
