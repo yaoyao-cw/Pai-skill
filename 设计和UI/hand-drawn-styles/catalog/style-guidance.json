@@ -1,0 +1,2760 @@
+{
+  "schema_version": 1,
+  "styles": {
+    "1": {
+      "suitable_for": [
+        {
+          "task": "分步骤解释概念或方法",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:1",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "用分镜对照前后做法",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:1",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "细黑线火柴人、圆角网格面板，每格有标题与简短说明；依靠线条而非黑色体块。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:1",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "明确禁止实心黑填充、排线、阴影、灰阶及其他颜色。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:1",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "若任务主要展示材质、光影或完整环境，这种示意图式表达不合适。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:1",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "4",
+          "difference": "1 用细线火柴人与网格；4 用实心黑豆人和竖向分格。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:1",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:4",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "6",
+          "difference": "1 不用排线或阴影；6 靠缠绕线条疏密表现体积。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:1",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:6",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "documented-example",
+          "scope": "样例页中对应编号的展示或输入示例，仅证明资料已登记。",
+          "conclusion": "样例页有此画风的展示入口；本次未重新进行图片视觉验收。",
+          "sources": [
+            {
+              "document": "examples/README.md",
+              "section": "style:1",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "not-recorded",
+          "scope": "当前配方全部适用场景的完整运行及逐项审核。",
+          "conclusion": "本次核对的仓库资料没有足够独立记录支撑这一范围的通过或用户认可；示例与合同本身不等于验收。",
+          "sources": []
+        }
+      ]
+    },
+    "2": {
+      "suitable_for": [
+        {
+          "task": "简单主题的儿童蜡笔画",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:2",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "带多色手写标题的童趣画面",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:2",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "模拟孩子自己画的笨拙比例、歪线和越界填色，保持平面、无透视的童涂。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:2",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "不接受精修、对称的专业插画、阴影、渐变与混色。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:2",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "需要固定成人儿童比例和家庭成员差异时，应先比较 3.1 的专门定义。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:2",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "3.1",
+          "difference": "2 是孩子从头画的笨拙造型；3.1 是普通家长歪线稿加孩子涂色。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:2",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:3.1",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "7",
+          "difference": "2 偏插画；7 明确表现真实纸页的拍摄观感。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:2",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:7",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "documented-example",
+          "scope": "样例页中对应编号的展示或输入示例，仅证明资料已登记。",
+          "conclusion": "样例页有此画风的展示入口；本次未重新进行图片视觉验收。",
+          "sources": [
+            {
+              "document": "examples/README.md",
+              "section": "style:2",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "not-recorded",
+          "scope": "当前配方全部适用场景的完整运行及逐项审核。",
+          "conclusion": "本次核对的仓库资料没有足够独立记录支撑这一范围的通过或用户认可；示例与合同本身不等于验收。",
+          "sources": []
+        }
+      ]
+    },
+    "3": {
+      "suitable_for": [
+        {
+          "task": "单一主体的温柔动画插画",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:3",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "主体明确、环境简化的叙事画面",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:3",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "手绘动画、水彩渐变与暖光；天空、水面等大区域连续，背景避免碎片化。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:3",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "禁止繁乱、碎片化的细节堆叠，以及照片、3D 或矢量效果。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:3",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "完整环境可以概括，但需要清晰展示大量环境细节时与本配方的单焦点约束冲突。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:3",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "12",
+          "difference": "3 偏柔和水彩动画；12 偏笔触可读的水粉视觉开发稿，并有明确的满幅场景档。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:3",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:12",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "11",
+          "difference": "3 偏动画插画；11 偏白纸上的复古角色概念稿。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:3",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:11",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "documented-example",
+          "scope": "样例页中对应编号的展示或输入示例，仅证明资料已登记。",
+          "conclusion": "样例页有此画风的展示入口；本次未重新进行图片视觉验收。",
+          "sources": [
+            {
+              "document": "examples/README.md",
+              "section": "style:3",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "not-recorded",
+          "scope": "当前配方全部适用场景的完整运行及逐项审核。",
+          "conclusion": "本次核对的仓库资料没有足够独立记录支撑这一范围的通过或用户认可；示例与合同本身不等于验收。",
+          "sources": []
+        }
+      ]
+    },
+    "3.1": {
+      "suitable_for": [
+        {
+          "task": "家庭成员之间的一个生活动作",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:3.1",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "可辨认成人儿童差异的亲子故事卡",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:3.1",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "点眼、歪线表情和不重复的粗乱蜡笔涂抹；人物集中在白底中下部。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:3.1",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "禁止细密等距同向斜排线、模板化人物、纸张摄影与完整室内布景。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:3.1",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "需要完整环境或商业精修人物时不宜选择；正式调用和放行条件以现行合同为准。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:3.1",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "2",
+          "difference": "3.1 保留普通家长画出的人物差异；2 强调孩子自己画的错误比例。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:3.1",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:2",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "10",
+          "difference": "3.1 用黑线与多色蜡笔；10 用稀疏靛蓝线和全画一处橙色焦点。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:3.1",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:10",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "documented-example",
+          "scope": "样例页中对应编号的展示或输入示例，仅证明资料已登记。",
+          "conclusion": "样例页有此画风的展示入口；本次未重新进行图片视觉验收。",
+          "sources": [
+            {
+              "document": "examples/README.md",
+              "section": "style:3.1",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "user-approved",
+          "scope": "当前固定家庭蜡笔锚点的画风选择；不含后续样图或新场景。",
+          "conclusion": "仓库维护说明记录用户认可锚点；不能因此将其他候选标为用户认可。",
+          "sources": [
+            {
+              "document": "benchmarks/README.md",
+              "section": "其他画风验证",
+              "availability": "repository"
+            },
+            {
+              "document": "benchmarks/style-3.1/README.md",
+              "section": "document",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "internal-reviewed",
+          "scope": "2026-08-04 母女倾听与图书归还两张三阶段回归图。",
+          "conclusion": "记录为内部通过、待用户复核；此前单次强修正存在改衣裙颜色的反例。",
+          "sources": [
+            {
+              "document": "benchmarks/style-3.1/README.md",
+              "section": "2026-08-04 三阶段递进修正回归",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "not-recorded",
+          "scope": "新验收合同下所有新场景的视觉通过。",
+          "conclusion": "合同和工程测试不构成新样图验收；每张候选仍需按当前合同记录与审核。",
+          "sources": []
+        }
+      ]
+    },
+    "4": {
+      "suitable_for": [
+        {
+          "task": "竖向展示多个操作步骤",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:4",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "用同一个讲解角色串起方法或流程",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:4",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "连续黑豆人、竖向分格、关键物橙色与短箭头标注，适合逐格阅读。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:4",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "道具保持黑色轮廓与白色内部，不做阴影或填充；橙色限每格关键物。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:4",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "不宜用于需要细腻人物身份、复杂场景或长篇文字的单张插画。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:4",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "1",
+          "difference": "4 使用实心黑豆人与竖向分格；1 使用细线火柴人与网格。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:4",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:1",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "20",
+          "difference": "4 原生支持多个步骤；20 只讲一个动作，不承担多格讲解。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:4",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:20",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "documented-example",
+          "scope": "样例页中对应编号的展示或输入示例，仅证明资料已登记。",
+          "conclusion": "样例页有此画风的展示入口；本次未重新进行图片视觉验收。",
+          "sources": [
+            {
+              "document": "examples/README.md",
+              "section": "style:4",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "not-recorded",
+          "scope": "当前配方全部适用场景的完整运行及逐项审核。",
+          "conclusion": "本次核对的仓库资料没有足够独立记录支撑这一范围的通过或用户认可；示例与合同本身不等于验收。",
+          "sources": []
+        }
+      ]
+    },
+    "5": {
+      "suitable_for": [
+        {
+          "task": "幽默的故意画烂人物或物件",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:5",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "把明确主体转成鼠标涂鸦观感",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:5",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "歪扭断线、错误比例、粗糙纯色和像素锯齿，强调业余数字涂鸦感。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:5",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "禁止专业精修、写实光影、渐变或漂亮细节。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:5",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "需要纸张材料真实感或精确角色造型时，不宜把本风格作为首选。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:5",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "2",
+          "difference": "5 是低质量鼠标数字涂鸦；2 是孩子蜡笔画。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:5",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:2",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "6",
+          "difference": "5 有粗糙纯色块；6 是单色圆珠笔缠绕线速写。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:5",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:6",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "documented-example",
+          "scope": "样例页中对应编号的展示或输入示例，仅证明资料已登记。",
+          "conclusion": "样例页有此画风的展示入口；本次未重新进行图片视觉验收。",
+          "sources": [
+            {
+              "document": "examples/README.md",
+              "section": "style:5",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "not-recorded",
+          "scope": "当前配方全部适用场景的完整运行及逐项审核。",
+          "conclusion": "本次核对的仓库资料没有足够独立记录支撑这一范围的通过或用户认可；示例与合同本身不等于验收。",
+          "sources": []
+        }
+      ]
+    },
+    "6": {
+      "suitable_for": [
+        {
+          "task": "人物肖像的艺术速写",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:6",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "动物形体的即兴线稿",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:6",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "快速缠绕的黑色细线通过疏密形成明暗和体积，轮廓不必闭合。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:6",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "只有黑墨与白纸，不使用平涂色块或数字渐变。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:6",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "需要每一步都清楚可读的教学信息图时，先比较有版式的 1 或 4。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:6",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "1",
+          "difference": "6 用线的密度表现体积；1 明确禁止排线和阴影。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:6",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:1",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "10",
+          "difference": "6 强调黑色缠绕线；10 是更稀疏的靛蓝线加单一橙色焦点。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:6",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:10",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "documented-example",
+          "scope": "样例页中对应编号的展示或输入示例，仅证明资料已登记。",
+          "conclusion": "样例页有此画风的展示入口；本次未重新进行图片视觉验收。",
+          "sources": [
+            {
+              "document": "examples/README.md",
+              "section": "style:6",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "not-recorded",
+          "scope": "当前配方全部适用场景的完整运行及逐项审核。",
+          "conclusion": "本次核对的仓库资料没有足够独立记录支撑这一范围的通过或用户认可；示例与合同本身不等于验收。",
+          "sources": []
+        }
+      ]
+    },
+    "7": {
+      "suitable_for": [
+        {
+          "task": "呈现儿童蜡笔纸页的拍摄观感",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:7",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "突出稀疏蜡质笔触和纸面细节",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:7",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "画面像明亮白纸上的真实蜡笔画被手机拍下，有轻微褶皱和不均匀压力。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:7",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "禁止数字蜡笔滤镜、均匀平滑填色、暗光及灰黄偏色。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:7",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "需要平面白底、可辨认的家庭人物时，应区分 3.1；本风格主动保留摄影纸感。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:7",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "2",
+          "difference": "7 的身份包含纸页摄影感；2 偏平面童涂插画。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:7",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:2",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "3.1",
+          "difference": "7 允许纸纹与轻微褶皱；3.1 的专节明确排除纸张摄影。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:7",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:3.1",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "documented-example",
+          "scope": "样例页中对应编号的展示或输入示例，仅证明资料已登记。",
+          "conclusion": "样例页有此画风的展示入口；本次未重新进行图片视觉验收。",
+          "sources": [
+            {
+              "document": "examples/README.md",
+              "section": "style:7",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "not-recorded",
+          "scope": "当前配方全部适用场景的完整运行及逐项审核。",
+          "conclusion": "本次核对的仓库资料没有足够独立记录支撑这一范围的通过或用户认可；示例与合同本身不等于验收。",
+          "sources": []
+        }
+      ]
+    },
+    "8": {
+      "suitable_for": [
+        {
+          "task": "花鸟或人物神态的写意表达",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:8",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "以留白概括自然意境",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:8",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "毛笔浓淡干湿、飞白与宣纸渗化，辅以少量设色和朱红印章。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:8",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "禁止均匀灰度滤镜、彩色铺底与浓艳设色；默认不加题字。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:8",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "需要精确结构标注、完整环境细节或丰富色彩时不宜首选。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:8",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "6",
+          "difference": "8 用毛笔水墨干湿与渗化；6 用圆珠笔缠绕细线。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:8",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:6",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "10",
+          "difference": "8 是宣纸上的传统写意；10 用靛蓝速写线和单点橙色叙事。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:8",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:10",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "documented-example",
+          "scope": "样例页中对应编号的展示或输入示例，仅证明资料已登记。",
+          "conclusion": "样例页有此画风的展示入口；本次未重新进行图片视觉验收。",
+          "sources": [
+            {
+              "document": "examples/README.md",
+              "section": "style:8",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "not-recorded",
+          "scope": "当前配方全部适用场景的完整运行及逐项审核。",
+          "conclusion": "本次核对的仓库资料没有足够独立记录支撑这一范围的通过或用户认可；示例与合同本身不等于验收。",
+          "sources": []
+        }
+      ]
+    },
+    "9": {
+      "suitable_for": [
+        {
+          "task": "复古游戏角色或精灵图观感",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:9",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "方块像素图标和简化物件",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:9",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "统一方形像素网格、硬边阶梯与有限调色板，用抖动表达过渡。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:9",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "禁止抗锯齿、柔边、模糊、平滑渐变和高清图套像素滤镜。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:9",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "本配方提供图像风格，不能据此保证可直接投入游戏的尺寸或精灵资源规格。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:9",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "5",
+          "difference": "9 要一致像素网格与清晰造型；5 的锯齿服务于故意画烂。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:9",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:5",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "18",
+          "difference": "9 用离散像素阶梯；18 用连续的圆润几何色块。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:9",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:18",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "documented-example",
+          "scope": "样例页中对应编号的展示或输入示例，仅证明资料已登记。",
+          "conclusion": "样例页有此画风的展示入口；本次未重新进行图片视觉验收。",
+          "sources": [
+            {
+              "document": "examples/README.md",
+              "section": "style:9",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "not-recorded",
+          "scope": "当前配方全部适用场景的完整运行及逐项审核。",
+          "conclusion": "本次核对的仓库资料没有足够独立记录支撑这一范围的通过或用户认可；示例与合同本身不等于验收。",
+          "sources": []
+        }
+      ]
+    },
+    "10": {
+      "suitable_for": [
+        {
+          "task": "克制的家庭情绪叙事",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:10",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "留白配短句的单场景插画",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:10",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "松散靛蓝线、大面积白纸与全画一处橙色焦点，人物情绪通过姿态和少量抖动线表达。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:10",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "禁止密集排线、整件厚涂、额外高饱和焦点和精细背景；仍保留原配方允许的个别小处极少淡蓝绿。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:10",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "长句或生僻字不宜直接放入图像；现有说明建议必要时留白后期排字。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:10",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "3.1",
+          "difference": "10 是稀疏蓝线与单点橙；3.1 是黑线和多色、粗乱蜡笔涂抹。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:10",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:3.1",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "20",
+          "difference": "10 接近简化真人比例的淡彩速写；20 是更紧凑形体、黑色方向排线与芥末黄。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:10",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:20",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "documented-example",
+          "scope": "样例页中对应编号的展示或输入示例，仅证明资料已登记。",
+          "conclusion": "样例页有此画风的展示入口；本次未重新进行图片视觉验收。",
+          "sources": [
+            {
+              "document": "examples/README.md",
+              "section": "style:10",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "not-recorded",
+          "scope": "当前配方全部适用场景的完整运行及逐项审核。",
+          "conclusion": "本次核对的仓库资料没有足够独立记录支撑这一范围的通过或用户认可；示例与合同本身不等于验收。",
+          "sources": []
+        }
+      ]
+    },
+    "11": {
+      "suitable_for": [
+        {
+          "task": "复古动画角色概念稿",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:11",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "白纸上的单人或双人角色立绘",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:11",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "高调白纸、复古水粉形状阴影与粉彩，衣服用少量大块笔触留出纸白。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:11",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "禁止光环圈、细节堆砌、整圈外轮廓及柔和三维体积渲染。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:11",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "需要完整可辨环境或丰富场景物件时，不宜把角色概念稿默认构图当成场景配方。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:11",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "12",
+          "difference": "11 偏中古动画、白纸粉彩；12 偏现代水粉视觉开发稿、青橙对比。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:11",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:12",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "16",
+          "difference": "11 不画人物光环；16 的满幅刷底和身后聚光晕是身份特征。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:11",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:16",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "documented-example",
+          "scope": "样例页中对应编号的展示或输入示例，仅证明资料已登记。",
+          "conclusion": "样例页有此画风的展示入口；本次未重新进行图片视觉验收。",
+          "sources": [
+            {
+              "document": "examples/README.md",
+              "section": "style:11",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "internal-reviewed",
+          "scope": "配方章节记载的同题四图对照。",
+          "conclusion": "来源为配方章节的历史内部验证描述，未附独立逐项审核报告；不能推广为新场景或用户认可。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:11",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ]
+    },
+    "12": {
+      "suitable_for": [
+        {
+          "task": "现代动画角色概念图",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:12",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "需要完整环境的明亮故事场景",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:12",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "大虹膜、蓬软发团与方向性水粉笔触；明确提供留白纸边和满幅场景两档。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:12",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "禁止光滑喷绘质感、数字渐变抛光和亮球式 3D 虹膜；满幅场景仍须明亮低对比。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:12",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "要求完整室内或街景时应采用原有满幅场景档；不将另一档的白纸边强行叠入。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:12",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "14",
+          "difference": "12 是大虹膜和暖光；14 以小点眼、全画纸纹和克制水粉表达。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:12",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:14",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "16",
+          "difference": "12 可以承载场景且默认留纸边；16 是无景物的满幅聚光立绘。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:12",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:16",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "documented-example",
+          "scope": "样例页中对应编号的展示或输入示例，仅证明资料已登记。",
+          "conclusion": "样例页有此画风的展示入口；本次未重新进行图片视觉验收。",
+          "sources": [
+            {
+              "document": "examples/README.md",
+              "section": "style:12",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "internal-reviewed",
+          "scope": "配方章节记载的换主体及两档场景对照。",
+          "conclusion": "来源为配方章节的历史内部验证描述，未附独立逐项审核报告；不能推广为新场景或用户认可。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:12",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ]
+    },
+    "13": {
+      "suitable_for": [
+        {
+          "task": "纸雕人物与民俗动物",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:13",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "有立体手工感的编辑插画",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:13",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "层叠厚纸、卷纸、雕塑头部与真实柔和投影，不是平面对称剪纸。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:13",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "禁止平面剪纸、对称装饰图案铺满画面和文字。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:13",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "需要平面白底速写或连续信息分格时，不宜用这套立体纸雕材质替代。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:13",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "15",
+          "difference": "13 是纸材质、民俗纹样与明显层叠投影；15 是光滑软胶与街头穿搭。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:13",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:15",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "14",
+          "difference": "13 是立体纸雕；14 是平面的纸纹水粉绘本人物。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:13",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:14",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "documented-example",
+          "scope": "样例页中对应编号的展示或输入示例，仅证明资料已登记。",
+          "conclusion": "样例页有此画风的展示入口；本次未重新进行图片视觉验收。",
+          "sources": [
+            {
+              "document": "examples/README.md",
+              "section": "style:13",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "internal-reviewed",
+          "scope": "配方章节记载的五张纸雕样图迭代。",
+          "conclusion": "来源为配方章节的历史内部验证描述，未附独立逐项审核报告；不能推广为新场景或用户认可。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:13",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ]
+    },
+    "14": {
+      "suitable_for": [
+        {
+          "task": "安静的绘本角色立绘",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:14",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "温柔而克制的单主体形象",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:14",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "全画纸纹牙口、小点眼、细长形体与干刷水粉，丹宁蓝和芥末黄构成主要对比。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:14",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "禁止硬外轮廓、三维体积和光泽数字阴影；配色与光影遵守原模板。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:14",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "偏好平滑鲜明几何色块和强动作弧线时，应比较 18；不能把两者只按色彩相似合并。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:14",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "18",
+          "difference": "14 依赖纸纹与水粉颗粒；18 是平滑几何色块与鲜明蓝橙。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:14",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:18",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "12",
+          "difference": "14 以小点眼和克制光影表现；12 是大虹膜、发团飞丝和暖光。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:14",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:12",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "documented-example",
+          "scope": "样例页中对应编号的展示或输入示例，仅证明资料已登记。",
+          "conclusion": "样例页有此画风的展示入口；本次未重新进行图片视觉验收。",
+          "sources": [
+            {
+              "document": "examples/README.md",
+              "section": "style:14",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "internal-reviewed",
+          "scope": "配方章节记载的三张同题对照。",
+          "conclusion": "来源为配方章节的历史内部验证描述，未附独立逐项审核报告；不能推广为新场景或用户认可。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:14",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ]
+    },
+    "15": {
+      "suitable_for": [
+        {
+          "task": "潮玩角色头像或立绘",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:15",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "街头穿搭的人物形象系列",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:15",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "夸张垂管鼻、细小眼睛、光滑哑光软胶和胶囊形体，属于 3D 潮玩观感。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:15",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "禁止毛毡、羊毛、光泽金属质感、背景道具与地平线。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:15",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "相同画风不等于同一角色跨图一致；系列角色应遵循现有角色参考说明。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:15",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "13",
+          "difference": "15 是光滑软胶与柔光纯底；13 是层叠纸材与民俗元素。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:15",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:13",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "16",
+          "difference": "15 是三维软胶角色；16 是带刷痕和聚光背景的二维水粉立绘。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:15",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:16",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "documented-example",
+          "scope": "样例页中对应编号的展示或输入示例，仅证明资料已登记。",
+          "conclusion": "样例页有此画风的展示入口；本次未重新进行图片视觉验收。",
+          "sources": [
+            {
+              "document": "examples/README.md",
+              "section": "style:15",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "internal-reviewed",
+          "scope": "配方章节记载的三种人物形态对照。",
+          "conclusion": "来源为配方章节的历史内部验证描述，未附独立逐项审核报告；不能推广为新场景或用户认可。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:15",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ]
+    },
+    "16": {
+      "suitable_for": [
+        {
+          "task": "聚光角色立绘",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:16",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "以互补底色组织的角色系列",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:16",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "单色刷底铺满画幅，人物背后有柔光晕；大眼保留眼白，发团呈羽化笔触。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:16",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "禁止白纸边和具体风景；不接受火焰般高饱和底色或深色油画斑驳。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:16",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "需要讲清完整环境与多处道具关系时，应比较 12 的满幅场景档。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:16",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "12",
+          "difference": "16 是抽象满幅聚光背景；12 有留白纸边与完整场景两档。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:16",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:12",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "11",
+          "difference": "16 以聚光晕和满幅刷底为特征；11 以白纸和局部干刷为特征。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:16",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:11",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "documented-example",
+          "scope": "样例页中对应编号的展示或输入示例，仅证明资料已登记。",
+          "conclusion": "样例页有此画风的展示入口；本次未重新进行图片视觉验收。",
+          "sources": [
+            {
+              "document": "examples/README.md",
+              "section": "style:16",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "internal-reviewed",
+          "scope": "配方章节记载的四种主体与两种底色对照。",
+          "conclusion": "来源为配方章节的历史内部验证描述，未附独立逐项审核报告；不能推广为新场景或用户认可。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:16",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ]
+    },
+    "17": {
+      "suitable_for": [
+        {
+          "task": "绘本人物头像或立绘",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:17",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "像速写手账页的角色插画",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:17",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "墨线构成形体骨架、轻薄明亮上色、少量局部排线和四边奶白纸边。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:17",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "禁止彩铅颗粒铺色、满块排线、细节风景及细节云。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:17",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "需要几乎无线稿的厚涂角色概念图时，应比较 12；避免仅凭绘本标签混用。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:17",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "12",
+          "difference": "17 以墨线定形和轻薄上色为主；12 用水粉笔触塑造大体积块。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:17",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:12",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "10",
+          "difference": "17 允许丰富协调配色和局部排线；10 仅一处橙色且不允许密集排线。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:17",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:10",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "documented-example",
+          "scope": "样例页中对应编号的展示或输入示例，仅证明资料已登记。",
+          "conclusion": "样例页有此画风的展示入口；本次未重新进行图片视觉验收。",
+          "sources": [
+            {
+              "document": "examples/README.md",
+              "section": "style:17",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "internal-reviewed",
+          "scope": "配方章节记载的两项对标和男孩泛化。",
+          "conclusion": "来源为配方章节的历史内部验证描述，未附独立逐项审核报告；不能推广为新场景或用户认可。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:17",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ]
+    },
+    "18": {
+      "suitable_for": [
+        {
+          "task": "人物之间的简洁互动",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:18",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "动物或人物的几何绘本插画",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:18",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "圆润几何色块靠相邻颜色分界，几乎无连续外轮廓，蓝橙对比和长动作弧线突出。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:18",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "禁止额外色相、粗描边、渐变体积、可见水粉或干刷笔触。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:18",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "需要明显纸纹和水粉颗粒时应比较 14；本风格全画仅有几乎不可察觉的纸面柔度，包括空白背景。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:18",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "14",
+          "difference": "18 是平滑几何色块和鲜明蓝橙；14 依赖整画纸纹和水粉颗粒。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:18",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:14",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "20",
+          "difference": "18 用长肢体与大色块动作弧线；20 用紧凑形体、干性黑线与芥末黄。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:18",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:20",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "documented-example",
+          "scope": "样例页中对应编号的展示或输入示例，仅证明资料已登记。",
+          "conclusion": "样例页有此画风的展示入口；本次未重新进行图片视觉验收。",
+          "sources": [
+            {
+              "document": "examples/README.md",
+              "section": "style:18",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "internal-reviewed",
+          "scope": "家庭同题校准，以及单人抱书、双人击掌、熊与狐狸共读三个泛化场景。",
+          "conclusion": "历史内部记录写明三项泛化通过入库门槛；目录中的旧编号 19 已明确映射当前 18，不能用于当前 19。",
+          "sources": [
+            {
+              "document": "benchmarks/style-19/README.md",
+              "section": "document",
+              "availability": "repository"
+            }
+          ]
+        }
+      ]
+    },
+    "19": {
+      "suitable_for": [
+        {
+          "task": "用身体姿态表达一个动作",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:19",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "大圆头与细线四肢的极简人物或动物",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:19",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "大圆头、两道竖眼、极细石墨四肢与单一珊瑚红焦点，依靠倾斜和失衡支点讲动作。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:19",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "禁止完整房间、风景、透视地面、投影系统和页内文字。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:19",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "需要连续步骤或完整环境时与单动作约束冲突；正式调用与审核条件以原合同为准。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:19",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "20",
+          "difference": "19 是大圆头、弹性细肢与珊瑚红；20 是紧凑短肢、干性黑排线与芥末黄。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:19",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:20",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "1",
+          "difference": "19 是单动作图；1 提供带文字说明的多格讲解版式。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:19",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:1",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "documented-example",
+          "scope": "样例页中对应编号的展示或输入示例，仅证明资料已登记。",
+          "conclusion": "样例页有此画风的展示入口；本次未重新进行图片视觉验收。",
+          "sources": [
+            {
+              "document": "examples/README.md",
+              "section": "style:19",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "not-recorded",
+          "scope": "当前配方全部适用场景的完整运行及逐项审核。",
+          "conclusion": "本次核对的仓库资料没有足够独立记录支撑这一范围的通过或用户认可；示例与合同本身不等于验收。",
+          "sources": []
+        }
+      ]
+    },
+    "20": {
+      "suitable_for": [
+        {
+          "task": "用接触动作表现人物关系",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:20",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "紧凑人物或动物的单动作小场景",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:20",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "暖白底、干性黑墨与方向性黑排线，芥末黄承担少数焦点，靠距离和接触表达关系。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:20",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "只讲一个动作、最多两件必要道具；禁止完整风景、室内与页内文案。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:20",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "多步骤解释应先比较 1 或 4；正式候选能否放行仍由原验收合同决定。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:20",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "19",
+          "difference": "20 是紧凑短肢与芥末黄；19 是大圆头细肢与珊瑚红。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:20",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:19",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "10",
+          "difference": "20 保留方向性黑排线；10 用稀疏蓝线与唯一橙色焦点，不能共享排线规则。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:20",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:10",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "documented-example",
+          "scope": "样例页中对应编号的展示或输入示例，仅证明资料已登记。",
+          "conclusion": "样例页有此画风的展示入口；本次未重新进行图片视觉验收。",
+          "sources": [
+            {
+              "document": "examples/README.md",
+              "section": "style:20",
+              "availability": "repository"
+            }
+          ]
+        },
+        {
+          "type": "not-recorded",
+          "scope": "当前配方全部适用场景的完整运行及逐项审核。",
+          "conclusion": "本次核对的仓库资料没有足够独立记录支撑这一范围的通过或用户认可；示例与合同本身不等于验收。",
+          "sources": []
+        }
+      ]
+    },
+    "22": {
+      "suitable_for": [
+        {
+          "task": "把人物照片或插画转为朱墨水墨漫画",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:22",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "以简练线面和留白表现原图动作与物件关系",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:22",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "近乎纸白的漫画五官、完整大墨团与游丝长线、黑白灰和少量朱红；允许适度漫画化。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:22",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "需要实际传入画风锚点并先执行内置美术指导预处理；不默认肉色、做旧纸、印章或签名。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:22",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "照片级五官、精密部件和完整背景细节会收窄写意空间；非人物泛化须逐图验证。画风锚点已发布到 Cloudflare Pages 并通过匿名大小与 SHA-256 校验。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:22",
+              "availability": "runtime"
+            },
+            {
+              "document": "docs/style-22-review.md",
+              "section": "document",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "8",
+          "difference": "21是基于原图的朱墨漫画概括和游丝大墨团；8是传统毛笔写意，含宣纸渗化和朱红印章。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:22",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:8",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "17",
+          "difference": "21用黑白灰朱红与完整墨面省笔；17用钢笔骨架、轻薄协调彩色和局部排线。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:22",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:17",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "user-approved",
+          "scope": "用户明确选择的v1.1.0第一风格及骑行附件。",
+          "conclusion": "该附件获明确选择；本次仅迁入和核验附件，未重新生成或证明新编号的全部泛化。",
+          "sources": [
+            {
+              "document": "docs/style-22-review.md",
+              "section": "document",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "type": "internal-reviewed",
+          "scope": "历史第一风格雪山环湖转绘的跨主体观察。",
+          "conclusion": "迁入前重新查看既有结果，主要环湖关系和墨面存在；新锚点调用包的跨主体稳定性尚待实图回归。",
+          "sources": [
+            {
+              "document": "docs/style-22-review.md",
+              "section": "document",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ]
+    },
+    "23": {
+      "suitable_for": [
+        {
+          "task": "把主题或参考内容概括为独立皮影彩染作品",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:23",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "task": "以大量留白与暖光呈现单一主体动作",
+          "basis": "editorial-suggestion",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:23",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "selection_cues": [
+        {
+          "description": "平面铆接偶片、结构性镂刻、少量操纵竹签、半透明彩染与整幅暖幕光。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:23",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "kind": "recipe-constraint",
+          "description": "成图不显示原片或上下对照，不强加人脸与人类四肢；竹签与少量偶件须有结构连接。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:23",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "kind": "selection-advice",
+          "description": "v0.1已获用户确认入库；复杂群像与全景可能弱化一幕一偶，尚未证明任意主题或一次生成稳定。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:23",
+              "availability": "runtime"
+            },
+            {
+              "document": "docs/style-23-review.md",
+              "section": "document",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "related_styles": [
+        {
+          "style_id": "13",
+          "difference": "23是透光平面偶片、铆钉关节与暖幕投影；13是立体厚纸层叠和纸雕投影。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:23",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:13",
+              "availability": "runtime"
+            }
+          ]
+        },
+        {
+          "style_id": "8",
+          "difference": "23由镂刻彩染和幕光组织形体；8由毛笔浓淡、飞白与宣纸渗化组织形体。",
+          "sources": [
+            {
+              "document": "STYLES.md",
+              "section": "style:23",
+              "availability": "runtime"
+            },
+            {
+              "document": "STYLES.md",
+              "section": "style:8",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "type": "user-approved",
+          "scope": "人物、白鹤、茶壶、楼阁四类3:4试作；人物与楼阁一次生成，白鹤与茶壶各增加一次配景清除编辑。",
+          "conclusion": "用户确认本轮风格入库并要求署名DAAI(@daaihq)。仅覆盖本轮四类候选与风格方向；白鹤与茶壶各经过一次修正，不证明一次生成或任意主题稳定。",
+          "sources": [
+            {
+              "document": "docs/style-23-review.md",
+              "section": "document",
+              "availability": "runtime"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
