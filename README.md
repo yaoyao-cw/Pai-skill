@@ -14,6 +14,7 @@ PAI 的 agent skill 仓库。按领域分目录存放可被 Grok / Claude / 其�
   anatomy/                        一句话生成精细可交互等距机械图（物体即解释；SVG + WebGL / 3D；wheresryan22）
   colorfigures/                   用自然语言生成手绘等距、可旋转、可透视、带标注与交互的日常物件 HTML 插图（April Zhu，MIT；基于 ISO-GLOW / iso-figure）
   brands-design-md/               品牌 DESIGN.md / tokens 参考库（ricocc，无 SKILL.md）
+  ux-ui-agent-skills/             UX/UI 指令层：DTCG token + 19 个 Claude skill（plugin87）
 品牌IP与形象/
   ip-as-logo/                     极简圆角吉祥物方图（s1dashu，MIT）
   personal-ip-image-pack/         授权照片转个人卡通 IP（DoraRabbitYan）

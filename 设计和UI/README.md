@@ -13,6 +13,7 @@
 | `jakubkrehel-skills/` | 界面设计工程技能集合（UI 打磨、字体、颜色、无障碍、布局、文案 + review / 状态机 / 变体工作流） | [jakubkrehel/skills](https://github.com/jakubkrehel/skills) |
 | `anatomy/` | 一句话生成精细可交互等距机械图（物体即解释；SVG + WebGL / 3D） | [wheresryan22/anatomy](https://github.com/wheresryan22/anatomy) |
 | `brands-design-md/` | 品牌 DESIGN.md / tokens 参考库（无 SKILL.md） | [ricocc/brands-design-md](https://github.com/ricocc/brands-design-md) |
+| `ux-ui-agent-skills/` | UX/UI 指令层：DTCG token + 19 个 Claude skill | [plugin87/ux-ui-agent-skills](https://github.com/plugin87/ux-ui-agent-skills) |
 
 ## 安装
 
