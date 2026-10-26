@@ -30,6 +30,7 @@ PAI 的 agent skill 仓库。按领域分目录存放可被 Grok / Claude / 其�
 知识库管理/
   bookmark-digest/                X 书签 → fail-closed agent inbox（runesleo）
   afu-llm-todo/                   管家阿福 Inbox → Wiki → Todo Card → Calendar（LearnPrompt）
+  nihaixia/                       倪海厦视角的中医经方 Skill（六经辨证；伤寒/金匮/内经/本草/针灸 + 医案；jangviktor-web；无 LICENSE 文件，README 标 MulanPSL-2.0）
 自媒体/
   Easel/                          OpenClaw 自媒体 skill 包（ZJU-REAL）
   yichen-jianying-edit/           剪映无界面草稿生成/修改与可选原生导出（mcncarl/yichen-skills；私有核心另装）
@@ -62,6 +63,7 @@ cp -R 品牌IP与形象/Punk-Skill/skills/punk-avatar ~/.grok/skills/punk-avatar
 cp -R 购物/taobao-buy ~/.grok/skills/taobao-buy
 cp -R 知识库管理/bookmark-digest ~/.grok/skills/bookmark-digest
 cp -R 知识库管理/afu-llm-todo ~/.grok/skills/afu-llm-todo
+cp -R 知识库管理/nihaixia ~/.grok/skills/nihaixia
 cp -R 自媒体/yichen-jianying-edit ~/.grok/skills/yichen-jianying-edit
 cp -R 自媒体/cy-carousel ~/.grok/skills/cy-carousel
 cp -R 自媒体/openzine ~/.grok/skills/openzine
