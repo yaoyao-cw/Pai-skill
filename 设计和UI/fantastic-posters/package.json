@@ -1,0 +1,17 @@
+{
+  "name": "fantastic-posters",
+  "version": "0.2.0",
+  "description": "Claude Code skill: generate fantastic posters across 33 visual styles via GPT Image 2. Multi-ref + logo + brief + batch + template modes.",
+  "type": "module",
+  "main": "generate.js",
+  "scripts": {
+    "list": "node generate.js --list",
+    "generate": "node generate.js"
+  },
+  "optionalDependencies": {
+    "pdfjs-dist": "^4.0.0",
+    "canvas": "^2.11.2",
+    "js-yaml": "^4.1.0"
+  },
+  "license": "MIT"
+}
