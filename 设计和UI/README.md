@@ -14,6 +14,7 @@
 | `anatomy/` | 一句话生成精细可交互等距机械图（物体即解释；SVG + WebGL / 3D） | [wheresryan22/anatomy](https://github.com/wheresryan22/anatomy) |
 | `brands-design-md/` | 品牌 DESIGN.md / tokens 参考库（无 SKILL.md） | [ricocc/brands-design-md](https://github.com/ricocc/brands-design-md) |
 | `hand-drawn-styles/` | 内置 22 种手绘画风配方 + 3.1 稳定版，输出可复制的生图提示词（不生图） | [threerocks/hand-drawn-styles](https://github.com/threerocks/hand-drawn-styles) |
+| `huashu-design/` | 花叔Design：用 HTML 做高保真原型、PPTX、动画、信息图与设计评审，先出三个方向初稿 | [alchaincyf/huashu-design](https://github.com/alchaincyf/huashu-design) |
 
 ## 安装
 
@@ -25,4 +26,5 @@ cp -R 设计和UI/archify ~/.grok/skills/archify
 cp -R 设计和UI/jakubkrehel-skills ~/.grok/skills/jakubkrehel-skills
 cp -R 设计和UI/anatomy ~/.grok/skills/anatomy
 cp -R 设计和UI/hand-drawn-styles ~/.grok/skills/hand-drawn-styles
+cp -R 设计和UI/huashu-design ~/.grok/skills/huashu-design
 ```

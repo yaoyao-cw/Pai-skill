@@ -14,6 +14,7 @@ PAI 的 agent skill 仓库。按领域分目录存放可被 Grok / Claude / 其�
   anatomy/                        一句话生成精细可交互等距机械图（物体即解释；SVG + WebGL / 3D；wheresryan22）
   colorfigures/                   用自然语言生成手绘等距、可旋转、可透视、带标注与交互的日常物件 HTML 插图（April Zhu，MIT；基于 ISO-GLOW / iso-figure）
   hand-drawn-styles/              内置 22 种手绘画风配方 + 3.1 稳定版，输出可复制的生图提示词（不生图；threerocks，MIT）
+  huashu-design/                  花叔Design：HTML 做原型/PPTX/动画/信息图 + 设计评审，先出三方向（alchaincyf，MIT）
   brands-design-md/               品牌 DESIGN.md / tokens 参考库（ricocc，无 SKILL.md）
 品牌IP与形象/
   ip-as-logo/                     极简圆角吉祥物方图（s1dashu，MIT）
@@ -52,6 +53,7 @@ cp -R 设计和UI/jakubkrehel-skills ~/.grok/skills/jakubkrehel-skills
 cp -R 设计和UI/anatomy ~/.grok/skills/anatomy
 cp -R 设计和UI/colorfigures ~/.grok/skills/colorfigures
 cp -R 设计和UI/hand-drawn-styles ~/.grok/skills/hand-drawn-styles
+cp -R 设计和UI/huashu-design ~/.grok/skills/huashu-design
 cp -R 品牌IP与形象/pai-infinite-loop-ip ~/.grok/skills/pai-infinite-loop-ip
 cp -R 品牌IP与形象/avatar-forge-skill ~/.grok/skills/avatar-forge-skill
 cp -R 品牌IP与形象/Punk-Skill/skills/punk-avatar ~/.grok/skills/punk-avatar
