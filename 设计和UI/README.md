@@ -16,6 +16,7 @@
 | `hand-drawn-styles/` | 内置 22 种手绘画风配方 + 3.1 稳定版，输出可复制的生图提示词（不生图） | [threerocks/hand-drawn-styles](https://github.com/threerocks/hand-drawn-styles) |
 | `huashu-design/` | 花叔Design：用 HTML 做高保真原型、PPTX、动画、信息图与设计评审，先出三个方向初稿 | [alchaincyf/huashu-design](https://github.com/alchaincyf/huashu-design) |
 | `fantastic-posters/` | 用 GPT Image 2 生成 31 种风格海报，自动选风格、构建提示词并出图 | [robonuggets/fantastic-posters](https://github.com/robonuggets/fantastic-posters) |
+| `motionsites-web-builder/` | MotionSites 电影感落地页/hero（高赞样例+媒体架+截图自检，或给 Lovable/Bolt/v0 写提示词；MIT+媒体条款） | [Motionsites-AI/claude-skill](https://github.com/Motionsites-AI/claude-skill) |
 
 ## 安装
 
@@ -29,4 +30,5 @@ cp -R 设计和UI/anatomy ~/.grok/skills/anatomy
 cp -R 设计和UI/hand-drawn-styles ~/.grok/skills/hand-drawn-styles
 cp -R 设计和UI/huashu-design ~/.grok/skills/huashu-design
 cp -R 设计和UI/fantastic-posters ~/.grok/skills/fantastic-posters
+cp -R 设计和UI/motionsites-web-builder ~/.grok/skills/motionsites-web-builder
 ```
