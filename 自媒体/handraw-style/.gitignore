@@ -13,6 +13,10 @@ _preview-chrome/
 temp/
 downloads/
 output/
+outputs/
+skills/handdraw-style-prompter/layouts/
+dist/
+*.zip
 *.tmp
 
 # OS files
@@ -67,3 +71,30 @@ skills/couple-photo-orchestrator/images/
 .pytest_cache/
 node_modules/
 tmp/
+client/cache/
+client/history/
+skills/community-share/client/
+community_auth.json
+*.auth.json
+build/
+dist/
+release/
+
+# Unfinished desktop workbench stays local until explicitly approved for release
+/client/
+/client2/
+/scripts/build_installer.py
+/启动客户端.bat
+
+# Private personal-library gallery mirror; never deploy
+/.handraw-personal/
+
+image_gen_config.json
+*config.local*
+# Private workspace experiments, motion graphics, and ad-hoc task scripts
+/work/
+/claude-motion/
+/plan-gallery-feishu.md
+/scripts/generate_sc025_suspense.py
+logs/
+*.log
