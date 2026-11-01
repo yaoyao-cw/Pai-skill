@@ -17,6 +17,7 @@ PAI 的 agent skill 仓库。按领域分目录存放可被 Grok / Claude / 其�
   huashu-design/                  花叔Design：HTML 做原型/PPTX/动画/信息图 + 设计评审，先出三方向（alchaincyf，MIT）
   fantastic-posters/              31 种风格海报生成（GPT Image 2，自动选风格；robonuggets，MIT）
   brands-design-md/               品牌 DESIGN.md / tokens 参考库（ricocc，无 SKILL.md）
+  stageshow/                      帮 agent 做出更像真产品的假 UI 静图/光标动画/bento（Benji Taylor，MIT）
 品牌IP与形象/
   ip-as-logo/                     极简圆角吉祥物方图（s1dashu，MIT）
   personal-ip-image-pack/         授权照片转个人卡通 IP（DoraRabbitYan）
@@ -56,6 +57,7 @@ cp -R 设计和UI/colorfigures ~/.grok/skills/colorfigures
 cp -R 设计和UI/hand-drawn-styles ~/.grok/skills/hand-drawn-styles
 cp -R 设计和UI/huashu-design ~/.grok/skills/huashu-design
 cp -R 设计和UI/fantastic-posters ~/.grok/skills/fantastic-posters
+cp -R 设计和UI/stageshow ~/.grok/skills/stageshow
 cp -R 品牌IP与形象/pai-infinite-loop-ip ~/.grok/skills/pai-infinite-loop-ip
 cp -R 品牌IP与形象/avatar-forge-skill ~/.grok/skills/avatar-forge-skill
 cp -R 品牌IP与形象/Punk-Skill/skills/punk-avatar ~/.grok/skills/punk-avatar
