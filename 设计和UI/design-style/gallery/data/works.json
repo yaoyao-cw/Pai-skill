@@ -1,0 +1,895 @@
+[
+  {
+    "id": "001-bauhaus",
+    "type": "style",
+    "number": "001",
+    "title": "包豪斯",
+    "titleEn": "Bauhaus",
+    "years": "1919—1933",
+    "category": "现代主义",
+    "description": "远不止红黄蓝。一支 15 秒短片，从色彩、字体到建筑与舞台，认识包豪斯的九种样子。",
+    "tags": [
+      "几何",
+      "三原色",
+      "网格",
+      "字体",
+      "建筑"
+    ],
+    "publishedAt": "2026-10-20T07:14:44Z",
+    "release": "day-01",
+    "asset": "001-bauhaus.mp4",
+    "sha256": "3390870b42acdf9c75c5bd9dfcc3dc09ce2603405b80b34e409f8c445a67be7a",
+    "images": [
+      {
+        "file": "poster",
+        "title": "一张海报，认识包豪斯",
+        "kind": "风格海报",
+        "titleEn": "Bauhaus at a glance",
+        "kindEn": "Style poster"
+      },
+      {
+        "file": "cheatsheet",
+        "title": "颜色、字体与五条规则",
+        "kind": "风格速查",
+        "titleEn": "Colors, typography, and five rules",
+        "kindEn": "Quick reference"
+      },
+      {
+        "file": "app-ui",
+        "title": "如果包豪斯来做 App",
+        "kind": "界面应用",
+        "titleEn": "Bauhaus in an app",
+        "kindEn": "UI application"
+      },
+      {
+        "file": "pattern",
+        "title": "基本形的无限组合",
+        "kind": "几何图案",
+        "titleEn": "Endless combinations of basic shapes",
+        "kindEn": "Geometric patterns"
+      }
+    ],
+    "categoryEn": "Modernism",
+    "descriptionEn": "More than red, yellow, and blue. A 15-second film explores nine sides of Bauhaus, from color and typography to architecture and the stage.",
+    "tagsEn": [
+      "geometry",
+      "primary colors",
+      "grid",
+      "typography",
+      "architecture"
+    ]
+  },
+  {
+    "id": "01-bento-grid",
+    "type": "layout",
+    "number": "01",
+    "title": "便当盒布局",
+    "titleEn": "Bento Grid",
+    "years": "2020s—",
+    "category": "当代界面",
+    "description": "同一套卡片，多种信息排法。从便当盒、动态磁贴到个人主页，用 15 秒看懂网格、比例与信息层级。",
+    "tags": [
+      "网格",
+      "卡片",
+      "圆角",
+      "发布会",
+      "个人主页",
+      "数据看板",
+      "Metro",
+      "iOS"
+    ],
+    "publishedAt": "2026-10-21T07:18:19Z",
+    "release": "layout-01",
+    "asset": "01-bento-grid.mp4",
+    "sha256": "51c830105b83320e43290b62b86f4ee88d8d803667ccf3cbe63453a648d4d51c",
+    "images": [
+      {
+        "file": "poster",
+        "title": "一张海报，认识便当盒布局",
+        "kind": "布局海报",
+        "titleEn": "Bento Grid at a glance",
+        "kindEn": "Layout poster"
+      },
+      {
+        "file": "cheatsheet",
+        "title": "网格、间距、圆角与五条规则",
+        "kind": "布局速查",
+        "titleEn": "Grid, gaps, corners, and five rules",
+        "kindEn": "Quick reference"
+      },
+      {
+        "file": "skins",
+        "title": "同一布局，六种风格",
+        "kind": "布局 × 风格",
+        "titleEn": "One layout, six visual styles",
+        "kindEn": "Layout × style"
+      },
+      {
+        "file": "templates",
+        "title": "拿来就用：三套排法",
+        "kind": "布局模板",
+        "titleEn": "Three ready-to-use arrangements",
+        "kindEn": "Layout templates"
+      }
+    ],
+    "categoryEn": "Contemporary interfaces",
+    "descriptionEn": "One set of cards, many ways to organize information. From lunch boxes and live tiles to personal websites, learn grids, proportions, and hierarchy in 15 seconds.",
+    "tagsEn": [
+      "grid",
+      "cards",
+      "rounded corners",
+      "keynote",
+      "personal website",
+      "dashboard",
+      "Metro",
+      "iOS"
+    ]
+  },
+  {
+    "id": "002-swiss-style",
+    "type": "style",
+    "number": "002",
+    "title": "瑞士国际主义",
+    "titleEn": "Swiss Style",
+    "years": "1950—1970",
+    "category": "现代主义",
+    "description": "一张网格、一种字体、一种红。一支 15 秒短片，同一张 12 栏网格排出标题、字体、海报、纽约地铁标识与五个关键词。",
+    "tags": [
+      "网格",
+      "无衬线",
+      "Helvetica",
+      "海报",
+      "瑞士红",
+      "纽约地铁"
+    ],
+    "publishedAt": "2026-10-21T14:32:56Z",
+    "release": "day-02",
+    "asset": "002-swiss-style.mp4",
+    "sha256": "622632578832e8cabb5e8861c7d7c16adaa9b144d290b3eafe1f45118464f07c",
+    "images": [
+      {
+        "file": "poster",
+        "title": "一张海报，认识瑞士风格",
+        "kind": "风格海报",
+        "titleEn": "Swiss Style at a glance",
+        "kindEn": "Style poster"
+      },
+      {
+        "file": "cheatsheet",
+        "title": "网格、色板、字体与五条规则",
+        "kind": "风格速查",
+        "titleEn": "Grid, palette, typography, and five rules",
+        "kindEn": "Quick reference"
+      },
+      {
+        "file": "app-ui",
+        "title": "如果瑞士风格来做 App",
+        "kind": "界面应用",
+        "titleEn": "Swiss Style in an app",
+        "kindEn": "UI application"
+      },
+      {
+        "file": "grid",
+        "title": "一张网格，四种排法",
+        "kind": "网格系统",
+        "titleEn": "One grid, four arrangements",
+        "kindEn": "Grid system"
+      }
+    ],
+    "categoryEn": "Modernism",
+    "descriptionEn": "One grid, one typeface, one red. A 15-second film uses the same 12-column grid for headlines, typography, posters, New York subway signs, and five key principles.",
+    "tagsEn": [
+      "grid",
+      "sans serif",
+      "Helvetica",
+      "poster",
+      "Swiss red",
+      "New York subway"
+    ]
+  },
+  {
+    "id": "02-masonry",
+    "type": "layout",
+    "number": "02",
+    "title": "瀑布流布局",
+    "titleEn": "Masonry",
+    "years": "2009—",
+    "category": "当代界面",
+    "description": "列宽固定，高度跟着内容走，每一张都放进最短的那一列。从砌石墙、Pinterest 图钉墙到双列信息流，用 15 秒看懂瀑布流怎么排。",
+    "tags": [
+      "瀑布流",
+      "列",
+      "最短列优先",
+      "图片墙",
+      "Pinterest",
+      "双列信息流",
+      "响应式"
+    ],
+    "publishedAt": "2026-10-22T10:29:23Z",
+    "release": "layout-02",
+    "asset": "02-masonry.mp4",
+    "sha256": "160011b22f71e8420abf7d4c694d49e41337410a931fbaff912d4e8d6d75710e",
+    "images": [
+      {
+        "file": "poster",
+        "title": "一张海报，认识瀑布流",
+        "kind": "布局海报",
+        "titleEn": "Masonry at a glance",
+        "kindEn": "Layout poster"
+      },
+      {
+        "file": "cheatsheet",
+        "title": "算法、断点、比例与五条规则",
+        "kind": "布局速查",
+        "titleEn": "Algorithm, breakpoints, ratios, and five rules",
+        "kindEn": "Quick reference"
+      },
+      {
+        "file": "compare",
+        "title": "同样 8 张卡片，四种排法",
+        "kind": "排法对比",
+        "titleEn": "The same eight cards in four layouts",
+        "kindEn": "Layout comparison"
+      },
+      {
+        "file": "templates",
+        "title": "作品集、双列种草、商品流",
+        "kind": "三套模板",
+        "titleEn": "Portfolio, two-column feed, and product gallery",
+        "kindEn": "Three templates"
+      }
+    ],
+    "categoryEn": "Contemporary interfaces",
+    "descriptionEn": "Equal-width columns, content-driven heights: each card goes into the shortest column. From stone walls and Pinterest boards to two-column feeds, discover masonry in 15 seconds.",
+    "tagsEn": [
+      "masonry",
+      "grid",
+      "columns",
+      "shortest column first",
+      "image wall",
+      "Pinterest",
+      "two-column feed",
+      "responsive"
+    ]
+  },
+  {
+    "id": "003-constructivism",
+    "type": "style",
+    "number": "003",
+    "title": "构成主义",
+    "titleEn": "Constructivism",
+    "years": "1917—1932",
+    "category": "现代主义",
+    "description": "一条斜线、一块红、一个大声的字。一支 15 秒短片，全片只有两条轴（−30° / 60°），从红楔子、《书》海报、塔特林塔、印花布、舞台一路形状接力到利西茨基的书。",
+    "tags": [
+      "斜线",
+      "红与黑",
+      "大字",
+      "蒙太奇",
+      "罗德琴科",
+      "利西茨基",
+      "西里尔字母"
+    ],
+    "publishedAt": "2026-10-22T10:56:00Z",
+    "release": "day-03",
+    "asset": "003-constructivism.mp4",
+    "sha256": "9277e96ac6c5c49125e0a7cdd518306c93d8dc9402f5ccdf8a9c8252549b26a8",
+    "images": [
+      {
+        "file": "poster",
+        "title": "一张海报，认识构成主义",
+        "kind": "风格海报",
+        "titleEn": "Constructivism at a glance",
+        "kindEn": "Style poster"
+      },
+      {
+        "file": "cheatsheet",
+        "title": "两条轴、色板、字体与五条规则",
+        "kind": "风格速查",
+        "titleEn": "Two axes, palette, typography, and five rules",
+        "kindEn": "Quick reference"
+      },
+      {
+        "file": "app-ui",
+        "title": "如果构成主义来做 App",
+        "kind": "界面应用",
+        "titleEn": "Constructivism in an app",
+        "kindEn": "UI application"
+      },
+      {
+        "file": "steps",
+        "title": "一张普通海报，四步改成构成主义",
+        "kind": "改造教程",
+        "titleEn": "Four steps from a plain poster to Constructivism",
+        "kindEn": "Poster tutorial"
+      }
+    ],
+    "categoryEn": "Modernism",
+    "descriptionEn": "A diagonal, a splash of red, and type that shouts. This 15-second film follows two axes (−30° and 60°) through wedges, posters, a tower, textiles, stage sets, and books.",
+    "tagsEn": [
+      "diagonal",
+      "red and black",
+      "large type",
+      "photomontage",
+      "Rodchenko",
+      "El Lissitzky",
+      "Cyrillic",
+      "halftone"
+    ]
+  },
+  {
+    "id": "004-memphis",
+    "type": "style",
+    "number": "004",
+    "title": "孟菲斯",
+    "titleEn": "Memphis",
+    "years": "1980—1988",
+    "category": "后现代主义",
+    "description": "一块一色、描一圈黑边、再歪一点。一支 15 秒短片，所有东西都是会掉下来、压扁、回弹的糖果色积木：从迪伦的唱片、Carlton 书架、Tahiti 台灯、First 椅子、Bacterio 纹样一路颜色接力到今天的 App 界面。",
+    "tags": [
+      "糖果色",
+      "黑描边",
+      "硬投影",
+      "几何积木",
+      "纹样",
+      "索特萨斯",
+      "80 年代"
+    ],
+    "publishedAt": "2026-10-23T05:15:33Z",
+    "release": "day-04",
+    "asset": "004-memphis.mp4",
+    "sha256": "d1ff264a8c4421620dee0371c4cf4cf4da865f894615c71a09e809137a222d31",
+    "images": [
+      {
+        "file": "poster",
+        "title": "一张海报，认识孟菲斯",
+        "kind": "风格海报",
+        "titleEn": "Memphis at a glance",
+        "kindEn": "Style poster"
+      },
+      {
+        "file": "cheatsheet",
+        "title": "积木、色板、纹样、字体与五条规则",
+        "kind": "风格速查",
+        "titleEn": "Blocks, palette, patterns, typography, and five rules",
+        "kindEn": "Quick reference"
+      },
+      {
+        "file": "app-ui",
+        "title": "如果孟菲斯来做 App",
+        "kind": "界面应用",
+        "titleEn": "Memphis in an app",
+        "kindEn": "UI application"
+      },
+      {
+        "file": "steps",
+        "title": "一张普通海报，四步改成孟菲斯",
+        "kind": "改造教程",
+        "titleEn": "Four steps from a plain poster to Memphis",
+        "kindEn": "Poster tutorial"
+      }
+    ],
+    "categoryEn": "Postmodernism",
+    "descriptionEn": "One color per shape, a black outline, and a playful tilt. Candy-colored blocks drop, squash, and bounce through a record, the Carlton bookcase, Tahiti lamp, First chair, patterns, and a modern app in 15 seconds.",
+    "tagsEn": [
+      "candy colors",
+      "black outlines",
+      "hard shadows",
+      "geometric blocks",
+      "patterns",
+      "Sottsass",
+      "1980s"
+    ]
+  },
+  {
+    "id": "005-pop-art",
+    "type": "style",
+    "number": "005",
+    "title": "波普艺术",
+    "titleEn": "Pop Art",
+    "years": "1956—1970",
+    "category": "流行文化",
+    "description": "用网点代替渐变，用粗黑线把每块颜色圈起来。一支 18 秒短片，一切都像印出来的：从汉密尔顿的拼贴、沃霍尔的 32 罐汤、利希滕斯坦的网点、《花》的丝网、奥登伯格的软汉堡，一路网点接力到今天手机里的表情包与漫画滤镜。",
+    "tags": [
+      "本戴点",
+      "网点",
+      "粗黑线",
+      "原色",
+      "拟声字",
+      "沃霍尔",
+      "60 年代"
+    ],
+    "publishedAt": "2026-10-23T09:08:03Z",
+    "release": "day-05",
+    "asset": "005-pop-art.mp4",
+    "sha256": "646bd8ef167f62144f6d9e01904145001532cf7c39c1bda0d748a0cec3d5e02d",
+    "images": [
+      {
+        "file": "poster",
+        "title": "一张海报，认识波普艺术",
+        "kind": "风格海报",
+        "titleEn": "Pop Art at a glance",
+        "kindEn": "Style poster"
+      },
+      {
+        "file": "cheatsheet",
+        "title": "网点、色板、对话框、字体与五条规则",
+        "kind": "风格速查",
+        "titleEn": "Dots, palette, speech bubbles, typography, and five rules",
+        "kindEn": "Quick reference"
+      },
+      {
+        "file": "app-ui",
+        "title": "如果波普来做 App",
+        "kind": "界面应用",
+        "titleEn": "Pop Art in an app",
+        "kindEn": "UI application"
+      },
+      {
+        "file": "steps",
+        "title": "一张普通海报，四步改成波普",
+        "kind": "改造教程",
+        "titleEn": "Four steps from a plain poster to Pop Art",
+        "kindEn": "Poster tutorial"
+      }
+    ],
+    "categoryEn": "Pop culture",
+    "descriptionEn": "Halftone dots replace gradients, and bold black outlines frame every color. An 18-second journey from collage, soup cans, comic dots, silkscreen flowers, and a soft burger to today’s emoji and comic filters.",
+    "tagsEn": [
+      "Ben-Day dots",
+      "halftone",
+      "bold outlines",
+      "primary colors",
+      "comic lettering",
+      "Warhol",
+      "1960s"
+    ]
+  },
+  {
+    "id": "008-risograph",
+    "type": "style",
+    "number": "006",
+    "title": "孔版印刷",
+    "titleEn": "Risograph",
+    "years": "1946—今天",
+    "category": "印刷工艺",
+    "description": "三种油墨、一张会呼吸的纸。一支 15 秒短片，从对版、制版、分色过机到叠印出纸：荧光粉印不进 CMYK，套不准是这台机器的口音。",
+    "tags": [
+      "孔版",
+      "专色",
+      "叠印",
+      "套不准",
+      "网点",
+      "小志"
+    ],
+    "publishedAt": "2026-10-24T11:43:20Z",
+    "release": "day-08",
+    "asset": "008-risograph.mp4",
+    "sha256": "a1c79e0021c8c4b84148fa0babed3537e108349c1ae105dcdc589a3faa12150f",
+    "images": [
+      {
+        "file": "poster",
+        "title": "一张海报，认识孔版印刷",
+        "kind": "风格海报",
+        "titleEn": "Risograph at a glance",
+        "kindEn": "Style poster"
+      },
+      {
+        "file": "cheatsheet",
+        "title": "油墨、叠印与五条规则",
+        "kind": "风格速查",
+        "titleEn": "Inks, overprint, and five rules",
+        "kindEn": "Quick reference"
+      },
+      {
+        "file": "app-ui",
+        "title": "如果孔版印刷来做 App",
+        "kind": "界面应用",
+        "titleEn": "Risograph in an app",
+        "kindEn": "UI application"
+      },
+      {
+        "file": "inks",
+        "title": "三种油墨，七种颜色",
+        "kind": "叠印图解",
+        "titleEn": "Three inks, seven colors",
+        "kindEn": "Overprint diagram"
+      }
+    ],
+    "categoryEn": "Print process",
+    "descriptionEn": "Three soy inks on a sheet of paper that still breathes. A 15-second film runs a Risograph: plates slam into register, a thermal head burns a master, colors reprint one drum at a time, and overprints mix by multiplying.",
+    "tagsEn": [
+      "stencil",
+      "spot color",
+      "overprint",
+      "misregistration",
+      "halftone",
+      "zine"
+    ]
+  },
+  {
+    "id": "009-neo-brutalism",
+    "type": "style",
+    "number": "007",
+    "title": "新粗野主义",
+    "titleEn": "Neo-Brutalism",
+    "years": "2021—今天",
+    "category": "当代界面",
+    "description": "黑框描到底，阴影是一块偏移的黑。一支 20 秒短片，全片只有一条物理——阴影长度就是高度：海报炸成十三颗键帽；一支笔先画框，注册表单从框里一个个长出来；卡片抬起来摊成阶梯；二十颗按钮的按压像水波一样扩散，再从 1952 年的清水混凝土、2014 年的粗野主义网页一路变回今天的界面；最后落进网页和手机 App。",
+    "tags": [
+      "黑框",
+      "硬阴影",
+      "平涂",
+      "按下",
+      "CSS",
+      "界面",
+      "无障碍"
+    ],
+    "publishedAt": "2026-10-27T12:32:35Z",
+    "release": "day-09-audio-v2",
+    "asset": "009-neo-brutalism.mp4",
+    "sha256": "7f54efd02c76040d7bf6d3331eb55fe3d747fc574fe20f5de7d0f17d77bfaf4e",
+    "images": [
+      {
+        "file": "poster",
+        "title": "一张海报，认识新粗野主义",
+        "kind": "风格海报",
+        "titleEn": "Neo-Brutalism at a glance",
+        "kindEn": "Style poster"
+      },
+      {
+        "file": "cheatsheet",
+        "title": "五个令牌、按钮三态与五条规则",
+        "kind": "风格速查",
+        "titleEn": "Five tokens, three button states, and five rules",
+        "kindEn": "Quick reference"
+      },
+      {
+        "file": "app-ui",
+        "title": "如果新粗野主义来做 App",
+        "kind": "界面应用",
+        "titleEn": "Neo-Brutalism in an app",
+        "kindEn": "UI application"
+      },
+      {
+        "file": "steps",
+        "title": "四步，改一张卡片",
+        "kind": "改造教程",
+        "titleEn": "Four steps to restyle one card",
+        "kindEn": "Card tutorial"
+      }
+    ],
+    "categoryEn": "Contemporary interfaces",
+    "descriptionEn": "Black borders on everything; the shadow is a solid offset block. A 20-second film built on one piece of physics — shadow length is height: a poster shatters into thirteen keycaps; a pen draws each frame and a sign-up form grows out of the borders; a card lifts and fans into a staircase; twenty buttons ripple when pressed, turn into 1952 raw concrete and a 2014 brutalist web page, and come back as today's UI — then a landing page and a phone app assemble layer by layer.",
+    "tagsEn": [
+      "black borders",
+      "hard shadows",
+      "flat color",
+      "press states",
+      "CSS",
+      "interfaces",
+      "accessibility"
+    ]
+  },
+  {
+    "id": "013-art-deco",
+    "type": "style",
+    "number": "008",
+    "title": "装饰艺术",
+    "titleEn": "Art Deco",
+    "years": "1925—1939",
+    "category": "建筑与海报",
+    "categoryEn": "Architecture & posters",
+    "description": "先立一条中轴，阶梯、放射和三线从中轴往两边同时长出来；金色是材质，只给线。一支 20 秒一镜到底的短片：光顺着海报的金线跑一圈，镜头推进拱窗、穿过一串三线拱门；玫瑰窗变成十二瓣万花筒，再塌成地平线上的太阳；夜景天际线三层纵深升起，探照灯成对交叉，镜头贴着主楼一路升到尖顶；五条规则翻转着飞来；最后海报一笔一笔重新长回去。",
+    "descriptionEn": "Draw one central axis, then grow steps, sunbursts and triple lines out of it on both sides at once; gold is a material, used only for lines. A 20-second single-shot film: light races along the poster's gold lines, the camera pushes through the arch into a tunnel of triple-line portals, a rose window turns into a twelve-fold Busby Berkeley kaleidoscope that collapses into a sun on the horizon, a night skyline rises in three layers of depth under crossing searchlights while the camera rides the hero tower up to its spire, five rule plaques flip in from the distance, and the poster redraws itself stroke by stroke.",
+    "tags": [
+      "中轴对称",
+      "阶梯",
+      "放射",
+      "三线",
+      "金色",
+      "海报",
+      "品牌"
+    ],
+    "tagsEn": [
+      "symmetry",
+      "ziggurat",
+      "sunburst",
+      "triple line",
+      "gold",
+      "posters",
+      "branding"
+    ],
+    "publishedAt": "2026-10-27T16:31:08Z",
+    "release": "day-13",
+    "asset": "013-art-deco.mp4",
+    "sha256": "9df3171271f51ce6a2af8281e3307fb3f00c4974642c3d7473ad2060181ec05d",
+    "images": [
+      {
+        "file": "poster",
+        "title": "一张海报，认识装饰艺术",
+        "kind": "风格海报",
+        "titleEn": "Art Deco at a glance",
+        "kindEn": "Style poster"
+      },
+      {
+        "file": "cheatsheet",
+        "title": "五种颜色、三种字、五个母题、五条规则",
+        "kind": "风格速查",
+        "titleEn": "Five colors, three typefaces, five motifs, five rules",
+        "kindEn": "Quick reference"
+      },
+      {
+        "file": "app-ui",
+        "title": "如果装饰艺术来做 App",
+        "kind": "界面应用",
+        "titleEn": "Art Deco in an app",
+        "kindEn": "UI application"
+      },
+      {
+        "file": "steps",
+        "title": "五步，从一条中轴到一张装饰艺术",
+        "kind": "设计教程",
+        "titleEn": "Five steps from one axis to Art Deco",
+        "kindEn": "Design tutorial"
+      }
+    ]
+  },
+  {
+    "id": "014-liquid-glass",
+    "type": "style",
+    "number": "009",
+    "title": "液态玻璃",
+    "titleEn": "Liquid Glass",
+    "years": "2013—今天",
+    "category": "当代界面",
+    "categoryEn": "Contemporary interfaces",
+    "description": "玻璃不发光，只把后面的东西弯过来：折射量 = 边缘的坡度。一支 20 秒短片，同一滴玻璃从头接力到尾：落下激起涟漪，镜头两次穿过玻璃，从 Aqua 到液态玻璃的二十五年，靠近融合、按钮展开成菜单，再落进 3D 手机与网页；五条规则由放大镜逐条读过，最后升回开场。",
+    "descriptionEn": "Glass does not glow; it bends what is behind it, with refraction following the slope of the edge. One droplet carries this 20-second film: a rippling impact, two journeys through glass, twenty-five years from Aqua to Liquid Glass, merging drops and a button that grows into a menu, then a 3D phone and browser. A magnifier reads five practical rules before the droplet returns to the opening.",
+    "tags": [
+      "折射",
+      "玻璃",
+      "融合",
+      "厚度",
+      "高光",
+      "界面",
+      "WebGL"
+    ],
+    "tagsEn": [
+      "refraction",
+      "glass",
+      "merging",
+      "depth",
+      "highlights",
+      "interfaces",
+      "WebGL"
+    ],
+    "release": "day-14",
+    "asset": "014-liquid-glass.mp4",
+    "sha256": "08ff501cb5c597f1097ab9da6512344e936cd37d64c58fa5f5c7b6e303d1e643",
+    "images": [
+      {
+        "file": "poster",
+        "title": "一张海报，认识液态玻璃",
+        "kind": "风格海报",
+        "titleEn": "Liquid Glass at a glance",
+        "kindEn": "Style poster"
+      },
+      {
+        "file": "cheatsheet",
+        "title": "五层结构、三种厚度与设计规则",
+        "kind": "风格速查",
+        "titleEn": "Five layers, three thicknesses, and design rules",
+        "kindEn": "Quick reference"
+      },
+      {
+        "file": "app-ui",
+        "title": "如果液态玻璃来做 App",
+        "kind": "界面应用",
+        "titleEn": "Liquid Glass in a music app",
+        "kindEn": "UI application"
+      },
+      {
+        "file": "steps",
+        "title": "五步做一块液态玻璃",
+        "kind": "设计教程",
+        "titleEn": "Five steps to build liquid glass",
+        "kindEn": "Design tutorial"
+      }
+    ],
+    "publishedAt": "2026-10-28T13:32:21Z"
+  },
+  {
+    "id": "018-diorama",
+    "videoDir": "video3d",
+    "type": "style",
+    "number": "010",
+    "title": "微缩景观",
+    "titleEn": "Diorama",
+    "years": "1950s—今天",
+    "category": "三维场景",
+    "categoryEn": "3D scenes",
+    "description": "把世界切成一块底座，一块块搭出来，再用移轴把它变小。一支 20 秒短片：街角、房间剖面与模型铁路在同一张桌上逐块搭起，收成手机界面，再一起入夜；镜头缓推房间，台灯熄灭后停在小彩灯和月光里。",
+    "descriptionEn": "Cut the world into a block on a base, build it piece by piece, then make it small with tilt-shift. In this 20-second film, a street corner, a cutaway room and a model railway assemble on one table, become a phone interface and turn to night. The camera pushes into the room; the lamp clicks off and the film rests in string lights and moonlight.",
+    "tags": [
+      "微缩模型",
+      "底座",
+      "移轴",
+      "逐块搭建",
+      "剖面",
+      "暖光",
+      "three.js"
+    ],
+    "tagsEn": [
+      "miniatures",
+      "base",
+      "tilt-shift",
+      "build-up",
+      "cutaway",
+      "warm light",
+      "three.js"
+    ],
+    "release": "day-18-v3",
+    "asset": "018-diorama.mp4",
+    "sha256": "7cf8d42d075c04f7a4f4d397bcb17126d61b240d34fe2f75ab7b29e710a6af73",
+    "images": [
+      {
+        "file": "poster",
+        "title": "一张海报，认识微缩景观",
+        "kind": "风格海报",
+        "titleEn": "Diorama at a glance",
+        "kindEn": "Style poster"
+      },
+      {
+        "file": "cheatsheet",
+        "title": "底座、移轴、逐块搭建与五条规则",
+        "kind": "风格速查",
+        "titleEn": "Bases, tilt-shift, build-up, and five rules",
+        "kindEn": "Quick reference"
+      },
+      {
+        "file": "app-ui",
+        "title": "如果微缩景观来做 App",
+        "kind": "界面应用",
+        "titleEn": "Diorama in a smart-home app",
+        "kindEn": "UI application"
+      },
+      {
+        "file": "steps",
+        "title": "四步，从普通 3D 到微缩景观",
+        "kind": "设计教程",
+        "titleEn": "Four steps from plain 3D to Diorama",
+        "kindEn": "Design tutorial"
+      }
+    ],
+    "publishedAt": "2026-11-02T11:27:28Z"
+  },
+  {
+    "id": "019-low-poly",
+    "type": "style",
+    "number": "011",
+    "title": "低多边形",
+    "titleEn": "Low Poly",
+    "years": "1993—今天",
+    "category": "三维场景",
+    "categoryEn": "3D scenes",
+    "description": "一个面，一个颜色。一支 20 秒短片：三角面从纸上翻起拼成山谷与小火车，从空中落下搭成灯塔；小星球从 1280 面减到 80 面，收进天气 App，再回到入夜的山谷，翻回纸面、停在片名与署名。",
+    "descriptionEn": "One face, one colour. In this 20-second film, triangles flip up from paper into a valley and a train, then fall from the sky to build a lighthouse. A planet drops from 1280 to 80 faces, becomes a weather app and returns to the valley at night before folding back to paper for the title and byline.",
+    "tags": [
+      "三角面",
+      "平涂",
+      "翻牌",
+      "三档明暗",
+      "减面",
+      "天气 App",
+      "SVG"
+    ],
+    "tagsEn": [
+      "triangles",
+      "flat shading",
+      "card flip",
+      "three shades",
+      "polygon reduction",
+      "weather app",
+      "SVG"
+    ],
+    "release": "day-19",
+    "asset": "019-low-poly.mp4",
+    "sha256": "2165d41e8502ab973e79fe61d415544b843d73ccbd43559ade534600878e5353",
+    "images": [
+      {
+        "file": "poster",
+        "title": "一张海报，认识低多边形",
+        "kind": "风格海报",
+        "titleEn": "Low Poly at a glance",
+        "kindEn": "Style poster"
+      },
+      {
+        "file": "cheatsheet",
+        "title": "三角面、三档明暗与五条规则",
+        "kind": "风格速查",
+        "titleEn": "Triangle faces, three shades, and five rules",
+        "kindEn": "Quick reference"
+      },
+      {
+        "file": "app-ui",
+        "title": "如果低多边形来做 App",
+        "kind": "界面应用",
+        "titleEn": "Low Poly in a weather app",
+        "kindEn": "UI application"
+      },
+      {
+        "file": "steps",
+        "title": "四步，从一张纸到低多边形",
+        "kind": "设计教程",
+        "titleEn": "Four steps from paper to Low Poly",
+        "kindEn": "Design tutorial"
+      }
+    ],
+    "publishedAt": "2026-10-30T12:56:23Z"
+  },
+  {
+    "id": "017-mid-century-modern",
+    "type": "style",
+    "number": "012",
+    "title": "中世纪现代",
+    "titleEn": "Mid-Century Modern",
+    "years": "1945—1965",
+    "category": "平面与生活设计",
+    "categoryEn": "Graphic & everyday design",
+    "description": "剪刀代替尺子，每一块都是能拿起来的彩纸。一支 15 秒短片：球钟搭成海报，同一批纸片翻面接力，变成电影片头、彩球挂衣架、爵士唱片、玻璃住宅与今天的电台 App；五张规则卡逐条演示，最后接回海报。",
+    "descriptionEn": "Scissors replace rulers; every piece is a sheet of paper you could pick up. In this 15-second film, a ball clock becomes a poster, then the same pieces flip and relay through film titles, a colorful coat rack, a jazz record, a glass house and a radio app. Five cards demonstrate the rules before returning to the opening.",
+    "tags": [
+      "剪纸",
+      "糖果色",
+      "影子",
+      "叠印",
+      "原子时代",
+      "片头",
+      "界面"
+    ],
+    "tagsEn": [
+      "cut paper",
+      "candy colors",
+      "shadows",
+      "overprint",
+      "atomic age",
+      "film titles",
+      "interfaces"
+    ],
+    "release": "day-17",
+    "asset": "017-mid-century-modern.mp4",
+    "sha256": "eeefc36479254819103bb89195c59b4d61eb09b6e63255945aba85f21e47c08c",
+    "images": [
+      {
+        "file": "poster",
+        "title": "一张海报，认识中世纪现代",
+        "kind": "风格海报",
+        "titleEn": "Mid-Century Modern at a glance",
+        "kindEn": "Style poster"
+      },
+      {
+        "file": "cheatsheet",
+        "title": "剪刀边、影子与五条规则",
+        "kind": "风格速查",
+        "titleEn": "Scissor-cut edges, shadows and five rules",
+        "kindEn": "Quick reference"
+      },
+      {
+        "file": "app-ui",
+        "title": "如果中世纪现代来做 App",
+        "kind": "界面应用",
+        "titleEn": "Mid-Century Modern in a radio app",
+        "kindEn": "UI application"
+      },
+      {
+        "file": "steps",
+        "title": "四步，从普通海报到中世纪现代",
+        "kind": "改造教程",
+        "titleEn": "Four steps to a Mid-Century Modern poster",
+        "kindEn": "Design tutorial"
+      }
+    ],
+    "publishedAt": "2026-11-04T10:53:43Z"
+  }
+]

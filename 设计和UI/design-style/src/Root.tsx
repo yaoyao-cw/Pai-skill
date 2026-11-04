@@ -1,0 +1,177 @@
+import React from 'react';
+import {Composition} from 'remotion';
+import {Bauhaus, BAUHAUS_DURATION} from '../styles/001-bauhaus/video/Bauhaus';
+import {BentoGrid, BENTO_DURATION} from '../layouts/01-bento-grid/video/BentoGrid';
+import {Masonry, MASONRY_DURATION} from '../layouts/02-masonry/video/Masonry';
+import {SwissStyle, SWISS_DURATION} from '../styles/002-swiss-style/video/SwissStyle';
+import {Constructivism, CONSTRUCTIVISM_DURATION} from '../styles/003-constructivism/video/Constructivism';
+import {Memphis, MEMPHIS_DURATION} from '../styles/004-memphis/video/Memphis';
+import {PopArt, POPART_DURATION} from '../styles/005-pop-art/video/PopArt';
+import {Y2K, Y2K_DURATION} from '../styles/006-y2k/video/Y2K';
+import {Risograph, RISOGRAPH_DURATION} from '../styles/008-risograph/video/Risograph';
+import {NeoBrutalism, NEOBRUTAL_DURATION} from '../styles/009-neo-brutalism/video/NeoBrutalism';
+import {ArtDeco, ARTDECO_DURATION} from '../styles/013-art-deco/video/ArtDeco';
+import {LiquidGlass, LIQUIDGLASS_DURATION} from '../styles/014-liquid-glass/video/LiquidGlass';
+import {Futurism, FUTURISM_DURATION} from '../styles/015-futurism/video/Futurism';
+import {MidCenturyModern, MIDCENTURYMODERN_DURATION} from '../styles/017-mid-century-modern/video/MidCenturyModern';
+
+// 每期注册为一个 Composition：风格 S{期号}-{名字}，布局 L{期号}-{名字}
+// 统一规格：1920×1080 · 60fps · 15s
+export const Root: React.FC = () => (
+  <>
+    <Composition
+      id="S001-Bauhaus"
+      component={Bauhaus}
+      durationInFrames={BAUHAUS_DURATION}
+      fps={60}
+      width={1920}
+      height={1080}
+    />
+    <Composition
+      id="S002-SwissStyle"
+      component={SwissStyle}
+      durationInFrames={SWISS_DURATION}
+      fps={60}
+      width={1920}
+      height={1080}
+      defaultProps={{music: true, blur: 6}}
+    />
+    <Composition
+      id="S003-Constructivism"
+      component={Constructivism}
+      durationInFrames={CONSTRUCTIVISM_DURATION}
+      fps={60}
+      width={1920}
+      height={1080}
+      defaultProps={{music: true, blur: 5}}
+    />
+    <Composition
+      id="S004-Memphis"
+      component={Memphis}
+      durationInFrames={MEMPHIS_DURATION}
+      fps={60}
+      width={1920}
+      height={1080}
+      defaultProps={{music: true, blur: 5}}
+    />
+    <Composition
+      id="S005-PopArt"
+      component={PopArt}
+      durationInFrames={POPART_DURATION}
+      fps={60}
+      width={1920}
+      height={1080}
+      defaultProps={{music: true, blur: 5}}
+    />
+    <Composition
+      id="L01-BentoGrid"
+      component={BentoGrid}
+      durationInFrames={BENTO_DURATION}
+      fps={60}
+      width={1920}
+      height={1080}
+      defaultProps={{music: true}}
+    />
+    <Composition
+      id="L02-Masonry"
+      component={Masonry}
+      durationInFrames={MASONRY_DURATION}
+      fps={60}
+      width={1920}
+      height={1080}
+      defaultProps={{music: true}}
+    />
+    <Composition
+      id="S006-Y2K"
+      component={Y2K}
+      durationInFrames={Y2K_DURATION}
+      fps={60}
+      width={1920}
+      height={1080}
+      defaultProps={{music: true}}
+    />
+    <Composition
+      id="S008-Risograph"
+      component={Risograph}
+      durationInFrames={RISOGRAPH_DURATION}
+      fps={60}
+      width={1920}
+      height={1080}
+      defaultProps={{music: true, blur: 5}}
+    />
+    <Composition
+      id="S009-NeoBrutalism"
+      component={NeoBrutalism}
+      durationInFrames={NEOBRUTAL_DURATION}
+      fps={60}
+      width={1920}
+      height={1080}
+      defaultProps={{music: true, blur: 8}}
+    />
+    <Composition
+      id="S013-ArtDeco"
+      component={ArtDeco}
+      durationInFrames={ARTDECO_DURATION}
+      fps={60}
+      width={1920}
+      height={1080}
+      defaultProps={{music: true, blur: 8}}
+    />
+    <Composition
+      id="S014-LiquidGlass"
+      component={LiquidGlass}
+      durationInFrames={LIQUIDGLASS_DURATION}
+      fps={60}
+      width={1920}
+      height={1080}
+      defaultProps={{music: true}}
+    />
+    {/* 草稿预览：30fps、内部半分辨率、不做运动模糊；渲染时加 --scale=0.5（npm run preview:014） */}
+    <Composition
+      id="S014-LiquidGlass-Preview"
+      component={LiquidGlass}
+      durationInFrames={LIQUIDGLASS_DURATION / 2}
+      fps={30}
+      width={1920}
+      height={1080}
+      defaultProps={{music: true, blur: 1, step: 2, res: 0.5}}
+    />
+    <Composition
+      id="S015-Futurism"
+      component={Futurism}
+      durationInFrames={FUTURISM_DURATION}
+      fps={60}
+      width={1920}
+      height={1080}
+      defaultProps={{music: true, blur: 6}}
+    />
+    {/* 草稿预览：30fps、step 2、不做运动模糊、内部半分辨率；渲染时加 --scale=0.5（npm run preview:015） */}
+    <Composition
+      id="S015-Futurism-Preview"
+      component={Futurism}
+      durationInFrames={FUTURISM_DURATION / 2}
+      fps={30}
+      width={1920}
+      height={1080}
+      defaultProps={{music: true, blur: 1, step: 2, res: 0.5}}
+    />
+    <Composition
+      id="S017-MidCenturyModern"
+      component={MidCenturyModern}
+      durationInFrames={MIDCENTURYMODERN_DURATION}
+      fps={60}
+      width={1920}
+      height={1080}
+      defaultProps={{music: true, step: 1, blur: 6, res: 1}}
+    />
+    <Composition
+      id="S017-MidCenturyModern-Preview"
+      component={MidCenturyModern}
+      durationInFrames={MIDCENTURYMODERN_DURATION / 2}
+      fps={30}
+      width={1920}
+      height={1080}
+      defaultProps={{music: true, step: 2, blur: 1, res: 0.5}}
+    />
+  </>
+);
