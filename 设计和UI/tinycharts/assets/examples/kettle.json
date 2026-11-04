@@ -1,0 +1,16 @@
+{
+ "title": "One kettle",
+ "checked": "Every reachable state checked (4 states, 4 steps). All 2 rules hold.",
+ "rules": [
+  {
+   "rule": "Every step can happen, and none is a dead end",
+   "says": "Each of the 3 states is reached from the start, and every path can still reach its end (boiled).",
+   "path": "Holds: all 3 reached, none stuck."
+  },
+  {
+   "rule": "Never boil dry",
+   "says": "The kettle is never on without water in it.",
+   "path": "Take away the has water guard and it breaks in 1 step: switch on, empty."
+  }
+ ]
+}

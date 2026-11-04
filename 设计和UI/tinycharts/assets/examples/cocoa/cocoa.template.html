@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Bean to Bar</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu&family=DM+Sans:wght@400;500&family=Young+Serif&display=swap"><style>
+:root{--desk:#e3dac8;--paper:#f4efe3;--ink:#2f261e;--muted:#7d7566;--red:#b23a38;--mono:"Cutive Mono","Courier New",monospace;--hand:"Courier Prime","Courier New",monospace}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--desk);color:var(--ink);font-family:var(--mono);display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px max(16px,env(safe-area-inset-right,0px));overflow-x:hidden}
+#stage{width:100%;display:flex;justify-content:center;align-items:flex-start;gap:16px}
+#frame{overflow:hidden;box-shadow:0 1px 0 #cdbfa8,3px 4px 0 #d4c9b4;position:relative;flex:0 1 auto;width:min(100%,calc(100dvh - 142px));aspect-ratio:1;line-height:0}
+#side{display:none;flex:0 0 250px;box-sizing:border-box;background:#fbf7ec;border:1px solid var(--ink);border-top:3px solid var(--red);padding:14px 16px 16px;box-shadow:3px 4px 0 #d4c9b4}
+#side.show{display:block}
+#side #hero{display:block;width:100%;aspect-ratio:1.45;margin:0 0 10px;background:#f4efe3;border:1px solid var(--ink);border-radius:3px}
+#side .kick{font:12px var(--mono);letter-spacing:1px;margin:0;color:var(--red)}
+#side h2{font:400 25px/1.1 var(--mono);letter-spacing:-.5px;margin:4px 0 10px}
+#side .meter{height:12px;border:1px solid var(--ink);background:#fffdf6;margin:0 0 3px}
+#side .meter span{display:block;height:100%;transition:width .4s,background .4s}
+#side .ml{font:italic 13px var(--hand);margin:0 0 10px}
+#side ol{list-style:none;margin:0 0 10px;padding:0;font:13.5px/1.2 var(--mono)}
+#side li{padding:3px 6px 3px 18px;position:relative;opacity:.5;border-radius:2px}
+#side li::before{content:"";position:absolute;left:5px;top:8px;width:7px;height:7px;border-radius:50%;border:1px solid var(--ink);box-sizing:border-box}
+#side li.done{opacity:.85}#side li.done::before{background:var(--ink)}
+#side li.now{opacity:1;background:var(--red);color:#fffdf6}#side li.now::before{background:#fffdf6;border-color:#fffdf6}
+#side .fact{font:italic 14px/1.35 var(--hand);margin:0}
+@media (max-width:899px){#stage{flex-direction:column;align-items:center}#side{flex:none;width:100%}}
+#frame::after{content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;background-size:320px;opacity:.5;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .22  0 0 0 0 .18  0 0 0 0 .14  1.1 0 0 0 -.56'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>")}
+#sheet{display:block;width:100%;height:100%;touch-action:manipulation;background-color:var(--paper);background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .4  0 0 0 0 .34  0 0 0 0 .25  .14 0 0 0 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>");transform-origin:0 0}
+.hit{cursor:pointer}.who{transform-box:fill-box;transform-origin:50% 100%}
+.hop{animation:hop .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes hop{0%{transform:translateY(0)}35%{transform:translateY(-14px) rotate(-2deg)}70%{transform:translateY(0) scale(1.03,.97)}100%{transform:none}}
+.bubble{animation:pop 1.5s both}
+@keyframes pop{0%{opacity:0;transform:translateY(8px)}12%{opacity:1;transform:none}82%{opacity:1}100%{opacity:0}}
+.tt{font-family:var(--mono)}.it{font-family:var(--hand);font-style:italic}
+#logic{opacity:0;transition:opacity .55s;pointer-events:none}.on #logic{opacity:1}
+#art{transition:opacity .55s}.on #art{opacity:.82}
+#panel{width:min(900px,100%);display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;justify-content:center;min-height:36px}
+.bar{display:flex;gap:6px;flex-wrap:wrap}
+button{font:14px var(--mono);color:var(--ink);background:var(--paper);border:1px solid var(--ink);border-radius:2px;padding:6px 11px;cursor:pointer}
+button:hover{transform:translateY(-1px)}button[aria-pressed=true]{background:var(--ink);color:var(--paper)}.bar button{color:var(--red);border-color:var(--red)}.bar button[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+button:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+#note{font:italic 15px var(--hand);text-align:center;min-width:0;flex:1 1 180px;margin:0}
+#hint{font:12px var(--mono);opacity:.72;margin:0}
+#why{display:none;flex:1 1 100%;font:italic 14px/1.45 var(--hand);margin:0;text-align:center}#main.showwhy #why{display:block}
+footer{font:italic 12px var(--hand);opacity:.72;text-align:center;margin:0;max-width:900px}footer a{color:inherit}
+.crown{transform-box:fill-box;transform-origin:50% 100%;animation:crown 3.6s ease-in-out infinite alternate}
+@keyframes crown{from{transform:rotate(-1deg)}to{transform:rotate(1.1deg)}}
+.tea{transform-box:fill-box;transform-origin:50% 50%;transform:scale(.62);transition:transform 1.2s cubic-bezier(.3,.7,.3,1),opacity .35s}.tea.full{transform:none}
+.steam{opacity:0;transition:opacity .8s}.steam.up{opacity:1}.steam path,.hsteam path{fill:none;stroke:#2f261e;stroke-width:1.2;stroke-linecap:round;opacity:.55;animation:wisp 2.6s ease-in-out infinite}.steam path:nth-child(2),.hsteam path:nth-child(2){animation-delay:-1.1s}.steam path:nth-child(3),.hsteam path:nth-child(3){animation-delay:-1.9s}
+#heroTea{transition:opacity .9s}
+@keyframes wisp{0%{transform:translateY(10px);opacity:0}30%{opacity:.55}100%{transform:translateY(-22px);opacity:0}}
+.spot{fill:none;stroke:#b23a38;stroke-width:3;stroke-dasharray:9 7;opacity:0;transition:opacity .3s}.spot.on{opacity:1;animation:march .9s linear infinite}
+@keyframes march{to{stroke-dashoffset:-16}}
+.reach{fill:none;stroke:#b23a38;stroke-width:6;stroke-linecap:round;opacity:0;transition:opacity .4s}.reach.on{opacity:.8}
+#barShiny,#barDull{transition:opacity .9s}.sheen{transform:translateX(-420px)}.gleam .sheen{animation:sheen 1.8s .7s ease-in-out}
+@keyframes sheen{to{transform:translateX(420px)}}
+.flame{opacity:0;transition:opacity .3s}.flame.lit{opacity:1;animation:flick .22s ease-in-out infinite alternate}.flame{transform-box:fill-box;transform-origin:50% 100%}
+@keyframes flick{from{transform:scale(1,.86)}to{transform:scale(.92,1.14)}}
+.root{fill:none;stroke:#b23a38;stroke-width:3;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.8s ease-in-out}.reveal .root{stroke-dashoffset:0}
+.rootword{opacity:0;transition:opacity .8s 1.5s}.reveal .rootword{opacity:1}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01s!important}}
+#frame::after{display:none}#sheet{background-image:none!important;background-color:#fbf6ec!important}#views button[aria-current=page]{--tab:#fbf6ec}:root{--mono:Gaegu,"DM Sans",sans-serif;--hand:Gaegu,"DM Sans",sans-serif}
+.tt{font-family:var(--mono)}text.it{font-family:Gaegu,"DM Sans",sans-serif;font-style:normal!important;font-size-adjust:.5;letter-spacing:.5px}
+.cap{font-family:Gaegu,"DM Sans",sans-serif;font-size-adjust:.5;letter-spacing:1.4px}
+text.tt[font-size="74"],text.tt[font-size="70"],text.tt[font-size="72"],text.tt[font-size="68"],text.tt[font-size="66"]{font-family:"Young Serif",Georgia,serif;font-size:76px;letter-spacing:-1px}
+text.tt[font-size="16"]{font-size:13px;letter-spacing:2.4px;text-transform:uppercase}
+#views b{font-family:"Young Serif",Georgia,serif;font-weight:400;letter-spacing:0}
+#views small,#actions button,#actions::before,#status,#hint,#tabs button,#credit,footer,#side li{font-size-adjust:.5!important;font-style:normal!important}
+@media (min-width:1px){#views small{white-space:nowrap}}
+#actions{align-items:center}#actions button{font:500 15px/1 var(--mono);padding:10px 15px;border-radius:999px;background:transparent}
+#actions button.run{order:-2;background:var(--red);border-color:var(--red);color:#fffdf6}#actions button.next{background:var(--paper);color:var(--ink);border-color:var(--ink)}
+#actions:has(button:not(.run):not(.next) ~ button:not(.run):not(.next))::before{content:"Pick one";order:-1;width:100%;font:500 12px/1 var(--mono);letter-spacing:.8px;color:var(--ink);opacity:.72;text-transform:uppercase}
+:root{--desk:#e7dbd4;--paper:#f6ede8;--red:#8a5a41}
+#frame{box-shadow:0 1px 0 #cbb8ae,3px 4px 0 #d6c6bd}
+#side{background:#fbf6ec;box-shadow:3px 4px 0 #d6c6bd}#side #hero{background:#f3e7df;border-radius:3px}
+#side .kick{display:none}#side h2{font:400 30px/1.1 "Young Serif",Georgia,serif;letter-spacing:-.5px}
+#side .ml,#side .fact{font-style:normal;font-family:Gaegu,"DM Sans",sans-serif;font-size-adjust:.5}#side .fact{font-size:17px}
+#side li{font-size:14px}.spot{stroke:var(--red)}.reach{stroke:var(--red)}
+.stn,.lab{transition:opacity .4s}.stn{transform-box:fill-box;transform-origin:50% 100%}.stn.here{animation:wig .7s ease-in-out infinite alternate}
+@keyframes wig{from{transform:rotate(-1deg)}to{transform:rotate(1deg) translateY(-3px)}}
+.lab.here text{fill:var(--red)}
+button{font-family:var(--mono);font-size:15px}
+button,#status,#hint,footer,#say,#note,#credit{font-size-adjust:.5!important;font-style:normal!important}
+</style></head>
+<body id="main"><div id="stage"><div id="frame"><svg id="sheet" viewBox="0 0 1400 1400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn isometric chocolate line: six small steps run into one big tempering ring."><g id="defs"></g><g id="art"><g id="back"></g><g id="live"></g><g id="front"></g></g><g id="logic"></g><g id="fx" pointer-events="none"></g></svg></div><aside id="side" aria-live="polite"></aside></div>
+<div id="panel"><div class="bar" id="bar"></div><p id="note"></p><p id="hint">tap people too</p><p id="why"></p></div>
+<footer>Inspired by <a href="https://github.com/kevintngo/statechart-art">statechart-art</a> by Kevin T. Ngo. Faces and shadows after <a href="https://april-zhu.com/colorfigures">Colorfigures</a>. Rules checked with TLC, following the statechart skill by Lauren Tan. Steps and temperatures from <a href="https://www.chemistryworld.com/features/well-tempered-chocolate/9200.article">Chemistry World</a> and maker guides; typical values, they vary by maker.</footer>
+<script>const LOOK={};</script>
+<script>
+@@KIT@@
+</script>
+<script>const DATA={
+ "distinct": 11,
+ "states": [
+  {
+   "id": "Pod",
+   "initial": true
+  },
+  {
+   "id": "Fermented",
+   "initial": false
+  },
+  {
+   "id": "Dried",
+   "initial": false
+  },
+  {
+   "id": "Roasted",
+   "initial": false
+  },
+  {
+   "id": "Ground",
+   "initial": false
+  },
+  {
+   "id": "Conched",
+   "initial": false
+  },
+  {
+   "id": "Melted",
+   "initial": false
+  },
+  {
+   "id": "Cooled",
+   "initial": false
+  },
+  {
+   "id": "Dull bar",
+   "initial": false
+  },
+  {
+   "id": "Reworked",
+   "initial": false
+  },
+  {
+   "id": "Shiny bar",
+   "initial": false
+  }
+ ],
+ "edges": [
+  {
+   "key": "Pod>Fermented",
+   "from": "Pod",
+   "to": "Fermented",
+   "label": ""
+  },
+  {
+   "key": "Fermented>Dried",
+   "from": "Fermented",
+   "to": "Dried",
+   "label": ""
+  },
+  {
+   "key": "Dried>Roasted",
+   "from": "Dried",
+   "to": "Roasted",
+   "label": ""
+  },
+  {
+   "key": "Roasted>Ground",
+   "from": "Roasted",
+   "to": "Ground",
+   "label": ""
+  },
+  {
+   "key": "Ground>Conched",
+   "from": "Ground",
+   "to": "Conched",
+   "label": ""
+  },
+  {
+   "key": "Conched>Melted",
+   "from": "Conched",
+   "to": "Melted",
+   "label": ""
+  },
+  {
+   "key": "Melted>Cooled",
+   "from": "Melted",
+   "to": "Cooled",
+   "label": ""
+  },
+  {
+   "key": "Melted>Dull bar",
+   "from": "Melted",
+   "to": "Dull bar",
+   "label": "poured too soon"
+  },
+  {
+   "key": "Cooled>Reworked",
+   "from": "Cooled",
+   "to": "Reworked",
+   "label": ""
+  },
+  {
+   "key": "Reworked>Melted",
+   "from": "Reworked",
+   "to": "Melted",
+   "label": "too hot, start again"
+  },
+  {
+   "key": "Reworked>Shiny bar",
+   "from": "Reworked",
+   "to": "Shiny bar",
+   "label": "in temper"
+  }
+ ],
+ "bug": [
+  {
+   "n": 1,
+   "state": "Pod"
+  },
+  {
+   "n": 2,
+   "state": "Fermented"
+  },
+  {
+   "n": 3,
+   "state": "Dried"
+  },
+  {
+   "n": 4,
+   "state": "Roasted"
+  },
+  {
+   "n": 5,
+   "state": "Ground"
+  },
+  {
+   "n": 6,
+   "state": "Conched"
+  },
+  {
+   "n": 7,
+   "state": "Melted"
+  },
+  {
+   "n": 8,
+   "state": "Dull bar"
+  }
+ ],
+ "rule": "Every bar sets with a shine"
+};</script>
+<script>/* Shared by both sheets: capture pen output into a group, tracks with lengths, tags from the model, a stepped clock. */
+const $ = id => document.getElementById(id);
+const layer = (id, fn) => { out = []; fn(); layShades(); $(id).innerHTML = out.join(''); };
+const lenOf = pts => { const c = [0]; for (let i = 1; i < pts.length; i++) c.push(c[i-1] + Math.hypot(pts[i][0]-pts[i-1][0], pts[i][1]-pts[i-1][1], (pts[i][2]||0)-(pts[i-1][2]||0))); return c; };
+function track(pts){ const c = lenOf(pts); return { pts, c, len: c.at(-1) }; }
+function along(t, s){ s = Math.max(0, Math.min(t.len, s)); let i = 1; while (i < t.c.length-1 && t.c[i] < s) i++; const a = t.pts[i-1], b = t.pts[i], k = (s-t.c[i-1])/((t.c[i]-t.c[i-1])||1); return [a[0]+(b[0]-a[0])*k, a[1]+(b[1]-a[1])*k, (a[2]||0)+((b[2]||0)-(a[2]||0))*k]; }
+const paint = (pts, col, w = 1.1) => { fill(pts, col, { dx:.3, dy:.2, amp:.3 }); if (w) inkLoop(pts, { w, amp:.3, over:0 }); };
+const P3 = pts => pts.map(p => P(p[0], p[1], p[2]||0));
+// arrows lie on the tracks, so each one can only be the belt it stands on
+function arrowOn(t, bug, trim = 34, lift = 16){
+  const ps = []; for (let s = trim; s <= t.len-trim; s += 7) ps.push(along(t, s));
+  if (ps.length < 3) ps.push(along(t, t.len-trim));
+  const q = ps.map(p => { const a = P(...p); return [a[0], a[1]-lift]; }), b = q.at(-1), a = q.at(-3) || q[0], l = Math.hypot(b[0]-a[0], b[1]-a[1])||1, u = [(b[0]-a[0])/l, (b[1]-a[1])/l], h = bug ? 16 : 13, e = [b[0]-u[0]*h, b[1]-u[1]*h];
+  line(q, { w: bug ? 6 : 4.4, col: '#f8f3e9', amp:.2, over:0 });
+  line([...q.slice(0,-1), e], { w: bug ? 2.6 : 1.5, col: RED, amp:.4, over:0 });
+  const hw = bug ? 7.5 : 5.5; fill([b, [e[0]-u[1]*hw, e[1]+u[0]*hw], [e[0]+u[1]*hw, e[1]-u[0]*hw]], RED, { dx:0, dy:0, amp:.05 });
+}
+function stateTag(cx, cy, text, no, to, o = {}){
+  const w = Math.max(84, text.length*13.6+26), x = cx-w/2, y = cy-27;
+  if (to) dash([cx, cy], P(...to), RED);
+  const n = out.length; tag(x, y, w, text, no || '');
+  if (!no) for (let i = n; i < out.length; i++) out[i] = out[i].replace('>No. </text>', '></text>');
+  if (o.wrong) out.push(`<rect x="${x}" y="${y}" width="${w}" height="54" fill="${RED}" opacity=".13"/>`);
+}
+const scrawl = (x, y, str, anchor = 'start', size = 20) => out.push(`<text x="${x}" y="${y}" class="it" font-size="${size}" fill="${INK}" text-anchor="${anchor}" letter-spacing=".5">${str}</text>`);
+const standAt = (x, y, z, o) => { const p = P(x, y, z); person(p[0], p[1], { size:.85, ...o }); };
+const SVGNS = 'http://www.w3.org/2000/svg', BOX = $('sheet').viewBox.baseVal;
+function bubble(x, y, str){
+  const w = Math.max(54, str.length*10.5+24), X = Math.min(BOX.x+BOX.width-w-10, Math.max(BOX.x+10, x-w/2)), Y = Math.max(BOX.y+44, y-46), g = document.createElementNS(SVGNS, 'g'); g.setAttribute('class', 'bubble');
+  g.innerHTML = `<path d="M${X+7} ${Y}Q${X+w/2} ${Y-3} ${X+w-7} ${Y}Q${X+w} ${Y+1} ${X+w} ${Y+8}L${X+w} ${Y+24}Q${X+w} ${Y+31} ${X+w-7} ${Y+31}L${x+9} ${Y+31}L${x} ${Y+43}L${x-3} ${Y+31}L${X+7} ${Y+31}Q${X} ${Y+31} ${X} ${Y+24}L${X} ${Y+8}Q${X} ${Y+1} ${X+7} ${Y}Z" fill="#fdf9f1" stroke="#2d2820" stroke-width="1.5"/><text x="${X+w/2}" y="${Y+21}" text-anchor="middle" class="it" font-size="17" fill="#2d2820">${str}</text>`;
+  $('fx').append(g); setTimeout(() => g.remove(), 1500);
+}
+$('art').addEventListener('click', e => { const el = e.target.closest('[data-say]'); if (!el) return;
+  el.classList.remove('hop'); el.getBBox(); el.classList.add('hop'); const r = el.getBoundingClientRect(), f = $('sheet').getBoundingClientRect(), k = 1400/f.width; bubble((r.left+r.width/2-f.left)*k,(r.top-f.top)*k,el.dataset.say); });
+function sheetTitle(eyebrow, name, line){ const k = BOX.width/1400, X = v => BOX.x+v*k, Y = v => BOX.y+v*k;
+  out.push(`<text x="${X(72)}" y="${Y(88)}" class="tt" font-size="${16*k}" fill="${INK}" letter-spacing="${1.5*k}">${eyebrow}</text><text x="${X(68)}" y="${Y(164)}" class="tt" font-size="${70*k}" fill="${INK}" letter-spacing="${-1*k}">${name}</text><text x="${X(72)}" y="${Y(202)}" class="it" font-size="${22*k}" fill="${INK}" letter-spacing="${.8*k}">${line}</text>`); }
+// the details beside the sheet: what is being made, where it has got to, one sentence on why
+function sideOpen(kick, title, steps, fact, meter, art){ const el = $('side'); el.innerHTML = `<svg id="hero" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 207" role="img" aria-label="${title}">${art}</svg><p class="kick">${kick}</p><h2>${title}</h2><div class="meter"><span id="mBar"></span></div><p class="ml" id="mWord"></p><ol>${steps.map(s => `<li>${s}</li>`).join('')}</ol><p class="fact">${fact}</p>`; el.classList.add('show'); if (meter) sideMeter(...meter); sideAt(0); }
+// the picture at the top of the panel: the thing itself, drawn big with the same pen
+function drawHero(fn, ox, oy){ const keep = [out, shades, OX, OY]; out = []; shades = []; OX = ox; OY = oy; fn(); const h = out.join(''); [out, shades, OX, OY] = keep; $('defs').innerHTML = pencilDefs(); return h; }
+function sideAt(i){ [...$('side').querySelectorAll('li')].forEach((l, n) => { l.className = n < i ? 'done' : n === i ? 'now' : ''; }); }
+function sideMeter(pct, col, word){ const b = $('mBar'); if (!b) return; b.style.width = pct + '%'; b.style.background = col; $('mWord').textContent = word; }
+const noteEl = () => $('note');
+function say2(h){ if (noteEl()._h !== h){ noteEl()._h = h; noteEl().innerHTML = h; } }
+function button(label, fn, cls){ const b = document.createElement('button'); b.textContent = label; if (cls) b.className = cls; b.onclick = fn; $('bar').appendChild(b); return b; }
+function logicToggle(){ const b = button('Show the logic', () => setLogic(!$('sheet').classList.contains('on'))); window.setLogic = on => { $('sheet').classList.toggle('on', on); $('main').classList.toggle('showwhy', on); b.setAttribute('aria-pressed', on); b.textContent = on ? 'Hide the logic' : 'Show the logic'; }; return b; }
+const q = new URLSearchParams(location.search);
+let last = 0, simT = 0; const DT = 1/60;
+// the camera: follow what is moving, then ease back to the whole sheet, the same way the baggage hall does
+const CALM = matchMedia('(prefers-reduced-motion: reduce)').matches, FOLLOW = () => innerWidth < 600 ? 2.5 : 2;
+let camX = BOX.x+BOX.width/2, camY = BOX.y+BOX.height/2, camZ = 1, camAim = null;
+const camGoal = (p, z = FOLLOW()) => { camAim = p && !CALM ? { x:p[0], y:p[1], z } : null; };
+function camStep(dt){ const z = camAim ? camAim.z : 1, cx = camAim ? camAim.x : BOX.x+BOX.width/2, cy = camAim ? camAim.y : BOX.y+BOX.height/2, k = 1-Math.pow(.05, dt);
+  camZ += (z-camZ)*k; camX += (cx-camX)*k; camY += (cy-camY)*k;
+  const half = BOX.width/2/camZ, x = Math.max(BOX.x+half, Math.min(BOX.x+BOX.width-half, camX)), y = Math.max(BOX.y+half, Math.min(BOX.y+BOX.height-half, camY)), sc = $('frame').clientWidth/BOX.width;
+  $('sheet').style.transform = camZ < 1.002 ? '' : `translate(${(-(x-half-BOX.x)*camZ*sc).toFixed(1)}px,${(-(y-half-BOX.y)*camZ*sc).toFixed(1)}px) scale(${camZ.toFixed(4)})`; }
+function clock(step, paint){ window.__step = n => { for (let i = 0; i < n; i++){ simT += DT; step(DT); paint(); camStep(DT); } };
+  if (q.has('manual')){ paint(); return; }
+  let acc = 0; const f = t => { const d = Math.min(.1, (t-last)/1000); last = t; acc += d; while (acc >= DT){ simT += DT; step(DT); camStep(DT); acc -= DT; } paint(); requestAnimationFrame(f); }; requestAnimationFrame(f); }
+</script>
+<script>/* Bean to bar. A thin tail of six small steps runs into one big hollow ring: the composition is a lasso, and the ring is the point. */
+OX = 330; OY = 345; seedWith(423); shades = [];
+const CX = 960, CY = 237, RIM = 262, ISLE = 204, MID = 225, FLOOR = 14, LIQ = 6, TAILY = 60;
+const STOPS = { Pod:70, Fermented:198, Dried:326, Roasted:454, Ground:582, Conched:710 };
+const ANG = { Melted:229, Cooled:349, Reworked:469 }, onRing = (deg, r = MID, z = FLOOR) => [CX+r*Math.cos(deg*Math.PI/180), CY+r*Math.sin(deg*Math.PI/180), z];
+const arc = (a, b) => Array.from({ length:61 }, (_, i) => onRing(a+(b-a)*i/60));
+const WARM = '#e3b19e', COOL = '#bcccdb', BEAN = '#986652', LIQC = '#94654a';
+// the page tells the one good way through; the model's early pour stays in models/ but is not shown
+DATA.edges = DATA.edges.filter(e => e.to !== 'Dull bar'); DATA.states = DATA.states.filter(x => x.id !== 'Dull bar');
+const BIG = { x:800, y:790, w:380, d:230 };
+const tailKeys = ['Pod','Fermented','Dried','Roasted','Ground','Conched'];
+const TR = {};
+tailKeys.slice(1).forEach((k, i) => { TR[`${tailKeys[i]}>${k}`] = track([[STOPS[tailKeys[i]],TAILY,16],[STOPS[k],TAILY,16]]); });
+TR['Conched>Melted'] = track([[STOPS.Conched,TAILY,16], onRing(ANG.Melted)]);
+TR['Melted>Cooled'] = track(arc(ANG.Melted, ANG.Cooled));
+TR['Cooled>Reworked'] = track(arc(ANG.Cooled, ANG.Reworked));
+TR['Reworked>Melted'] = track(arc(ANG.Reworked, ANG.Melted+360));
+TR['Reworked>Shiny bar'] = track([onRing(ANG.Reworked), [860,560,14], [860,664,16]]);
+for (const e of DATA.edges) if (!TR[e.key]) throw new Error('no belt for ' + e.key);
+for (const k in TR) if (!DATA.edges.some(e => e.key === k)) throw new Error('belt without an arrow ' + k);
+
+const roundPts = (r, z, n = 60) => ringAt((a, b) => P(CX+r*a, CY+r*b, z), n);
+const pathD = pts => 'M' + pts.map(p => p[0].toFixed(1)+' '+p[1].toFixed(1)).join('L') + 'Z';
+function rack(x, y){ box(x-28,y-22,0,56,44,6,{ left:'#bd9963', ink:1.3 }); for (const [a,b] of [[-20,-14],[20,-14],[-20,14],[20,14]]) line(P3([[x+a,y+b,6],[x+a,y+b,26]]), { w:1.4, amp:.1, over:0 }); box(x-30,y-24,26,60,48,4,{ left:'#e0cda8', top:'#e3d3b4', shade:false, ink:1.2 }); for (let i = 0; i < 26; i++){ const c = P(x-24+rnd()*48, y-18+rnd()*36, 30); fill(oval(c[0],c[1],3.2,2), '#a86f59', { dx:0, dy:0, amp:0 }); } }
+function pods(x, y){
+  cast(x-8,y-8,16,16,70); layShades();
+  line(P3([[x,y,0],[x,y,70]]), { w:7, col:'#ad8955', amp:.5, over:0 }); line(P3([[x,y,45],[x+22,y-16,76]]), { w:3.6, col:'#ad8955', amp:.5, over:0 });
+  const q = P(x, y, 105), crown = blob(q[0], q[1], 62, 50, .08, 9); fill(crown, '#9bc4aa', { amp:.4 }); inkLoop(crown, { w:1.5, amp:.4, over:0 });
+  for (const [a,b] of [[-30,-14],[6,-26],[26,6],[-10,18]]) { const c = [q[0]+a, q[1]+b]; for (const t of [.4,-.5]) { const L = 15, p = Array.from({ length:12 }, (_, i) => { const k = i/12*6.28; return [c[0]+Math.cos(k)*L*.5*Math.cos(t)-Math.sin(k)*4*Math.sin(t), c[1]+Math.cos(k)*L*.5*Math.sin(t)+Math.sin(k)*4*Math.cos(t)]; }); } line([[c[0]-7,c[1]-2],[c[0]+7,c[1]+2]], { w:.8, col:'#699b7d', amp:.2, over:0 }); }
+  for (const [a,b,r] of [[-12,-6,9],[18,8,8],[-30,16,8]]) { const c = P(x+a, y+b, 62+a*.2), p = oval(c[0], c[1], r*.7, r*1.3); fill(p, '#e2b34d', { dx:0, dy:0, amp:.1 }); inkLoop(p, { w:1.1, amp:.15, over:0 }); }
+}
+function bin(x, y){ box(x-30,y-22,0,60,44,30,{ left:'#c1a16d', ink:1.5 }); const t = P3([[x-30,y-22,30],[x+30,y-22,30],[x+30,y+22,30],[x-30,y+22,30]]); paint(t, '#93ac81', 1); for (let i = 0; i < 3; i++) line(P3([[x-24+i*24,y-22,30.5],[x-18+i*24,y+20,30.5]]), { w:.7, col:'#699b7d', amp:.2, over:0 }); }
+function roaster(x, y){ box(x-26,y-20,0,52,40,18,{ left:'#949da7', ink:1.4 }); cyl(x, y, 18, 19, 34, '#c1a570', { ink:1.3 }); const c = P(x+15,y+9,8); dot(c[0],c[1],4,'#e1af61',.7); }
+function grinder(x, y){ box(x-22,y-20,0,44,40,36,{ left:'#dee1e2', ink:1.5 }); paint(P3([[x-20,y-16,36],[x+20,y-16,36],[x+12,y-8,58],[x-12,y-8,58]]), '#c1a570', 1.1); }
+function conche(x, y){ box(x-34,y-22,0,68,44,20,{ left:'#dee1e2', ink:1.5 }); const a = P3([[x-28,y-16,20],[x+28,y-16,20],[x+28,y+16,20],[x-28,y+16,20]]); paint(a, LIQC, 1); line(P3([[x-20,y,21],[x+20,y,34]]), { w:4.4, col:'#949da7', amp:.1, over:0 }); }
+function gantry(deg, col, side){
+  const a = onRing(deg, ISLE-6, FLOOR), b = onRing(deg, RIM+6, FLOOR), h = 58, A = P(a[0],a[1],FLOOR+h), B = P(b[0],b[1],FLOOR+h), n = [0,-11], m = [(A[0]+B[0])/2,(A[1]+B[1])/2];
+  if (!side){ line([P(...a), A], { w:4, col:'#858d97', amp:.15, over:0 }); return; }
+  line([P(...b), B], { w:4, col:'#858d97', amp:.15, over:0 });
+  const q = [A, B, [B[0],B[1]+n[1]], [A[0],A[1]+n[1]]]; paint(q, col, 1.3); paint([[m[0]-15,m[1]-4],[m[0]+15,m[1]-4],[m[0]+15,m[1]+12],[m[0]-15,m[1]+12]], '#f8f3e9', 1);
+}
+function stations(){
+  const put = (deg, r) => onRing(deg, r, 0);
+  { const [x, y] = put(262, 284); box(x-22,y-18,0,44,36,24,{ left:'#dea18b', ink:1.5 }); const c = P(x,y,24), f = [[c[0]-9,c[1]],[c[0]-5,c[1]-14],[c[0],c[1]-7],[c[0]+4,c[1]-20],[c[0]+9,c[1]]]; paint(f, '#e2b34d', 1); }
+  { const [x, y] = put(349, 288); box(x-18,y-22,0,36,44,36,{ left:'#bcccdb', ink:1.5 }); const r = 12, c = Array.from({ length:18 }, (_, i) => { const t = i/18*6.28; return P(x+18.2, y+r*Math.cos(t), 18+r*Math.sin(t)); }); paint(c, '#ebf1f4', 1); for (const k of [[-9,9],[9,-9],[-9,-9]]) line(P3([[x+18.3,y,18],[x+18.3,y+k[0],18+k[1]]]), { w:1, amp:.1, over:0 }); }
+  { const [x, y] = put(128, 288); box(x-20,y-20,0,40,40,22,{ left:'#eed7ae', ink:1.5 }); line(P3([[x,y,22],[x,y,50]]), { w:2.4, col:'#858d97', amp:.1, over:0 }); const c = P(x,y,50); dot(c[0], c[1], 10, '#e2b34d', 1.2); }
+}
+function drawBack(){
+  sheetTitle('field notes · one bean', 'Bean to bar', 'six steps, then round and round');
+  for (const [x,y] of [[-100,430],[120,560],[-90,640],[1040,400],[1080,560],[300,120],[930,900]]) plus(x, y, 6);
+  // what arrives: sacks and a crate of pods, up behind the line
+  board(270,-520,230,150,10,'#f8f2e5','#cbd4c4',16);
+  box(404,-502,10,74,62,30,{ left:'#c1a16d', ink:1.4 }); for (const [a, b] of [[420,-486],[452,-488],[424,-458],[456,-460]]){ const c = P(a, b, 42), p = oval(c[0], c[1], 15, 9); fill(p, '#e2b34d', { dx:.1, dy:.1, amp:.1 }); inkLoop(p, { w:1.1, amp:.15, over:0 }); }
+  for (const [x, y] of [[312,-488],[352,-452],[300,-428]]){ const [a, b] = P(x, y, 10), s = [[a-34,b-62],[a-20,b-74],[a+22,b-73],[a+36,b-60],[a+42,b-6],[a+24,b+4],[a-26,b+4],[a-42,b-6]]; fill(s, '#d1b98b', { amp:.5 }); inkLoop(s, { w:1.3, amp:.6, over:0 }); line([[a-20,b-64],[a-4,b-59],[a+22,b-64]], { w:.9, amp:.4, over:0 }); out.push(`<text x="${a}" y="${b-26}" text-anchor="middle" class="tt" font-size="12" fill="${INK}">COCOA</text>`); }
+  standAt(470, -392, 10, { hair:'cap', cap:'#c1a16d', shirt:'#bad8c6', arm:'wave', look:-1, say:'one more sack' });
+  scrawl(1000, 262, 'in by the sack', 'middle');
+  board(-22,-34,590,132,14,'#f8f2e5','#cbd4c4',20);
+  // the belt along the tail
+  const beltPts = [[8,TAILY-13,1],[574,TAILY-13,1],[574,TAILY+13,1],[8,TAILY+13,1]];
+  paint(P3(beltPts), '#d4c7ae', 1); for (let x = 30; x < 570; x += 34) line(P3([[x,TAILY-13,1],[x,TAILY+13,1]]), { w:.5, amp:.1, over:0 });
+  // people stand on the far side of the belt, so the batch passes in front of them
+  standAt(88, -14, 14, { hair:'hat', shirt:'#bad8c6', arm:'up', look:1, say:'ripe ones only' });
+  standAt(182, -14, 14, { hair:'bun', shirt:'#eed7ae', arm:'wave', look:1, say:'rake, rake, rake' });
+  standAt(372, -14, 14, { hair:'short', shirt:'#bcccdb', arm:'down', look:1, say:'smells good' });
+  rack(STOPS.Dried, 8); bin(STOPS.Fermented, 8); roaster(STOPS.Roasted, 8); grinder(STOPS.Ground, 8); conche(STOPS.Conched, 8);
+  pods(STOPS.Pod, 10);
+  // the ring on its round board
+  const rb = roundPts(304, 0), rl = roundPts(304, -14), H = hull([...rb, ...rl]); fill(H, '#cbd4c4', { amp:.2, dx:.2, dy:.2 }); fill(rb, '#e8ede9', { amp:.2, dx:.2, dy:.2 }); inkLoop(H, { w:2.2, amp:.3, over:0 }); inkLoop(rb, { w:1.2, amp:.3, over:0 });
+  shades.push(hull(roundPts(RIM, 0).map(p => [p[0]-14, p[1]+8]))); out.push('<g opacity=".4">'); layShades(); out.push('</g>');
+  const wall = roundPts(RIM, 0), top = roundPts(RIM, FLOOR); const WH = hull([...wall, ...top]); fill(WH, '#bbc1bf', { amp:.15, dx:.1, dy:.1 }); inkLoop(WH, { w:2, amp:.25, over:0 });
+  fill(top, '#ebeeec', { amp:.15, dx:.1, dy:.1 });
+  // the channel is an opening: the inner walls, then the chocolate lower down, cut to the rim
+  const op = roundPts(RIM-16, FLOOR), isl = roundPts(ISLE, FLOOR), hole = pathD(op)+pathD(isl);
+  out.push(`<clipPath id="chan"><path clip-rule="evenodd" d="${hole}"/></clipPath><g clip-path="url(#chan)"><path d="${hole}" fill-rule="evenodd" fill="#939aa2"/><path d="${pathD(roundPts(RIM-12, LIQ))}${pathD(roundPts(ISLE-3, LIQ))}" fill-rule="evenodd" fill="${LIQC}"/></g>`);
+  for (const [a0, a1, c] of [[ANG.Melted-50, ANG.Melted+60, WARM],[ANG.Cooled-60, ANG.Cooled+60, COOL],[ANG.Reworked-60, ANG.Reworked+70, '#eed7ae']]){ const o = Array.from({ length:31 }, (_, i) => onRing(a0+(a1-a0)*i/30, RIM-1, FLOOR)), inn = Array.from({ length:31 }, (_, i) => onRing(a1+(a0-a1)*i/30, RIM-16, FLOOR)); fill(P3([...o, ...inn]), c, { dx:0, dy:0, amp:.1 }); line(P3([onRing(a0,RIM-1),onRing(a0,RIM-16)]), { w:.8, amp:.05, over:0 }); }
+  inkLoop(op, { w:1.3, amp:.2, over:0 }); inkLoop(isl, { w:1.3, amp:.2, over:0 });
+  fill(isl, '#f8f3e9', { amp:.15, dx:.1, dy:.1 });
+  stations();
+  const lip = [[522,TAILY-12,15],[590,TAILY-10,15],[596,TAILY+12,15],[522,TAILY+12,15]]; paint(P3(lip), '#d4c7ae', 1);
+  // the two ways out
+  const b1 = TR['Reworked>Shiny bar'].pts;
+  board(BIG.x-BIG.w/2-22,BIG.y-BIG.d/2-22,BIG.w+44,BIG.d+44,10,'#f8f2e5','#cbd4c4',18);
+  for (const [t, c] of [[b1,'#dee1e2']]) for (let i = 0; i < t.length-1; i++){ const a = t[i], b = t[i+1], d = Math.hypot(b[0]-a[0], b[1]-a[1])||1, n = [-(b[1]-a[1])/d*11, (b[0]-a[0])/d*11]; paint(P3([[a[0]+n[0],a[1]+n[1],a[2]],[b[0]+n[0],b[1]+n[1],b[2]],[b[0]-n[0],b[1]-n[1],b[2]],[a[0]-n[0],a[1]-n[1],a[2]]]), c, 1); }
+  standAt(CX+84, CY-74, FLOOR, { hair:'hat', shirt:'#f8f3e9', apron:'#a36852', arm:'hold', look:-1, say:'one more lap' });
+  standAt(BIG.x+BIG.w/2+10, BIG.y-BIG.d/2-14, 10, { hair:'short', shirt:'#e3b19e', arm:'wave', look:-1, say:'snap!' });
+  for (const k of ['Pod','Fermented','Dried','Roasted','Ground']){ const p = P(STOPS[k], 150, 0); scrawl(p[0], p[1]+6, { Pod:'pods split open', Fermented:'days under leaves', Dried:'days in the sun', Roasted:'roasted', Ground:'ground to a paste' }[k], 'end'); }
+  scrawl(335, 497, 'stirred for hours, sometimes days', 'end');
+  scrawl(860, 470, 'melted, about 48&deg;'); scrawl(905, 825, 'cooled, about 27&deg;'); scrawl(190, 678, 'warmed, about 31&deg;', 'end');
+  scrawl(395, 965, 'a shine and a snap', 'start', 30);
+  // what leaves: wrapped bars and a carton
+  board(1110,300,220,130,10,'#f8f2e5','#cbd4c4',16);
+  box(1252,316,10,62,98,50,{ left:'#d1b98b', ink:1.5 }); line(P3([[1252,365,60.4],[1314,365,60.4]]), { w:2.2, col:'#b7a075', amp:.2, over:0 });
+  for (const [y, col] of [[316,'#c66756'],[366,'#5e87a8']]) for (let n = 0; n < 3; n++){ box(1130,y,10+n*9,84,40,9,{ left:col, ink:1.1 }); const q = P3([[1170,y,19+n*9],[1188,y,19+n*9],[1188,y+40,19+n*9],[1170,y+40,19+n*9]]); paint(q, '#dec07f', .7); }
+  scrawl(600, 1058, 'wrapped, off to the shop');
+  // thermometer base on the island
+  const c = P(CX, CY, FLOOR); fill(oval(c[0]-8, c[1]+6, 30, 12), SHADOW, { dx:0, dy:0, amp:.1 });
+}
+// the end of the flow: one big bar, a tray of squares with a shine that runs across when it sets
+function bigBar(){
+  const x0 = BIG.x-BIG.w/2, y0 = BIG.y-BIG.d/2, Z = 34, nx = 7, ny = 4, gx = BIG.w/nx, gy = BIG.d/ny, x1 = x0+BIG.w, y1 = y0+BIG.d;
+  // solid colour, no pencil tooth: paper grain on chocolate reads as bloom, and this one has to gleam
+  const flat = (pts, col, w = 1) => { const q = P3(pts); out.push(`<path fill="${col}" d="${pathD(q)}"/>`); if (w) inkLoop(q, { w, amp:.15, over:0 }); };
+  out.push('<g id="barShiny" opacity="0">');
+  flat([[x0,y1,16],[x1,y1,16],[x1,y1,Z],[x0,y1,Z]], '#362019', 2); flat([[x1,y0,16],[x1,y1,16],[x1,y1,Z],[x1,y0,Z]], '#89523f', 2); flat([[x0,y0,Z],[x1,y0,Z],[x1,y1,Z],[x0,y1,Z]], '#3c251e', 2);
+  for (let i = 0; i < nx; i++) for (let j = 0; j < ny; j++){ const a = x0+i*gx+5, b = y0+j*gy+5, A = a+gx-10, B = b+gy-10;
+    flat([[A,b,Z],[A,B,Z],[A,B,Z+4],[A,b,Z+4]], '#a86f59', .7); flat([[a,B,Z],[A,B,Z],[A,B,Z+4],[a,B,Z+4]], '#321d16', .7); flat([[a,b,Z+4],[A,b,Z+4],[A,B,Z+4],[a,B,Z+4]], '#945b46', .9);
+    flat([[a+5,b+5,Z+4.2],[a+gx*.42,b+5,Z+4.2],[a+5,b+gy*.42,Z+4.2]], '#ad8676', 0); }
+  const top = P3([[x0,y0,Z+4],[x1,y0,Z+4],[x1,y1,Z+4],[x0,y1,Z+4]]), c = P(BIG.x, BIG.y, Z);
+  out.push(`<linearGradient id="gleam"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".62"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><clipPath id="barTop"><path d="${pathD(top)}"/></clipPath><g clip-path="url(#barTop)"><g transform="translate(${c[0]} ${c[1]}) skewX(-30)"><rect class="sheen" x="-70" y="-240" width="140" height="480" fill="url(#gleam)"/></g></g>`);
+  out.push('</g>');
+}
+function drawFront(){
+  { const x = BIG.x-BIG.w/2-8, y = BIG.y-BIG.d/2-8, w = BIG.w+16, d = BIG.d+16; box(x,y,10,w,d,6,{ left:'#dee1e2', ink:1.4, shade:false }); paint(P3([[x+6,y+6,16.2],[x+w-6,y+6,16.2],[x+w-6,y+d-6,16.2],[x+6,y+d-6,16.2]]), '#bbc1bf', .9); }
+  bigBar();
+  { const r = roundPts(RIM+14, FLOOR, 70), rd = pathD(r); out.push(`<path id="ringSpot" class="spot" d="${rd}"/>`); const q = 26, c = [[BIG.x-BIG.w/2-q,BIG.y-BIG.d/2-q],[BIG.x+BIG.w/2+q,BIG.y-BIG.d/2-q],[BIG.x+BIG.w/2+q,BIG.y+BIG.d/2+q],[BIG.x-BIG.w/2-q,BIG.y+BIG.d/2+q]].map(p => P(p[0],p[1],12)); out.push(`<path id="barSpot" class="spot" d="${pathD(c)}"/>`); }
+  // thermometer: glass tube on the island, its mercury in its own group
+  const b = P(CX, CY, FLOOR), tube = [[b[0]-7,b[1]-3],[b[0]-7,b[1]-TH],[b[0]+7,b[1]-TH],[b[0]+7,b[1]-3]];
+  fill(tube, '#ebf1f4', { dx:0, dy:0, amp:.1 }); out.push(`<rect id="merc" x="${b[0]-4}" width="8" fill="#c66756"/>`); inkLoop(tube, { w:1.4, amp:.15, over:0 }); dot(b[0], b[1]-1, 12, '#c66756', 1.3);
+  for (const [t, lab] of [[50,'50'],[31,'31'],[27,'27']]){ const y = b[1]-tempY(t); line([[b[0]+7,y],[b[0]+15,y]], { w:1, amp:.05, over:0 }); out.push(`<text x="${b[0]+18}" y="${y+4}" class="tt" font-size="13" fill="${INK}">${lab}</text>`); }
+}
+const TH = 148, tempY = t => 14 + (t-20)/(52-20)*(TH-26);
+const fmt = s => s.toLowerCase().replace('bar','bar');
+function drawLogic(){
+  const way = PLANS.good, bugKeys = new Set(way.slice(1).map((x, i) => `${way[i]}>${x}`));
+  const first = {}; way.forEach((x, i) => { first[x] = i+1; });
+  for (const e of DATA.edges.slice().sort((a, b) => bugKeys.has(a.key)-bugKeys.has(b.key))) { const tail = !/Melted>|Reworked>|Cooled>/.test(e.key); arrowOn(TR[e.key], bugKeys.has(e.key), tail ? 20 : 44, tail ? 3 : 16); }
+  const n = (k) => first[k];
+  const T = { Pod:[70,322], Fermented:[352,162], Dried:[470,226], Roasted:[574,290], Ground:[668,352], Conched:[300,498],
+    Melted:[914,470], Cooled:[884,872], Reworked:[190,640], 'Shiny bar':[700,905], 'Dull bar':[900,378] };
+  const L = { Pod:[STOPS.Pod,TAILY,16], Fermented:[STOPS.Fermented,TAILY,16], Dried:[STOPS.Dried,TAILY,16], Roasted:[STOPS.Roasted,TAILY,16], Ground:[STOPS.Ground,TAILY,16], Conched:[STOPS.Conched,TAILY,16],
+    Melted:onRing(262,280,30), Cooled:onRing(349,280,36), Reworked:onRing(128,280,30), 'Shiny bar':[BIG.x,BIG.y,36], 'Dull bar':[592,-146,18] };
+  for (const s of DATA.states) stateTag(T[s.id][0], T[s.id][1], fmt(s.id), n(s.id), L[s.id], { wrong: s.id === 'Dull bar' });
+  out.push(`<text x="470" y="628" class="it" font-size="19" fill="${RED}" stroke="#f1ece1" stroke-width="4" paint-order="stroke" text-anchor="middle">too hot, go round</text>`);
+}
+/* runtime: one batch, moved only along model arrows */
+let plan = [], ri = 0, s = 0, wait = 0, mode = 'good', laps = 0, stage = 'Pod', temp = 22, auto = true, done = false, holdT = 0;
+const STATE_T = { Melted:48, Cooled:27, Reworked:31 }, COL = { Pod:'#e2b34d', Fermented:'#c1a16d', Dried:'#b09269', Roasted:'#b08468', Ground:'#94654a', Conched:'#94654a', Melted:LIQC, Cooled:LIQC, Reworked:LIQC };
+const via = list => { const o = []; for (let i = 1; i < list.length; i++){ const k = `${list[i-1]}>${list[i]}`; if (!TR[k]) throw new Error('not an arrow: ' + k); o.push(k); } return o; };
+const TAIL = ['Pod','Fermented','Dried','Roasted','Ground','Conched','Melted'];
+const PLANS = { good: [...TAIL,'Cooled','Reworked','Shiny bar'] };
+const SAY = { Pod:'Pods are cut open. The beans sit in sweet white pulp.', Fermented:'Fermented for days, under leaves.', Dried:'Dried in the sun for days.', Roasted:'Roasted.', Ground:'Ground to a paste.', Conched:'Conched: stirred for hours, sometimes days.', Melted:'Melted, about 45 to 50&deg;C. Every crystal gone.', Cooled:'Cooled, about 27&deg;C. Crystals form, good and bad.', Reworked:'Warmed, about 31&deg;C. The bad ones melt.', 'Shiny bar':'In temper: a shine and a snap.', 'Dull bar':'Poured too soon. No crystals to guide it, so it sets dull and streaked.' };
+const MAKE = { good:['Chocolate', 'Cooled, then warmed a little, so the good crystals lead. That gives the shine and the snap.'] };
+const ROW = { Pod:'pods split', Fermented:'fermented', Dried:'dried', Roasted:'roasted', Ground:'ground', Conched:'conched', Melted:'melted, about 48&deg;', Cooled:'cooled, about 27&deg;', Reworked:'warmed, about 31&deg;', 'Shiny bar':'shiny bar', 'Dull bar':'dull bar' };
+// the bar itself, big: glossy when tempered, streaked and pale when not
+function barHero(dull){ return drawHero(() => {
+  const W = 168, D = 122, nx = 4, ny = 3, gx = W/nx, gy = D/ny, Z = 24, q = pts => pts.map(p => P(...p));
+  const flat = (pts, col, w = 1) => { const r = q(pts); out.push(`<path fill="${col}" d="${pathD(r)}"/>`); if (w) inkLoop(r, { w, amp:.15, over:0 }); };
+  const [side, right, base, face, lit, edge] = dull ? ['#8f786f','#9a857d','#938079','#9f908a','#b3aa9e','#a8a094'] : ['#362019','#89523f','#3c251e','#945b46','#ad8676','#a86f59'];
+  shades.push(q([[0,0,0],[W+16,0,0],[W+16,D+16,0],[0,D+16,0]])); out.push('<g opacity=".4">'); layShades(); out.push('</g>');
+  flat([[0,D,0],[W,D,0],[W,D,Z],[0,D,Z]], side, 2); flat([[W,0,0],[W,D,0],[W,D,Z],[W,0,Z]], right, 2); flat([[0,0,Z],[W,0,Z],[W,D,Z],[0,D,Z]], base, 2);
+  for (let i = 0; i < nx; i++) for (let j = 0; j < ny; j++){ const a = i*gx+5, b = j*gy+5, A = a+gx-10, B = b+gy-10; flat([[A,b,Z],[A,B,Z],[A,B,Z+5],[A,b,Z+5]], edge, .8); flat([[a,B,Z],[A,B,Z],[A,B,Z+5],[a,B,Z+5]], side, .8); flat([[a,b,Z+5],[A,b,Z+5],[A,B,Z+5],[a,B,Z+5]], face, 1); if (!dull) flat([[a+5,b+5,Z+5.2],[a+gx*.42,b+5,Z+5.2],[a+5,b+gy*.42,Z+5.2]], lit, 0); }
+  if (dull) for (let i = 0; i < 34; i++){ const a = P(6+rnd()*(W-30), 6+rnd()*(D-12), Z+5.3); line([a,[a[0]+8+rnd()*12,a[1]+3]], { w:1.1, col:'#e3ddd1', amp:.1, over:0 }); }
+  else { const c = P(W/2, D/2, Z), t = pathD(q([[0,0,Z+5],[W,0,Z+5],[W,D,Z+5],[0,D,Z+5]])); out.push(`<clipPath id="heroTop"><path d="${t}"/></clipPath><g clip-path="url(#heroTop)"><g transform="translate(${c[0]} ${c[1]}) skewX(-30)"><rect x="-34" y="-120" width="68" height="240" fill="url(#gleam)"/></g></g>`); }
+}, 142, 34); }
+function spots(){ const inRing = /^(Melted|Cooled|Reworked)$/.test(stage) && ri < plan.length; $('ringSpot').classList.toggle('on', inRing); $('barSpot').classList.toggle('on', true); }
+function start(m){ mode = m; plan = via(PLANS[m]); ri = 0; s = 0; wait = .7; laps = 0; stage = 'Pod'; temp = 22; $('barShiny').setAttribute('opacity', 0); $('barShiny').classList.remove('gleam'); say2(SAY.Pod); sideOpen('now making', MAKE[m][0], PLANS[m].map(x => ROW[x]), MAKE[m][1], null, barHero(false)); spots(); }
+function stepSim(dt){
+  if (wait > 0){ wait -= dt; return; }
+  if (ri >= plan.length){ if (auto){ wait = 6; if (window.__hold) return; if (done){ start('good'); done = false; } else done = true; } return; }
+  const k = plan[ri], t = TR[k], ring = /^(Melted|Cooled|Reworked)>(Melted|Cooled|Reworked)/.test(k), v = ring ? 230 : 150;
+  s += v*dt; const tgt = k.split('>')[1], from = k.split('>')[0];
+  if (STATE_T[from] && STATE_T[tgt]) temp = STATE_T[from] + (STATE_T[tgt]-STATE_T[from])*Math.min(1, s/t.len);
+  else if (STATE_T[tgt]) temp += (STATE_T[tgt]-temp)*Math.min(1, dt*3);
+  if (s >= t.len){ s = 0; ri++; stage = tgt; say2(SAY[tgt]); wait = STATE_T[tgt] ? .55 : .5; sideAt(ri); spots(); if (ri >= plan.length) holdT = simT+3.6;
+    if (tgt === 'Shiny bar'){ $('barShiny').setAttribute('opacity', 1); $('barShiny').classList.add('gleam'); } }
+}
+function paintLive(){
+  const k = plan[Math.min(ri, plan.length-1)], p = ri >= plan.length ? null : along(TR[k], s), g = $('batch');
+  if (!auto){ const ring = /^(Melted|Cooled|Reworked)>(Melted|Cooled|Reworked)/.test(k), end = P(BIG.x, BIG.y, 30);
+    if (p) camGoal(ring ? P(CX, CY, 0) : P(...p), ring ? 1.45 : FOLLOW()); else camGoal(simT < holdT ? end : null, 1.7); }
+  if (p){ const [x, y] = P(...p); g.setAttribute('transform', `translate(${x.toFixed(1)} ${(y-(p[2] > 20 ? 0 : 2)).toFixed(1)})`); g.setAttribute('opacity', 1); $('batchFill').setAttribute('fill', COL[stage]); } else g.setAttribute('opacity', 0);
+  const b = P(CX, CY, FLOOR), h = tempY(temp); const m = $('merc'); m.setAttribute('y', (b[1]-h).toFixed(1)); m.setAttribute('height', h.toFixed(1)); $('deg').textContent = Math.round(temp) + '°'; sideMeter(Math.max(0, Math.min(100, (temp-20)/32*100)), temp > 40 ? '#c66756' : temp > 29 ? '#d4aa5c' : '#96adc7', Math.round(temp) + '° now');
+}
+function drawOld(){
+  layer('back', drawBack); layer('front', drawFront); layer('logic', drawLogic);
+  out = []; $('defs').innerHTML = pencilDefs();
+  const [ix, iy] = P(CX-34, CY+64, FLOOR);
+  $('live').innerHTML = `<text id="deg" transform="matrix(.866 .5 -.866 .5 ${ix} ${iy})" class="tt" font-size="62" fill="${INK}">22°</text><g id="batch"><ellipse rx="22" ry="12" cy="4" fill="#2d2820" opacity=".22"/><circle id="batchFill" r="16" fill="${LIQC}" stroke="${INK}" stroke-width="1.8"/><ellipse cx="-4" cy="-5" rx="4" ry="2.4" fill="#fff" opacity=".55"/></g>`;
+}
+/* Bean to bar in the marker look. Spliced into cocoa.js by build-copic.py: same lasso, same model, same runtime; every function here replaces the one of that name. Big light shapes, chocolate a clean mid-brown, dark only in the ink */
+const VIG = (() => {
+/* the journey of one lump of clay, told the way a statechart would. The props live here and the other two pottery sheets borrow them: few shapes, light colours, dark only in the ink */
+const CL = {wet:'#d3c8b6',leather:'#dac7ab',bone:'#ebe5d8',bisque:'#e6c0b2',teal:'#b8cfc4',blue:'#c5d2dc',rose:'#e0baad',wood:'#dacaab',steel:'#dad8d3',brick:'#ebe0ce',board:'#e5d8c0'};
+const PROF = {mug:[[.72,0],[.82,.12],[.84,1.25],[.8,1.4]],bowl:[[.45,0],[.6,.12],[1.1,.72],[1.2,.92]],vase:[[.5,0],[.82,.42],[.86,.84],[.42,1.42],[.36,1.72],[.52,1.86]],jar:[[.6,0],[.96,.5],[.96,1],[.62,1.4],[.64,1.56]]};
+const pot = (x,y,z,s,col,kind = 'mug') => lifeTurn(x,y,z,PROF[kind].map(([r,h]) => [r*s,h*s]),col,{wall:Math.max(.8,s*.1),sink:s*.3,cap:mixC(col,'#92949d',.28),ink:s > 12 ? 1 : .75,seam:false});
+const lump = (x,y,z,s,col = CL.wet) => lifeTurn(x,y,z,[[s,0],[s*1.06,s*.32],[s*.84,s*.68],[s*.42,s*.86]],col,{seam:false,cap:litOf(col)});
+function handle(x,y,z,s,col){ const a = P(x+s*.6,y-s*.6,z+s*1.12), b = P(x+s*.6,y-s*.6,z+s*.32), m = [a[0]+s*.72,(a[1]+b[1])/2], h = spline([a,[m[0],a[1]+s*.08],[m[0],b[1]-s*.08],b],false,2), w = Math.max(1.6,s*.14), d = pathOf(h); out.push(`<path d="${d}" fill="none" stroke="${INK}" stroke-width="${n1(w+1.3)}" stroke-linecap="round"/><path d="${d}" fill="none" stroke="${col}" stroke-width="${n1(w)}" stroke-linecap="round"/>`); }
+const mug = (x,y,z,s,col) => { handle(x,y,z,s,col); pot(x,y,z,s,col); };
+function bench(x,y,w,d,h,top = CL.bone,leg = CL.wood){ for (const [a,b] of [[2,2],[w-8,2],[2,d-8],[w-8,d-8]]) box(x+a,y+b,0,6,6,h-5,{left:leg,marks:false,ink:1}); box(x,y,h-5,w,d,5,{left:leg,top,marks:false,ink:1}); }
+function wheel(x,y,z,k,col = CL.wet,kind = 'mug'){ const cx = x+21*k, cy = y+22*k; box(x,y,z,42*k,44*k,18*k,{left:CL.bone,top:'#f3eee4',marks:false,ink:1}); lifeTurn(cx,cy,z+18*k,[[17*k,0],[20*k,6*k]],CL.blue,{wall:1.6*k,sink:4*k,cap:'#e4e9eb',seam:false}); lifeTurn(cx,cy,z+20*k,[[8*k,0],[12*k,5*k]],CL.steel,{seam:false,cap:'#eeebe4'}); pot(cx,cy,z+25*k,10*k,col,kind); }
+function stool(x,y,z,h,s = 1){ lifeTurn(x,y,z,[[3.4*s,0],[3.4*s,h-3*s]],CL.wood,{seam:false}); lifeTurn(x,y,z+h-3*s,[[10*s,0],[10*s,3*s]],CL.wood,{seam:false,cap:'#ece1ca'}); }
+/* a front-loading kiln: firebrick box on a steel foot, door hinged on the left, loaded shelves when it stands open */
+function kiln(x,y,z,k,{open = true,cols = [CL.bisque],fine = false,hot = false} = {}){
+  const Q = (a,b,c) => P(x+a*k,y+b*k,z+c*k), w = 70, d = 62, h = 76, o = {marks:false,ink:1.1};
+  box(x+3*k,y+3*k,z,(w-6)*k,(d-6)*k,7*k,{...o,left:CL.steel}); box(x,y,z+7*k,w*k,d*k,h*k,{...o,left:CL.brick,top:'#f3ede0'});
+  if (fine){ const c = []; for (let v = 16; v < 80; v += 10) c.push([Q(0,d,v),Q(w,d,v)],[Q(w,d,v),Q(w,0,v)]); rule(c,'#b8b0a2',.45,.8); }
+  if (open){ openL(x+9*k,y+d*k,z+15*k,52*k,60*k,5*k,'#efe6d6',() => { for (const [i,t] of [[0,0],[1,29]]){ const zz = z+(15+t)*k, f = [Q(9,d-30,15+t),Q(61,d-30,15+t),Q(61,d-6,15+t),Q(9,d-6,15+t)]; flat(f,'#f8f2e7'); rim(f,.6,INK); for (const a of [20,35,50]) pot(x+a*k,y+(d-17)*k,zz,8*k,cols[i%cols.length],i%2 ? 'bowl' : 'mug'); } });
+    box(x+4*k,y+d*k,z+14*k,4*k,46*k,62*k,{...o,left:CL.steel,top:'#eeebe4'}); }
+  else { const q = [Q(8,d,13),Q(62,d,13),Q(62,d,77),Q(8,d,77)]; flat(q,CL.steel); rim(q,1,INK); for (const c of [30,60]) rule([[Q(4,d,c),Q(62,d,c)]],INK,1.3); const e = Array.from({length:14},(_,i) => { const t = i/14*6.283; return Q(35+5*Math.cos(t),d,45+5*Math.sin(t)); }); flat(e,hot ? '#e3b29e' : '#f8f2e7'); rim(e,.8,INK); }
+  lifeTurn(x+35*k,y+31*k,z+83*k,[[9*k,0],[9*k,10*k]],CL.steel,{seam:false,cap:'#eeebe4'}); box(x+w*k,y+20*k,z+36*k,3*k,24*k,24*k,{...o,left:CL.blue,top:'#e4e9eb'});
+}
+/* a ware rack: four posts, boards, pots on the boards */
+function rack(x,y,z,w,d,tiers,cols,{n = 3,s = 7,kinds = ['mug','bowl','mug']} = {}){ const P4 = (a,b,hh) => box(x+a,y+b,z,3.4,3.4,hh,{left:CL.wood,marks:false,ink:.85}), H = tiers.at(-1)+s*2.2; P4(0,0,H); P4(w-3.4,0,H); tiers.forEach((t,i) => { box(x,y,z+t-2.4,w,d,2.4,{left:CL.wood,top:CL.board,marks:false,ink:.8}); for (let j = 0; j < n; j++) pot(x+(j+.5)*w/n,y+d/2,z+t,s,cols[(i+j)%cols.length],kinds[(i+j)%kinds.length]); }); P4(0,d-3.4,H); P4(w-3.4,d-3.4,H); }
+function bucket(x,y,z,s,col){ lifeTurn(x,y,z,[[s*.82,0],[s,s*1.3]],'#ebe7e0',{wall:s*.1,sink:s*.22,cap:col,seam:false}); }
+function cones(x,y,z,s = 1){ const q = P(x,y,z); for (const [a,t] of [[0,0],[9,.4],[18,1]]){ const p = [q[0]+a*s,q[1]+a*.3*s], c = [[p[0]-3.4*s,p[1]],[p[0]+3.4*s,p[1]],[p[0]+t*13*s,p[1]-19*s+t*12*s]]; flat(c,'#eedbb4'); rim(c,.8,INK); } }
+const POT = self.POT = {CL,pot,lump,mug,bench,wheel,stool,kiln,rack,bucket,cones};
+
+function step(x,y,text){ const w = Math.max(92,text.length*14.6+30); tag(x-w/2,y,w,text,tagN++); return w; }
+const words = (x,y,s,anchor = 'start') => out.push(`<text x="${x}" y="${y}" text-anchor="${anchor}" class="it" font-size="18.5" fill="${INK}" letter-spacing=".5">${s}</text>`);
+const small = (x,y,s,anchor = 'start') => out.push(`<text x="${x}" y="${y}" text-anchor="${anchor}" class="it" font-size="15.5" fill="#897861">${s}</text>`);
+/* close-ups, drawn straight on: a loose marker wash, then big shapes in ink. Forearms and boards fade into the edge of the wash */
+const CLAY = '#e3d9c7', SPIN = !matchMedia('(prefers-reduced-motion: reduce)').matches, SKIN = '#edcdc0', GLZ = '#a6cabb', KLN = '#f0d9aa', solid = (pts,c) => out.push(`<path d="${pathOf(pts)}Z" fill="${c}"/>`), under = (list,w) => out.push(`<path d="${list.map(p => pathOf(p)+'Z').join('')}" fill="${INK}" stroke="${INK}" stroke-width="${w}" stroke-linejoin="round"/>`), oval = (x,y,rx,ry) => ringAt((a,b) => [x+rx*a,y+ry*b],30);
+function capsule(pts,w,w2 = w*.88){ const c = spline(pts,false,2), n = c.length, A = [], B = []; let t = 0; c.forEach((p,i) => { const a = c[Math.max(0,i-1)], b = c[Math.min(n-1,i+1)], r = lerp(w,w2,i/(n-1))/2; t = Math.atan2(b[1]-a[1],b[0]-a[0]); A.push([p[0]-Math.sin(t)*r,p[1]+Math.cos(t)*r]); B.push([p[0]+Math.sin(t)*r,p[1]-Math.cos(t)*r]); }); const e = c[n-1], r = w2/2, tip = Array.from({length:9},(_,i) => { const q = t+Math.PI/2-Math.PI*(i+1)/10; return [e[0]+r*Math.cos(q),e[1]+r*Math.sin(q)]; }); return [...A,...tip,...B.reverse()]; }
+/* the one hand: forearm, palm, four fingers and a thumb. flip puts the thumb on the other side. Returns the fingertips */
+function hand(x,y,ang,s,{flip = false,curl = .4,thumb = [1.05,.6],fan = .014} = {}){
+  const c = Math.cos(ang), n = Math.sin(ang), f = flip ? -1 : 1, M = ([u,v]) => [x+s*(u*c-f*v*n),y+s*(u*n+f*v*c)], W = l => l.map(M);
+  const fingers = [[-18,27],[-6.5,35],[5.5,39],[17.5,34]].map(([v,l]) => { const a = v*fan, b = [18+l*.55*Math.cos(a),v+l*.55*Math.sin(a)], e = [b[0]+l*.55*Math.cos(a-curl),b[1]+l*.55*Math.sin(a-curl)]; return {o:W(capsule([[6,v*.92],[18,v],b,e],13,11.6)),tip:M(e)}; });
+  const arm = W([[-6,-22],[-200,-31],[-200,31],[-6,23]]), palm = W(spline([[-14,-24],[12,-26],[27,-19],[31,0],[28,20],[8,27],[-14,25],[-22,0]],true,3));
+  const [ta,tc] = thumb, b0 = [-4,17], b1 = [b0[0]+17*Math.cos(ta),b0[1]+17*Math.sin(ta)], b2 = [b1[0]+19*Math.cos(ta-tc),b1[1]+19*Math.sin(ta-tc)], th = W(capsule([b0,b1,b2],16.5,14)), n0 = Math.ceil(th.length*.14);
+  under([arm,palm,...fingers.map(q => q.o),th],2.2);
+  for (const q of fingers){ solid(q.o,SKIN); inkLoop(q.o,{w:1.15,over:0}); }
+  solid(arm,SKIN); solid(palm,SKIN);
+  solid(th,SKIN); pen(th.slice(n0,th.length-n0),1.15);
+  rule([W(spline([[8,-2],[13,3],[11,10]],false,2)),W(spline([[-4,2],[3,8],[8,17]],false,2))].flatMap(l => l.slice(1).map((p,i) => [l[i],p])),'#bb9182',1,1);
+  return {tips:fingers.map(q => q.tip),thumb:M(b2)};
+}
+const slip = (p,r = 8) => { const q = blob(p[0],p[1],r,r*.72,.12,5); flat(q,CL.wet); inkLoop(q,{w:.7,over:0}); };
+/* a pot seen from the front and a little above. pr is [half width,height] from the foot up */
+function vpot(cx,by,pr,col,{ry = .2,inside = null,ink = 1.25} = {}){
+  const Rp = spline(pr.map(([w,h]) => [cx+w,by-h]),false,3), Lp = Rp.map(([a,b]) => [2*cx-a,b]), w0 = pr[0][0], [wt,ht] = pr.at(-1), low = Array.from({length:15},(_,i) => { const t = Math.PI*(1-i/14); return [cx+w0*Math.cos(t),by+w0*ry*Math.sin(t)]; }), body = [...[...Lp].reverse(),...low,...Rp], W = pr.reduce((a,p) => Math.max(a,p[0]),0);
+  flat(body,col); clipped(body,() => { solid([[cx+W*.56,by-ht-20],[cx+W+9,by-ht-20],[cx+W+9,by+30],[cx+W*.62,by+30]],shadeOf(col)); solid([[cx-W*.62,by-ht*.92],[cx-W*.42,by-ht*.92],[cx-W*.44,by-ht*.24],[cx-W*.6,by-ht*.24]],litOf(litOf(col))); });
+  inkLoop(body,{w:ink,over:0}); const top = oval(cx,by-ht,wt,wt*ry), inn = oval(cx,by-ht,wt*.86,wt*ry*.8); flat(top,litOf(col)); flat(inn,inside || shadeOf(col)); inkLoop(inn,{w:ink*.7,over:0}); inkLoop(top,{w:ink,over:0}); return {y:by-ht,rx:wt,ry:wt*ry,body};
+}
+function plank(cx,y,col = CL.board){ solid([[cx-210,y],[cx+210,y],[cx+210,y+24],[cx-210,y+24]],col); rule([[[cx-210,y],[cx+210,y]],[[cx-210,y+24],[cx+210,y+24]]],INK,1.1); }
+const O = k => `class="spring obj" data-k="${k}"`;
+function study(k,cx,cy,wash,fn,rx = 156,ry = 128){ const a = rnd()*6, b = rnd()*6, e = rnd()*6, edge = (ox,oy,m) => ringAt((c,d) => { const t = Math.atan2(d,c), r = m*(1+.055*Math.sin(3*t+a)+.04*Math.sin(5*t+b)+.022*Math.sin(11*t+e)); return [cx+ox+rx*r*c,cy+oy+ry*r*d]; },60), id = 'pvm'+k;
+  group(O(k),() => { out.push(`<path d="${pathOf(edge(0,0,1))}Z" fill="${wash}"/><path d="${pathOf(edge(9,-7,.9))}Z" fill="${litOf(wash)}" opacity=".55"/><mask id="${id}" maskUnits="userSpaceOnUse" x="${cx-rx-40}" y="${cy-ry-40}" width="${2*rx+80}" height="${2*ry+80}"><path d="${pathOf(edge(0,0,.95))}Z" fill="white" filter="url(#pvb)"/></mask><g mask="url(#${id})">`); fn(cx,cy); out.push('</g>'); }); }
+function closeups(){
+  out.push('<filter id="pvb" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="7"/></filter>');
+  /* clay: two hands kneading a big soft lump */
+  study(0,1176,172,'#e9dfcf',(x,y) => { plank(x,y+74); const q = spline([[x-112,y+74],[x-118,y+22],[x-76,y-30],[x-6,y-46],[x+72,y-34],[x+116,y+14],[x+112,y+74]],true,3); flat(q,CLAY); clipped(q,() => { solid(blob(x+84,y+54,76,56),'#d8cdba'); solid(blob(x-34,y-10,52,18),litOf(CLAY)); }); inkLoop(q,{w:1.4,over:0}); pen(spline([[x-30,y+70],[x-14,y+36],[x+12,y+22]],false,3),1); hand(x-92,y-68,.92,1.08,{flip:true,curl:.3}); hand(x+92,y-68,Math.PI-.92,1.08,{curl:.3}); });
+  /* hand built: thumbs inside the bowl, fingers outside, pinching the wall */
+  study(3,226,344,'#e7dbc7',(x,y) => { plank(x,y+84); const b = vpot(x,y+84,[[44,0],[70,26],[92,62],[98,84]],CLAY,{ry:.27,inside:'#d0c5b2'}); hand(x-120,y+50,-.22,1.08,{flip:true,curl:.15,thumb:[1.28,1.1]}); hand(x+120,y+50,Math.PI+.22,1.08,{curl:.15,thumb:[1.28,1.1]}); },156,116);
+  /* thrown: two wet hands on a spinning pot */
+  study(2,1176,440,'#dae1e5',(x,y) => { const h = oval(x,y+88,132,27); solid([[x-132,y+88],[x+132,y+88],[x+132,y+106],[x-132,y+106]],CL.steel); solid(oval(x,y+106,132,27),CL.steel); inkLoop(oval(x,y+106,132,27),{w:1.2,over:0}); flat(h,'#eeebe4'); inkLoop(h,{w:1.25,over:0}); rim(oval(x,y+88,96,19),.7,INK,.55); const b = vpot(x,y+88,[[60,0],[64,30],[58,80],[50,118],[54,132]],CLAY,{ry:.2,inside:'#d0c5b2'}); clipped(b.body,() => { for (const [z,w] of [[18,64],[40,63],[62,60],[84,56],[104,52]]){ const a = spline([[x-w-4,y+88-z],[x-w*.4,y+88-z+9],[x+w*.5,y+88-z+7],[x+w+4,y+88-z-3]],false,3); out.push(`<path d="${pathOf(a)}" fill="none" stroke="${INK}" stroke-width=".85" stroke-linecap="round" stroke-dasharray="26 9">${SPIN ? '<animate attributeName="stroke-dashoffset" from="0" to="-35" dur=".9s" repeatCount="indefinite"/>' : ''}</path>`); } solid(blob(x-14,y+30,7,34),'#ece5da'); }); const l = hand(x-112,y+40,-.42,1.04,{flip:true,curl:.34,thumb:[1.15,.7]}), r = hand(x+112,y+40,Math.PI+.42,1.04,{curl:.34,thumb:[1.15,.7]}); for (const t of [...l.tips,...r.tips]) slip(t,6.6); slip([l.tips[2][0]-26,l.tips[2][1]+8],5); slip([r.tips[1][0]+26,r.tips[1][1]+8],5); for (const s of [-1,1]) pen(spline([[x+s*140,y+56],[x+s*152,y+72],[x+s*140,y+92]],false,3),1); });
+  /* dried: pale pots in a row on a board */
+  study(7,226,590,'#d8dfe3',(x,y) => { plank(x,y+68); vpot(x-92,y+68,[[34,0],[50,30],[50,74],[36,100],[40,108]],CL.bone); vpot(x+90,y+68,[[34,0],[50,18],[58,58],[60,72]],CL.bone,{ry:.24}); vpot(x,y+80,[[40,0],[62,44],[60,96],[42,132],[46,144]],'#f4eee4'); },156,116);
+  /* first firing: looking in, shelves and pots in a warm glow */
+  study(6,1176,720,'#eedec3',(x,y) => { const f = [[x-130,y+128],[x-130,y-70],[x-84,y-112],[x+84,y-112],[x+130,y-70],[x+130,y+128]], o = spline([[x-104,y+112],[x-104,y-58],[x-70,y-90],[x+70,y-90],[x+104,y-58],[x+104,y+112]],true,3); flat(f,CL.brick); rule([[[x-130,y-30],[x-104,y-30]],[[x-130,y+30],[x-104,y+30]],[[x+104,y-30],[x+130,y-30]],[[x+104,y+30],[x+130,y+30]]],INK,.8,.7); flat(o,KLN); clipped(o,() => { solid(blob(x,y,84,86),'#f6e7c7'); for (const yy of [y-4,y+88]){ for (const [a,c] of [[-68,'mug'],[0,'jar'],[68,'bowl']]){ const P2 = c === 'jar' ? [[18,0],[28,20],[28,44],[20,58],[22,62]] : c === 'mug' ? [[23,0],[25,6],[25,54]] : [[15,0],[24,10],[34,34],[36,42]]; vpot(x+a,yy-6,P2,CL.bisque,{ry:.18,ink:1}); } const s = [[x-120,yy],[x+120,yy],[x+120,yy+11],[x-120,yy+11]]; flat(s,'#f8f2e7'); rim(s,1,INK); } }); inkLoop(o,{w:1.5,over:0}); });
+  /* glazed: a hand holds the pot under; glaze runs over the lip */
+  study(8,226,856,'#dbe8e2',(x,y) => { y -= 16; const bw = 118, B = [[x-bw,y+18],[x-bw+16,y+134],[x+bw-16,y+134],[x+bw,y+18]], t = oval(x,y+18,bw,27); flat(t,'#eeebe4'); inkLoop(t,{w:1.3,over:0}); const g = oval(x,y+20,bw-9,21); flat(g,GLZ); const m = [[x-44,y-92],[x+44,y-92],[x+46,y+18],[x-46,y+18]]; solid(oval(x,y+20,66,13),'#bdd9cd'); flat(m,CL.bisque); const w = spline([[x-46,y-22],[x-30,y+2],[x-14,y-30],[x+8,y-8],[x+26,y-34],[x+46,y-14],[x+46,y+18],[x-46,y+18]],true,3); flat(w,GLZ); pen(spline([[x-46,y-22],[x-30,y+2],[x-14,y-30],[x+8,y-8],[x+26,y-34],[x+46,y-14]],false,3),1); rule([[[x-44,y-92],[x-46,y+18]],[[x+44,y-92],[x+46,y+18]]],INK,1.25); const r = oval(x,y-92,44,10); flat(r,litOf(CL.bisque)); inkLoop(r,{w:1.2,over:0}); pen(spline([[x-46,y+18],[x,y+29],[x+46,y+18]],false,3),1.1); solid(B,'#f1ede6'); const fr = spline([[x-bw,y+18],[x-bw+10,y+37],[x,y+45],[x+bw-10,y+37],[x+bw,y+18]],false,3); const drip = spline([[x-bw+4,y+24],[x-96,y+74],[x-82,y+80],[x-74,y+44],[x-58,y+40],[x-48,y+96],[x-34,y+98],[x-24,y+46],[x+36,y+46],[x+46,y+66],[x+60,y+64],[x+70,y+42],[x+bw-6,y+28],[x,y+30]],true,3); flat(drip,GLZ); inkLoop(drip,{w:1,over:0}); pen(fr,1.1); rule([[B[0],B[1]],[B[3],B[2]],[B[1],B[2]]],INK,1.3); const d = blob(x-41,y+116,5.5,8); flat(d,GLZ); inkLoop(d,{w:.9,over:0}); hand(x-104,y-88,.28,1.02,{flip:true,curl:.5,thumb:[1.3,1.1]}); },156,120);
+  /* second firing: the spyhole, all orange */
+  study(11,1176,1000,'#f0dab9',(x,y) => { const d = [[x-124,y+132],[x-124,y-110],[x+124,y-110],[x+124,y+132]]; flat(d,'#e9e4da'); rim(d,1.3,INK); const o = oval(x,y+6,84,84), g = oval(x,y+6,68,68); flat(o,CL.steel); inkLoop(o,{w:1.4,over:0}); flat(g,'#e9bc7d'); clipped(g,() => { solid(blob(x,y+6,48,48),'#efce97'); vpot(x-30,y+78,[[18,0],[28,32],[28,70]],'#f2dbaa',{ry:.14,ink:.9}); vpot(x+32,y+78,[[20,0],[30,28],[30,52],[22,68],[24,72]],'#f2dbaa',{ry:.14,ink:.9}); }); inkLoop(g,{w:1.3,over:0}); for (let i = 0; i < 9; i++){ const t = -2.9+i*.34, a = 94, b = 112; rule([[[x+a*Math.cos(t),y+6+a*Math.sin(t)],[x+b*Math.cos(t),y+6+b*Math.sin(t)]]],'#d3a564',2.2,.9); } });
+  /* finished: one big glossy mug */
+  study(9,226,1122,'#eee1c8',(x,y) => { y -= 6;  plank(x,y+84); const hd = spline([[x+62,y-44],[x+128,y-54],[x+136,y+18],[x+58,y+36]],false,2), dd = pathOf(hd); out.push(`<path d="${dd}" fill="none" stroke="${INK}" stroke-width="21" stroke-linecap="round"/><path d="${dd}" fill="none" stroke="${GLZ}" stroke-width="18.4" stroke-linecap="round"/>`); const b = vpot(x-8,y+84,[[62,0],[72,8],[74,70],[72,130],[70,144]],GLZ,{ry:.2,inside:'#c5b69b',ink:1.5}); clipped(b.body,() => { solid(spline([[x-58,y-36],[x-40,y-44],[x-34,y+40],[x-50,y+62],[x-60,y+30]],true,3),'#f2f8f5'); solid(blob(x-24,y-40,6,9),'#f2f8f5'); }); },156,116);
+}
+const X = 640, Y = {clay:110,branch:280,dried:450,first:620,glazed:790,fired:960,done:1130}, LX = 480, RX = 800;
+function draw(seed){
+  begin(seed); OX = 700; OY = 300;
+  out.push(`<text x="72" y="88" class="tt" font-size="16" fill="${INK}" letter-spacing="1.5">field notes · one lump of clay</text>`);
+  out.push(`<text x="68" y="164" class="tt" font-size="70" fill="${INK}" letter-spacing="-1">One mug</text>`);
+  out.push(`<text x="72" y="202" class="it" font-size="22" fill="${INK}" letter-spacing=".8">from the bag to the shelf</text>`);
+  closeups();
+  for (const [px,py] of [[420,520],[420,1020],[900,1250],[960,330]]) plus(px,py);
+  /* the routes */
+  const gap = 58, down = (a,b,word) => { route([X,a+gap],[X,b-9]); if (word) words(X+16,a+gap+62,word); };
+  route([X-30,Y.clay+56],[LX,Y.branch-8],true); route([X+30,Y.clay+56],[RX,Y.branch-8],true);
+  words(LX+16,Y.clay+108,'[by hand]'); words(RX-16,Y.clay+108,'[on the wheel]','end');
+  route([LX,Y.branch+56],[X-30,Y.dried-9],false); route([RX,Y.branch+56],[X+30,Y.dried-9],false); words(X,Y.branch+84,'a week or so, slowly','middle');
+  down(Y.dried,Y.first,'950°C'); down(Y.first,Y.glazed,'dipped for a few seconds'); down(Y.glazed,Y.fired,'1260°C'); down(Y.fired,Y.done,'twelve hours up, 28 down');
+  out.push(`<path id="trail" fill="none" stroke="${RED}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity=".6"/>`);
+  step(X,Y.clay,'clay'); step(LX,Y.branch,'hand built'); step(RX,Y.branch,'thrown'); step(X,Y.dried,'dried'); step(X,Y.first,'first firing'); step(X,Y.glazed,'glazed'); step(X,Y.fired,'second firing'); step(X,Y.done,'finished');
+  group('class="spring obj who hit" data-k="12" data-say="still warm"',() => figure(640,1352,{hair:'short',shirt:PAL.tan,arm:'wave',look:0,hold:(cx,sh) => { const [a,b] = at(cx+32,sh-14); mug(a,b,0,11,CL.teal); }}));
+  small(760,1372,'figures vary by clay and kiln');
+  group('id="token"',() => { out.push(`<path id="tokB" d="M-11 -13C-13 -3 -11 7 -7 11H7C11 7 13 -3 11 -13Z" fill="${CL.wet}" stroke="${INK}" stroke-width="1.1"/><ellipse id="tokT" cx="0" cy="-13" rx="11" ry="3.6" fill="${litOf(CL.wet)}" stroke="${INK}" stroke-width="1"/>`); });
+  finish();
+}
+const STOPS = {
+  clay:{at:[X,Y.clay],k:0,say:'Wet clay from the bag, kneaded until the air is out. Wheel or hands?'},
+  hand:{at:[LX,Y.branch],k:3,say:'Pinch, coil or slab. No wheel needed.'},
+  thrown:{at:[RX,Y.branch],k:2,say:'Centred, opened and pulled up on the wheel.'},
+  dried:{at:[X,Y.dried],k:7,say:'A week or so, slowly and evenly. It goes to the kiln only when completely dry.'},
+  first:{at:[X,Y.first],k:6,say:'First firing, 950°C at one studio. Now it can take glaze.'},
+  glazed:{at:[X,Y.glazed],k:8,say:'Dipped for a few seconds, then left to dry.'},
+  fired:{at:[X,Y.fired],k:11,say:'To 1260°C at one studio, then a long cool. Open it early and it may crack.'},
+  done:{at:[X,Y.done],k:9,say:'Finished. Most pots are fired twice.'},
+  end:{at:[672,1262],k:12,say:'Still warm. That lump came a long way.'}
+};
+const COL = {clay:CL.wet,hand:CL.wet,thrown:CL.wet,dried:CL.bone,first:CL.bisque,glazed:'#e5ece8',fired:CL.teal,done:CL.teal,end:CL.teal};
+function init(ctx){
+  const trail = document.getElementById('trail'), token = document.getElementById('token'), objs = [...document.querySelectorAll('.obj')], tb = document.getElementById('tokB'), tt = document.getElementById('tokT');
+  let name = 'clay', path = [STOPS.clay.at], d = 0, how = 'thrown', moving = false, auto = false, autoT = 0, inked = [];
+  const seat = p => { token.setAttribute('transform',`translate(${p[0]} ${p[1]})`); if (inked.length){ inked.push(p); trail.setAttribute('d','M'+inked.map(q => `${q[0].toFixed(1)} ${q[1].toFixed(1)}`).join('L')); } };
+  const finale = () => { [...document.querySelectorAll('#art .who')].sort((a,b) => a.getBBox().y-b.getBBox().y).forEach((w,i) => setTimeout(() => ctx.hop(w),i*130)); };
+  const paint = () => { objs.forEach(o => o.classList.toggle('on',+o.dataset.k === STOPS[name].k)); ctx.say(STOPS[name].say); tb.setAttribute('fill',COL[name]); tt.setAttribute('fill',litOf(COL[name])); };
+  const legs = {hand:[[X-30,Y.clay+56],[LX,Y.clay+56]],thrown:[[X+30,Y.clay+56],[RX,Y.clay+56]]}, leave = {hand:[[LX,Y.dried-9],[X-30,Y.dried-9]],thrown:[[RX,Y.dried-9],[X+30,Y.dried-9]]};
+  function go(next,via){ if (moving) return; moving = true; path = [STOPS[name].at,...(via||[]),STOPS[next].at]; d = 0; name = next; ctx.clear(); }
+  const NEXT = {dried:'first',first:'glazed',glazed:'fired',fired:'done',done:'end',hand:'dried',thrown:'dried'};
+  const via = n => n === 'hand' || n === 'thrown' ? leave[n] : null;
+  const pick = h => { how = h; go(h,legs[h]); };
+  const step1 = () => { if (name === 'clay') return pick(how === 'thrown' ? 'hand' : 'thrown'); go(NEXT[name],via(name)); };
+  function menu(){ ctx.clear(); if (auto) return;
+    if (name === 'clay'){ ctx.button('on the wheel',() => pick('thrown')); ctx.button('by hand',() => pick('hand')); ctx.button('play it all',() => { auto = true; autoT = .5; ctx.clear(); }); return; }
+    if (name === 'end'){ ctx.button('another lump',reset); return; }
+    ctx.button('next stop',() => go(NEXT[name],via(name))); }
+  function reset(){ name = 'clay'; inked = []; trail.removeAttribute('d'); seat(STOPS.clay.at); inked = [STOPS.clay.at]; paint(); menu(); }
+  reset();
+  return { tick(t,dt){
+    if (auto && !moving){ autoT -= dt; if (autoT <= 0){ autoT = .9; step1(); } }
+    if (!moving) return; d += dt*1.5; const n = path.length-1, u = Math.min(n,d*n/Math.max(1,n*.55)), i = Math.min(n-1,Math.floor(u)), f = u-i, e = f*f*(3-2*f); seat([lerp(path[i][0],path[i+1][0],e),lerp(path[i][1],path[i+1][1],e)]); if (u >= n){ moving = false; if (name === 'end'){ auto = false; finale(); } paint(); menu(); } } };
+}
+
+return {hand,study,vpot,solid,oval};
+})();
+
+const CH = '#94654a', CHL = '#b08468', CHS = '#80543b', CHP = '#e6d2c2', WD = '#dacaab', WDT = '#ece1ce', STL = '#dad8d3', STT = '#eeebe4', LF = '#aec79d', LFL = '#c4d8b3', AMB = '#e1bc6e', AMO = '#dbb16f', PIT = '#f2e6d3', SKY = '#c4d2df';
+const BARS = { side:CHS, right:'#8a5c42', base:'#86583d', face:CH, lit:CHL, hi:'#c9a086' }, PALE = { side:'#cdb09a', right:'#d6bca7', base:'#d3b8a2', face:'#dfc8b4', lit:'#ebdccd', hi:'#f0e6da' };
+const stn = (st,fn) => group(`class="stn" data-st="${st}"`,fn);
+/* a pod on the sheet: a ribbed lemon shape, two ink lines, nothing more */
+function podAt(x,y,L,a,col){ const c = Math.cos(a), s = Math.sin(a), M = (u,v) => [x+u*c-v*s,y+u*s+v*c], w = L*.3, q = spline([M(0,0),M(L*.3,-w),M(L*.62,-w*.95),M(L,0),M(L*.62,w*.95),M(L*.3,w)],true,2); flat(q,col); inkLoop(q,{w:.95,over:0}); pen(spline([M(L*.1,0),M(L*.5,-w*.32),M(L*.92,0)],false,3),.6); pen(spline([M(L*.1,0),M(L*.5,w*.32),M(L*.92,0)],false,3),.6); }
+function cocoaTree(x,y){
+  const [a,b] = P(x,y), t = [[a-14,b+2],[a-10,b-40],[a-8,b-78],[a+8,b-78],[a+10,b-40],[a+14,b+2]];
+  ground(blob(a-16,b+6,64,17)); flat(t,'#c4ae8e'); inkLoop(t,{w:1.05,over:0}); pen([[a-2,b-14],[a+2,b-34]],.6); pen([[a+3,b-54],[a,b-70]],.6);
+  podAt(a+11,b-24,34,.55,AMB); podAt(a-11,b-16,31,2.5,AMO); podAt(a-9,b-52,30,2.7,AMB); podAt(a+9,b-58,27,.3,'#cfbf8b');
+  out.push('<g class="crown">'); const c = blob(a+2,b-120,70,57,.05,9); flat(c,LF); flat(blob(a+18,b-136,36,24,.06,7),LFL); inkLoop(c,{w:1.2,over:0});
+  for (const [u,v] of [[-34,-124],[6,-96],[-10,-146],[36,-104]]) pen([[a+u-7,b+v+2],[a+u,b+v-3],[a+u+7,b+v+2]],.8); out.push('</g>');
+}
+/* a leaf laid flat on a box, along x */
+function layLeaf(x,y,z,L,w,skew = 0){ const Q = (u,v) => P(x+u*L,y+v*w+skew*u,z), q = spline([Q(0,0),Q(.2,-.72),Q(.6,-.82),Q(1,0),Q(.6,.82),Q(.2,.72)],true,3); flat(q,LF); inkLoop(q,{w:.85,over:0}); pen([Q(0,0),Q(1,0)],.7); }
+function sweatBox(x,y,z,w,d,h,deck){ block(x,y,z,w,d,h,{wall:WD,deck,t:4,sink:5,ink:1.1}); rule([1,2].flatMap(i => { const v = z+h*i/3; return [[P(x,y+d,v),P(x+w,y+d,v)],[P(x+w,y+d,v),P(x+w,y,v)]]; }),INK,.55,.7); }
+/* fermenting boxes step down so the beans can be turned from one to the next */
+function sweatBoxes(x,y){ const X = x-54;
+  for (const [a,b] of [[2,2],[46,2],[2,50],[46,50]]) box(X+a,y+b,0,6,6,32,{left:'#c8b696',marks:false,ink:.9});
+  sweatBox(X,y,30,54,58,36,'#d3bb98'); layLeaf(X+3,y+18,66,48,18); layLeaf(X+3,y+40,66,48,18,-2);
+  sweatBox(X+56,y,0,54,58,36,'#d3bb98'); layLeaf(X+59,y+29,36,48,24,1);
+}
+/* drying racks: a raked bed on legs, the lower tray slid part way out for the night */
+function dryTray(x,y,z,w,d){ box(x,y,z,w,d,4,{left:WD,top:WDT,marks:false,ink:1}); for (let i = 0; i < 3; i++){ const v = y+d*(i+.5)/3, q = spline([P(x+7,v,z+4),P(x+w*.5,v-5,z+4),P(x+w-7,v,z+4),P(x+w*.5,v+5,z+4)],true,3); flat(q,'#c2aa8a'); inkLoop(q,{w:.65,over:0}); } }
+function dryRack(x,y){ const X = x-50, W = 88, D = 62, leg = (a,b) => box(X+a,y+b,0,5,5,52,{left:'#c8b696',marks:false,ink:.9});
+  leg(0,0); leg(W-5,0); leg(0,D-5); dryTray(X+6,y+2,22,W+14,D-4); leg(W-5,D-5); dryTray(X-2,y-2,52,W+4,D+4); }
+/* the winnower cracks the roasted beans and blows the shell away; the melanger grinds the nibs under two stones */
+function winnower(x,y){ for (const [a,b] of [[2,2],[32,2],[2,38],[32,38]]) box(x+a,y+b,0,5,5,16,{left:'#b9b3a7',marks:false,ink:.9});
+  box(x,y,14,38,44,42,{left:SKY,top:'#dae3eb',marks:false,ink:1.1}); lifeHopper(x+19,y+22,56,7,17,17,STL,CHL);
+  const R = 12, c = Array.from({length:18},(_,i) => { const t = i/18*6.283; return P(x+38,y+21+R*Math.cos(t),36+R*Math.sin(t)); }); flat(c,STT); rim(c,.9,INK); rule([0,2.1,4.2].map(t => [P(x+38,y+21,36),P(x+38,y+21+R*.8*Math.cos(t),36+R*.8*Math.sin(t))]),INK,.8);
+  const s = [P(x+20,y+44,22),P(x+32,y+44,22),P(x+36,y+60,4),P(x+16,y+60,4)]; flat(s,STL); rim(s,.9,INK); }
+function melanger(x,y){ lifeTurn(x,y,0,[[20,0],[23,10]],STL,{seam:false,cap:STT}); lifeTurn(x,y,10,[[28,0],[36,30]],STT,{wall:3,sink:9,cap:CH});
+  for (const [a,b] of [[-27,-10],[6,7]]) lifeDrum(x+a,y+b,36,12,20,'#cfccc7',{cap:'#e1ded8',ink:.9});
+  box(x-26,y-5,50,66,9,6,{left:SL0,top:'#e6e4e1',marks:false,ink:.9}); lifePipe([P(x,y,44),P(x,y,50)],4,STL); box(x+40,y-12,10,16,24,46,{left:SKY,top:'#dae3eb',marks:false,ink:1}); }
+const SL0 = '#cad0d4';
+/* the old long conche: a trough, a roller run back and forth by a crank and a flywheel */
+function conche(x,y){ const X = x-31, D = 108, Z = 36, Y = y, ry = Y+58;
+  for (const [a,b] of [[3,4],[50,4],[3,96],[50,96]]) box(X+a,Y+b,0,8,8,14,{left:'#b9b3a7',marks:false,ink:.9});
+  block(X,Y,12,62,D,24,{wall:'#e6e1da',deck:CH,t:5,sink:4,ink:1.2}); rule([[P(X,Y+D,24),P(X+62,Y+D,24)],[P(X+62,Y+D,24),P(X+62,Y,24)]],INK,.5,.7);
+  { const q = spline([P(X+9,ry+18,Z),P(X+30,ry+12,Z),P(X+53,ry+18,Z),P(X+53,ry+24,Z),P(X+30,ry+28,Z),P(X+9,ry+24,Z)],true,3); flat(q,CHL); }
+  lifeDrum(X+6,ry,Z+8,10,50,STL,{cap:STT,ink:1}); lifePipe([P(X+58,ry,Z+8),P(X+72,ry,Z+8)],2.4,STL);
+  box(X+70,Y+6,0,7,7,48,{left:'#b9b3a7',marks:false,ink:.9}); const R = 25, wy = Y+10, wz = 50, c = Array.from({length:26},(_,i) => { const t = i/26*6.283; return P(X+80,wy+R*Math.cos(t),wz+R*Math.sin(t)); }), h = c.map((p,i) => { const t = i/26*6.283; return P(X+80,wy+(R-6)*Math.cos(t),wz+(R-6)*Math.sin(t)); }); flat(c,STL); rim(c,1,INK); flat(h,'#f4efe7'); rim(h,.7,INK); rule([.4,2.5,4.6].map(t => [P(X+80,wy,wz),P(X+80,wy+(R-5)*Math.cos(t),wz+(R-5)*Math.sin(t))]),INK,1.1); lifePipe([P(X+80,wy+14,wz+6),P(X+74,ry,Z+8)],2,STT);
+}
+/* what happens in the ring: a warm tank with its flame, a cold unit with its fan, a lamp that warms it back */
+function ringStations(){
+  const at = (deg,r) => onRing(deg,r,0);
+  stn('Melted',() => { const [x,y] = at(262,300); box(x-28,y-26,0,56,52,18,{left:'#e5bbac',top:'#efd2c7',marks:false,ink:1.2}); const f = P(x+28,y,8), fl = spline([[f[0]-8,f[1]+8],[f[0]-6,f[1]-3],[f[0],f[1]-16],[f[0]+6,f[1]-3],[f[0]+8,f[1]+8]],true,3); flat(fl,AMB); rim(fl,.8,INK); lifeTurn(x,y,18,[[23,0],[24,34]],'#edd4ca',{wall:3,sink:8,cap:CH,seam:false,ink:1.1}); lifePipe([P(x-4,y+20,48),P(x-6,y+40,44),P(x-8,y+54,24)],3,STL); });
+  stn('Cooled',() => { const [x,y] = at(349,302); box(x-22,y-30,0,44,60,50,{left:SKY,top:'#dae3eb',marks:false,ink:1.2}); const R = 19, c = Array.from({length:22},(_,i) => { const t = i/22*6.283; return P(x+22,y+R*Math.cos(t),26+R*Math.sin(t)); }), z = t => P(x+22,y+R*.86*Math.cos(t),26+R*.86*Math.sin(t)); flat(c,'#ebf0f3'); rim(c,1,INK); for (const t of [.3,2.4,4.5]){ const b = spline([P(x+22,y,26),z(t),z(t+.6)],true,3); flat(b,SKY); rim(b,.7,INK); } lifePipe([P(x-22,y+6,44),P(x-44,y+6,36)],3.4,STL); });
+  stn('Reworked',() => { const [x,y] = at(128,306); box(x-20,y-20,0,40,40,16,{left:'#e9d6b3',top:'#f2e6ce',marks:false,ink:1.2}); lifePipe([P(x,y,16),P(x,y,62),P(x+12,y-14,74),P(x+16,y-32,66)],2.6,STL); const c = P(x+16,y-32,60), s = [[c[0]-20,c[1]+8],[c[0]-9,c[1]-12],[c[0]+9,c[1]-12],[c[0]+20,c[1]+8]]; flat(s,AMB); rim(s,1,INK); });
+}
+function sacks(x,y){ lifePallet(x,y,0,200,76); for (const a of [38,102,166]){ const p = P(x+a,y+42,4); lifeSack(p[0],p[1],.7,'#d7c6a8','COCOA'); } }
+function wrapped(x,y){ board(x,y,250,140,10,'#f8f3e9','#d9c7bf',0);
+  box(x+150,y+20,0,74,100,54,{left:'#d9c9a9',top:'#e7dbc3',marks:false,ink:1.2}); rule([[P(x+150,y+70,54),P(x+224,y+70,54)]],'#b7a075',2.2);
+  for (const [v,col] of [[20,'#c27768'],[74,'#7e99af']]) for (let n = 0; n < 3; n++){ box(x+22,y+v,n*9,92,44,9,{left:col,top:litOf(col),marks:false,ink:.9}); if (n === 2){ const t = [P(x+66,y+v,27),P(x+86,y+v,27),P(x+86,y+v+44,27),P(x+66,y+v+44,27)]; flat(t,'#dec07f'); rim(t,.6,INK); } } }
+/* a slab of bar drawn square on in the plane of a close-up */
+function barPiece(cx,cy,ang,nx,ny,g,L,R){ const c = Math.cos(ang), s = Math.sin(ang), M = (u,v) => [cx+u*c-v*s,cy+u*s+v*c], W = nx*g, H = ny*g, base = [M(-W/2,-H/2),M(W/2,-H/2),...R.map(([u,v]) => M(u*W/2,v*H/2)),M(W/2,H/2),M(-W/2,H/2),...L.map(([u,v]) => M(u*W/2,v*H/2))];
+  out.push(`<path d="${pathOf(base)}Z" fill="${CHS}"/>`); clipped(base,() => { for (let i = 0; i < nx; i++) for (let j = 0; j < ny; j++){ const a = -W/2+i*g+4, b = -H/2+j*g+4, e = g-8, q = [M(a,b),M(a+e,b),M(a+e,b+e),M(a,b+e)]; out.push(`<path d="${pathOf(q)}Z" fill="${CH}"/>`); rim(q,.8,INK); out.push(`<path d="${pathOf([M(a+5,b+5),M(a+e*.5,b+5),M(a+5,b+e*.5)])}Z" fill="${CHL}"/>`); } }); rim(base,1.3,INK); }
+function bean(x,y,rx,ry,a){ const c = Math.cos(a), s = Math.sin(a), q = ringAt((u,v) => [x+rx*u*c-ry*v*s,y+rx*u*s+ry*v*c],22); flat(q,'#fcf7ed'); inkLoop(q,{w:1,over:0}); pen(spline([[x-rx*.5*c,y-rx*.5*s],[x+ry*.3*s,y-ry*.3*c],[x+rx*.5*c,y+rx*.5*s]],false,3),.6); }
+/* close-ups on a loose wash, as on the pottery and bakery Charts */
+function closeups(){
+  out.push('<filter id="pvb" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="7"/></filter>');
+  stn('Pod',() => VIG.study(1,770,206,'#efe2c9',(x,y) => { const W = 104, H = 60, rim2 = k => spline([[x-W*k-30,y+8],[x-W*.62*k,y-H*.9*k],[x,y-H*1.08*k],[x+W*.62*k,y-H*.9*k],[x+W*k+32,y-8],[x+W*.62*k,y+H*.94*k],[x,y+H*1.1*k],[x-W*.62*k,y+H*.94*k]],true,3), o = rim2(1), i = rim2(.8);
+    flat(o,AMB); clipped(o,() => flat(blob(x+60,y+66,90,34),'#d2aa63')); inkLoop(o,{w:1.4,over:0}); for (const t of [.12,.36,.64,.88]){ const u = x-W*1.0+2*W*t; pen(spline([[u,y-H*.9+Math.abs(t-.5)*34],[u+6,y-H*.76+Math.abs(t-.5)*30],[u+4,y-H*.6+Math.abs(t-.5)*30]],false,3),.8); }
+    flat(i,PIT); inkLoop(i,{w:1.1,over:0}); for (const [a,b,t] of [[-54,-14,.2],[-18,-23,.1],[18,-23,-.1],[54,-14,-.2],[-54,16,-.2],[-18,25,-.1],[18,25,.1],[54,16,.2]]) bean(x+a,y+b,20,13,t);
+    VIG.hand(x-W-44,y+62,-.5,1,{flip:true,curl:.22,thumb:[1.3,.9]}); VIG.hand(x+W+46,y+58,Math.PI+.5,1,{curl:.22,thumb:[1.3,.9]}); },196,128));
+  stn('Conched',() => VIG.study(2,1168,206,'#ebd9d3',(x,y) => { const u = spline([[x-140,y-14],[x-134,y+64],[x-100,y+96],[x+100,y+96],[x+134,y+64],[x+140,y-14]],false,4); flat([...u],STL); pen(u,1.3); const c = spline([[x-126,y+24],[x-80,y+22],[x-44,y+8],[x-16,y-6],[x+6,y+18],[x+52,y+22],[x+126,y+22],[x+120,y+66],[x+94,y+84],[x-94,y+84],[x-120,y+66]],true,4); flat(c,CH); clipped(c,() => { flat(spline([[x-120,y+32],[x-78,y+30],[x-42,y+16],[x-24,y+8],[x-48,y+38],[x-112,y+42]],true,3),CHL); }); inkLoop(c,{w:1.2,over:0}); pen(spline([[x+40,y+46],[x+84,y+44],[x+112,y+46]],false,3),.8); pen(spline([[x-80,y+56],[x-30,y+52],[x+10,y+58]],false,3),.8);
+    const R = 54, ro = VIG.oval(x+44,y-26,R,R); flat(ro,STL); clipped(ro,() => flat(VIG.oval(x+26,y-44,R*.7,R*.62),STT)); inkLoop(ro,{w:1.4,over:0}); const hub = VIG.oval(x+44,y-26,12,12); flat(hub,'#f4efe7'); inkLoop(hub,{w:1,over:0}); lifePipe([[x+44,y-26],[x+150,y-80]],6,STL); },164,126));
+  stn('Shiny bar',() => VIG.study(3,892,1286,'#ebd9d3',(x,y) => { y -= 6; barPiece(x-56,y-18,-.13,3,3,33,[],[[.9,-.6],[1,-.25],[.87,.2],[1,.6]]); barPiece(x+60,y-14,.15,3,3,33,[[-.92,.62],[-1.04,.2],[-.9,-.25],[-1.02,-.6]],[]); for (const [a,b,s] of [[0,-46,8],[8,36,7],[-8,50,5]]){ const q = [[x+a-s,y+b],[x+a,y+b-s*.8],[x+a+s,y+b+1],[x+a-1,y+b+s*.7]]; out.push(`<path d="${pathOf(q)}Z" fill="${CH}"/>`); rim(q,.8,INK); } rule([[[x-12,y-88],[x-12,y-72]],[[x+4,y-92],[x+4,y-74]],[[x+20,y-88],[x+18,y-72]]],INK,1); VIG.hand(x-162,y+62,-.56,.92,{flip:true,curl:.42,thumb:[1.3,.9]}); VIG.hand(x+168,y+66,Math.PI+.56,.92,{curl:.42,thumb:[1.3,.9]}); },186,114));
+}
+function drawBack(){
+  out.push(lookGrid());
+  out.push(`<text x="68" y="164" class="tt" font-size="70" fill="${INK}" letter-spacing="-1">Bean to bar</text><text x="72" y="202" class="it" font-size="22" fill="${INK}" letter-spacing=".8">six steps, then round and round</text>`);
+  closeups();
+  for (const [x,y] of [[108,600],[1300,560],[1040,640],[470,1372],[120,860]]) plus(x,y);
+  /* what arrives, on its own pallet behind the line */
+  sacks(424,-310); scrawl(1136,540,'in by the sack','start');
+  board(16,-74,776,172,14,'#f8f3e9','#d9c7bf',0);
+  /* the belt along the tail: rails and slats, the batch runs on it */
+  const belt = [[38,TAILY-13,1],[706,TAILY-13,1],[706,TAILY+13,1],[38,TAILY+13,1]]; flat(P3(belt),'#e8ddcd'); rim(P3(belt),.8,INK); rule(Array.from({length:20},(_,i) => [P(54+i*33,TAILY-13,1),P(54+i*33,TAILY+13,1)]),INK,.45,.7);
+  stn('Pod',() => cocoaTree(112,-16));
+  stn('Fermented',() => sweatBoxes(STOPS.Fermented,-68));
+  stn('Dried',() => dryRack(STOPS.Dried,-66));
+  stn('Roasted',() => lifeRoaster(STOPS.Roasted-54,-54,0,.66,{stack:120}));
+  stn('Ground',() => { winnower(STOPS.Ground-64,-64); melanger(STOPS.Ground+30,-26); });
+  standAt(62,26,0,{hair:'hat',shirt:'#bad8c6',arm:'up',look:1,size:.62,say:'ripe ones only'});
+  standAt(262,26,0,{hair:'bun',shirt:'#eed7ae',arm:'wave',look:1,size:.62,say:'rake, rake, rake'});
+  /* the tempering ring: a steel pan on a round slab */
+  const rb = roundPts(304,0), rl = roundPts(304,-14), H = hull([...rb,...rl]); flat(H,'#d9c7bf'); VIG.solid(rb,'#f8f3e9'); rim(H,1.1,INK); rim(rb,.9,INK);
+  ground(hull(roundPts(RIM,0).map(p => [p[0]-14,p[1]+8])));
+  const wall = roundPts(RIM,0), top = roundPts(RIM,FLOOR), WH = hull([...wall,...top]); flat(WH,'#d5d2cd'); rim(WH,1.1,INK); flat(top,STT);
+  const op = roundPts(RIM-16,FLOOR), isl = roundPts(ISLE,FLOOR), hole = pathD(op)+pathD(isl);
+  out.push(`<clipPath id="chan"><path clip-rule="evenodd" d="${hole}"/></clipPath><g clip-path="url(#chan)"><path d="${hole}" fill-rule="evenodd" fill="#bab7b3"/><path d="${pathD(roundPts(RIM-12,LIQ))}${pathD(roundPts(ISLE-3,LIQ))}" fill-rule="evenodd" fill="${CH}"/></g>`);
+  rim(op,.9,INK); rim(isl,.9,INK);
+  for (const [a0,a1,c] of [[ANG.Melted-50,ANG.Melted+60,'#e9bfaf'],[ANG.Cooled-60,ANG.Cooled+60,SKY],[ANG.Reworked-60,ANG.Reworked+70,'#efddb9']]){ const o = Array.from({length:31},(_,i) => onRing(a0+(a1-a0)*i/30,RIM-1,FLOOR)), inn = Array.from({length:31},(_,i) => onRing(a1+(a0-a1)*i/30,RIM-16,FLOOR)); flat(P3([...o,...inn]),c); rule([[P(...onRing(a0,RIM-1)),P(...onRing(a0,RIM-16))],[P(...onRing(a1,RIM-1)),P(...onRing(a1,RIM-16))]],INK,.7); }
+  rim(op,.9,INK); VIG.solid(isl,'#f8f4ed'); rim(isl,1,INK); pen(spline(P3([[CX-150,CY-60,FLOOR],[CX-70,CY-30,FLOOR],[CX-30,CY+40,FLOOR]]),false,4),.5); pen(spline(P3([[CX+40,CY+120,FLOOR],[CX+90,CY+60,FLOOR],[CX+150,CY+50,FLOOR]]),false,4),.5);
+  ringStations();
+  /* the chute from the conche down into the ring */
+  { const c = [[682,TAILY-15,16],[774,TAILY-7,16],[774,TAILY+21,16],[682,TAILY+15,16]]; flat(P3(c),STL); rim(P3(c),.9,INK); const m = [[688,TAILY-7,16.5],[772,TAILY-1,16.5],[772,TAILY+15,16.5],[688,TAILY+7,16.5]]; flat(P3(m),CH); }
+  stn('Conched',() => conche(STOPS.Conched,-74));
+  /* the way out, and the mould at the end of it */
+  const b1 = TR['Reworked>Shiny bar'].pts; board(BIG.x-BIG.w/2-24,BIG.y-BIG.d/2-24,BIG.w+48,BIG.d+48,10,'#f8f3e9','#d9c7bf',0);
+  for (let i = 0; i < b1.length-1; i++){ const a = b1[i], b = b1[i+1], d = Math.hypot(b[0]-a[0],b[1]-a[1])||1, n = [-(b[1]-a[1])/d*14,(b[0]-a[0])/d*14], n2 = [n[0]*.56,n[1]*.56]; flat(P3([[a[0]+n[0],a[1]+n[1],a[2]],[b[0]+n[0],b[1]+n[1],b[2]],[b[0]-n[0],b[1]-n[1],b[2]],[a[0]-n[0],a[1]-n[1],a[2]]]),STL); flat(P3([[a[0]+n2[0],a[1]+n2[1],a[2]],[b[0]+n2[0],b[1]+n2[1],b[2]],[b[0]-n2[0],b[1]-n2[1],b[2]],[a[0]-n2[0],a[1]-n2[1],a[2]]]),CH); }
+  standAt(CX+92,CY-86,FLOOR,{hair:'hat',shirt:'#f8f3e9',apron:'#c49e8e',arm:'hold',look:-1,size:.72,say:'one more lap'});
+  wrapped(1282,342); out.push(`<text x="1362" y="1376" class="it" font-size="20" fill="${INK}" text-anchor="end" stroke="#f8f3e9" stroke-width="6" paint-order="stroke">wrapped, off to the shop</text>`);
+  /* the notes: one stair of hand labels down the tail */
+  const [lw,la] = [(t,n) => Math.max(t.length*17,n.length*11)+16,(st,x,y,t,n,to,side) => group(`class="lab" data-st="${st}"`,() => side ? label(x,y,t,n,to,side) : label(x-lw(t,n),y,t,n,to))];
+  for (const [st,t,n,to] of NOTES) la(st,LABEL[st][0],LABEL[st][1],t,n,to);
+  la('Melted',1366,650,'melted','about 48&deg;',onRing(262,300,40),'end'); la('Cooled',1366,1104,'cooled','about 27&deg;',onRing(349,302,8),'end'); la('Reworked',506,862,'warmed','about 31&deg;',onRing(128,306,10));
+  group('class="lab" data-st="Shiny bar"',() => scrawl(56,1348,'a shine and a snap','start',28));
+}
+const LABEL = { Pod:[262,446], Fermented:[372,508], Dried:[484,570], Roasted:[596,634], Ground:[704,698], Conched:[556,772] };
+const NOTES = [['Pod','pods','split open',[116,-14,24]],['Fermented','fermented','days under leaves',[STOPS.Fermented-8,-10,18]],['Dried','dried','days in the sun',[STOPS.Dried,-4,22]],['Roasted','roasted','',[STOPS.Roasted+8,-10,16]],['Ground','ground','to a paste',[STOPS.Ground-20,6,6]],['Conched','conched','stirred for hours, sometimes days',[STOPS.Conched-10,30,8]]];
+function barShape(Q,W,D,nx,ny,Z,T,lip,o = 1){ const gx = W/nx, gy = D/ny, r = pts => pts.map(p => Q(...p)), sq = (pts,col,w = o) => { const q = r(pts); out.push(`<path fill="${col}" d="${pathOf(q)}Z"/>`); if (w) rim(q,w,INK); };
+  sq([[0,D,0],[W,D,0],[W,D,Z],[0,D,Z]],T.side,o*1.2); sq([[W,0,0],[W,D,0],[W,D,Z],[W,0,Z]],T.right,o*1.2); sq([[0,0,Z],[W,0,Z],[W,D,Z],[0,D,Z]],T.base,o*1.2);
+  const m = Math.min(gx,gy)*.1; for (let i = 0; i < nx; i++) for (let j = 0; j < ny; j++){ const a = i*gx+m, b = j*gy+m, A = a+gx-2*m, B = b+gy-2*m, t = Z+lip;
+    sq([[A,b,Z],[A,B,Z],[A,B,t],[A,b,t]],T.lit,.7*o); sq([[a,B,Z],[A,B,Z],[A,B,t],[a,B,t]],T.side,.7*o); sq([[a,b,t],[A,b,t],[A,B,t],[a,B,t]],T.face,.9*o); sq([[a+7,b+7,t],[a+(A-a)*.55,b+7,t],[a+7,b+(B-b)*.55,t]],T.hi,0); }
+}
+function bigBar(){
+  const x0 = BIG.x-BIG.w/2, y0 = BIG.y-BIG.d/2, Z = 18, nx = 6, ny = 4, Q = (a,b,c) => P(x0+a,y0+b,14+c);
+  barShape(Q,BIG.w,BIG.d,nx,ny,Z,PALE,5);
+  out.push('<g id="barShiny" opacity="0">'); barShape(Q,BIG.w,BIG.d,nx,ny,Z,BARS,5);
+  const top = [Q(0,0,Z+5),Q(BIG.w,0,Z+5),Q(BIG.w,BIG.d,Z+5),Q(0,BIG.d,Z+5)], c = Q(BIG.w/2,BIG.d/2,Z);
+  out.push(`<linearGradient id="gleam"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><clipPath id="barTop"><path d="${pathD(top)}"/></clipPath><g clip-path="url(#barTop)"><g transform="translate(${c[0]} ${c[1]}) skewX(-30)"><rect class="sheen" x="-70" y="-280" width="140" height="560" fill="url(#gleam)"/></g></g></g>`);
+}
+function drawFront(){
+  { const x = BIG.x-BIG.w/2-10, y = BIG.y-BIG.d/2-10, w = BIG.w+20, d = BIG.d+20; box(x,y,0,w,d,14,{left:STL,top:STT,marks:false,ink:1.2}); }
+  bigBar();
+  { const rd = pathD(roundPts(RIM+14,FLOOR,70)); out.push(`<path id="ringSpot" class="spot" d="${rd}"/>`); const q = 26, c = [[BIG.x-BIG.w/2-q,BIG.y-BIG.d/2-q],[BIG.x+BIG.w/2+q,BIG.y-BIG.d/2-q],[BIG.x+BIG.w/2+q,BIG.y+BIG.d/2+q],[BIG.x-BIG.w/2-q,BIG.y+BIG.d/2+q]].map(p => P(p[0],p[1],12)); out.push(`<path id="barSpot" class="spot" d="${pathD(c)}"/>`); }
+  standAt(BIG.x+BIG.w/2+40,BIG.y-BIG.d/2+6,0,{hair:'bun',shirt:'#e2b7a8',arm:'wave',look:-1,size:.78,say:'snap!'});
+  const b = P(CX,CY,FLOOR), tube = [[b[0]-7,b[1]-3],[b[0]-7,b[1]-TH],[b[0]+7,b[1]-TH],[b[0]+7,b[1]-3]];
+  ground(blob(b[0]-10,b[1]+6,28,10)); flat(tube,'#ebf1f4'); out.push(`<rect id="merc" x="${b[0]-4}" width="8" fill="#c27768"/>`); inkLoop(tube,{w:1.1,over:0}); dot(b[0],b[1]-1,12,'#c27768',1.1);
+  for (const [t,lab] of [[50,'50'],[31,'31'],[27,'27']]){ const y = b[1]-tempY(t); pen([[b[0]+7,y],[b[0]+15,y]],.9); out.push(`<text x="${b[0]+19}" y="${y+5}" class="it" font-size="15" fill="${INK}">${lab}</text>`); }
+}
+function barHero(){ return drawHero(() => { const W = 176, D = 122, q = pts => pts.map(p => P(...p)); shades.push(q([[10,10,0],[W+16,10,0],[W+16,D+16,0],[10,D+16,0]])); out.push('<g opacity=".7">'); layShades(); out.push('</g>'); barShape(P,W,D,4,3,16,BARS,5);
+  const c = P(W/2,D/2,16), t = pathD(q([[0,0,21],[W,0,21],[W,D,21],[0,D,21]])); out.push(`<clipPath id="heroTop"><path d="${t}"/></clipPath><g clip-path="url(#heroTop)"><g transform="translate(${c[0]} ${c[1]}) skewX(-30)"><rect x="-34" y="-120" width="68" height="240" fill="url(#gleam)"/></g></g>`); },142,30); }
+function spots(){ const inRing = /^(Melted|Cooled|Reworked)$/.test(stage) && ri < plan.length; $('ringSpot').classList.toggle('on',inRing); $('barSpot').classList.toggle('on',stage === 'Shiny bar'); document.querySelectorAll('[data-st]').forEach(e => e.classList.toggle('here',e.dataset.st === stage)); }
+function drawAll(){
+  layer('back',drawBack); layer('front',drawFront);
+  out = []; $('defs').innerHTML = pencilDefs();
+  const [ix,iy] = P(CX-34,CY+64,FLOOR);
+  $('live').innerHTML = `<text id="deg" transform="matrix(.866 .5 -.866 .5 ${ix} ${iy})" class="it" font-size="62" fill="${INK}">22°</text><g id="batch"><ellipse rx="19" ry="9" cy="6" fill="#92949d" opacity=".3"/><ellipse id="batchFill" rx="16" ry="11.5" transform="rotate(-18)" fill="${LIQC}" stroke="${INK}" stroke-width="1"/><ellipse cx="-5" cy="-3.5" rx="4" ry="2" fill="#fff" opacity=".5"/></g>`;
+}
+drawAll();
+
+const make = m => { auto = false; done = false; start(m); }; button('Make chocolate', () => make('good'));
+start('good');
+clock(stepSim, paintLive);
+</script>
+</body></html>

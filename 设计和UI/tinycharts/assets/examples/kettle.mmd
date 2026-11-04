@@ -1,0 +1,13 @@
+---
+title: "One kettle"
+---
+stateDiagram-v2
+  [*] --> cold
+  cold: Cold
+  heating: Heating
+  boiled: Boiled
+  cold --> cold: fill it
+  cold --> heating: switch on [has water]
+  heating --> boiled: it boils
+  boiled --> cold: pour
+  boiled --> [*]
