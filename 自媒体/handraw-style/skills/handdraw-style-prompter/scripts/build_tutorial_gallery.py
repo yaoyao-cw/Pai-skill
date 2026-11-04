@@ -18,6 +18,53 @@ PROPS_JSON = SKILL / "references" / "props.json"
 SCENES_JSON = SKILL / "references" / "scenes.json"
 TONES_JSON = SKILL / "references" / "tones.json"
 
+IMAGE_FALLBACK_SCRIPT = """<script>
+(function() {
+  function fixImg(img) {
+    if (!img || img.__fixed) return;
+    var src = img.getAttribute('src') || '';
+    var idx = src.indexOf('images/');
+    if (idx === -1) return;
+    var sub = src.substring(idx);
+    var step = parseInt(img.dataset.retry || '0', 10);
+    var candidates = [
+      '../../../../' + sub,
+      '../../../' + sub,
+      '../../' + sub,
+      '../' + sub,
+      './' + sub,
+      '/' + sub,
+      'https://img.handraw-style.com/' + sub,
+      'https://raw.githubusercontent.com/yang0/handraw-style/master/' + sub
+    ];
+    while (step < candidates.length) {
+      var nextSrc = candidates[step];
+      step++;
+      if (nextSrc !== src) {
+        img.dataset.retry = step.toString();
+        img.src = nextSrc;
+        return;
+      }
+    }
+    img.__fixed = true;
+  }
+  window.addEventListener('error', function(e) {
+    if (e.target && e.target.tagName === 'IMG') {
+      fixImg(e.target);
+    }
+  }, true);
+  window.addEventListener('load', function(e) {
+    if (e.target && e.target.tagName === 'IMG') {
+      var card = e.target.closest('.style-card, .layout-card, .color-card, .asset-card, .picker-card');
+      if (card && e.target.src) {
+        card.dataset.image = e.target.src;
+      }
+    }
+  }, true);
+})();
+</script>"""
+
+
 SCRIPTS_DIR = Path(__file__).resolve().parent
 if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
@@ -98,6 +145,7 @@ def build_html() -> str:
             "name": s["generation_name"],
             "ref": s["reference"],
             "group": s["number"].split("-")[0],
+            "group_name": s.get("group", ""),
             "img": individual_image_path(s["number"]),
         }
         for s in styles_raw
@@ -170,21 +218,6 @@ def build_html() -> str:
         cards.append(card_html)
     cards_str = "\n".join(cards)
 
-    shot_catalog = SKILL.parent / "handraw-video-producer" / "catalog" / "shots.json"
-    shot_items = json.loads(shot_catalog.read_text(encoding="utf-8"))["items"]
-    shot_names_en = ['Single-image animation', 'Video', 'Background + transparent sprites', 'Full-image frame animation', 'Remotion animation', 'simo whiteboard animation', 'SRT whiteboard animation']
-    shot_desc_en = ['One complete image, shown full-screen or on a storybook page, with optional keyframes.', 'A screen recording or video clip with a defined trim range.', 'A background with static, looping or one-shot transparent sprites.', 'Complete images switched in a defined order with individual hold times.', 'Images, transparent PNGs, text and graphics arranged in Remotion.', 'Stroke-by-stroke drawing, text and sticker reveals.', 'Line drawing and color reveals timed to subtitle meaning.']
-    shot_names = {f"ST-{i + 1:03d}": (name, shot_desc_en[i]) for i, name in enumerate(shot_names_en)}
-    video_shots = [{
-        "id": item["id"], "name": item["name"],
-        "name_en": shot_names.get(item["id"], (item["name"], ""))[0],
-        "desc_zh": item["description"],
-        "desc_en": shot_names.get(item["id"], (item["name"], item["description"]))[1],
-        "img": f"video-shot-previews/{item['id']}.png",
-        "jianying": item["output_routes"]["jianying"] == "native_config_required",
-    } for item in shot_items]
-    shots_json_str = json.dumps(video_shots, ensure_ascii=False, separators=(",", ":"))
-
     return f'''<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>手绘 Skill 提示词拼装器</title><style>
@@ -243,55 +276,7 @@ main{{max-width:1240px;margin:auto;padding:24px 30px 50px}}
 .extra-fields-grid{{display:grid;grid-template-columns:1fr 1fr;gap:14px}}
 .extra-fields-grid.single-col{{grid-template-columns:1fr}}
 .extra-fields-grid[hidden]{{display:none!important}}
-.video-btn-group{{display:inline-flex;align-items:center;gap:4px;background:#eee8df;padding:3px;border-radius:8px;border:1px solid #dcd5ca;width:fit-content}}
-.video-opt-btn{{border:1px solid transparent;background:transparent;color:#514a43;font:inherit;font-size:12.5px;font-weight:750;padding:4px 12px;border-radius:6px;cursor:pointer;line-height:1.3;transition:all .15s}}
-.video-opt-btn:hover{{color:#b74227;background:#ffffffa0}}
-.video-opt-btn.is-active{{background:#b74227;color:#fff;border-color:#b74227;box-shadow:0 1px 3px rgba(183,66,39,0.25)}}
-.video-jianying-note{{font-size:12.5px;color:#b74227;background:#fff4f0;padding:7px 12px;border-radius:6px;border:1px solid #f0d5cc;display:flex;align-items:flex-start;gap:6px}}
-.video-note-copy{{line-height:1.7}}
-.video-note-copy a{{color:inherit;font-weight:700;text-underline-offset:3px;white-space:nowrap}}
 
-/* Screenshot-based video type selection */
-.video-shots-field{{gap:14px;padding:18px;border:1px solid #e0c9ba;border-left:4px solid #b74227;border-radius:12px;background:#fffdfa;box-shadow:0 3px 12px #7b4a2210}}
-.video-shots-heading{{display:flex;align-items:center;gap:10px;flex-wrap:wrap}}
-.video-shots-heading .form-label{{font-size:17px;font-weight:800}}
-.video-library-icon{{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:9px;background:#f8e8dd;color:#b74227;flex-shrink:0}}
-.video-library-intro{{display:flex;flex-direction:column;gap:4px;flex:1;min-width:160px}}
-.video-shots-hint{{font-size:12px;color:#8c8276}}
-.video-shots-clear{{border:0;background:transparent;color:#b74227;font:inherit;font-size:12px;cursor:pointer}}
-.video-shots-clear:focus-visible,.video-shot-remove:focus-visible{{outline:2px solid #b74227;outline-offset:3px}}
-.video-shots-choices{{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}}
-.video-choice-card{{display:flex;flex-direction:column;min-width:0;padding:0;border:1px solid #ded5c9;border-radius:9px;background:#fff;overflow:hidden;cursor:pointer;text-align:left;position:relative;transition:border-color .15s,box-shadow .15s,transform .15s;font:inherit;color:#24211e}}
-.video-choice-card:hover{{border-color:#b74227;box-shadow:0 4px 12px #75431a18;transform:translateY(-2px)}}
-.video-choice-card:focus-visible{{outline:2px solid #b74227;outline-offset:3px}}
-.video-choice-card.is-selected{{border-color:#b74227;box-shadow:0 0 0 2px #b74227}}
-.video-choice-image{{width:100%;aspect-ratio:16/9;object-fit:contain;display:block;background:#f6f0e8}}
-.video-choice-check{{position:absolute;right:7px;top:7px;display:flex;align-items:center;justify-content:center;width:23px;height:23px;border:1px solid #d2c8bc;border-radius:50%;background:#fffcf5e8;color:transparent;font-size:12px;font-weight:800}}
-.video-choice-card.is-selected .video-choice-check{{background:#b74227;color:#fff;border-color:#b74227}}
-.video-choice-info{{display:flex;flex-direction:column;gap:4px;padding:9px 10px}}
-.video-choice-id{{font-size:10px;letter-spacing:.04em;font-weight:800;color:#b74227}}
-.video-choice-name{{font-size:12px;font-weight:750;line-height:1.5;min-height:3em}}
-.video-choice-route{{font-size:10px;color:#786f65;line-height:1.4}}
-.video-choice-card.is-selected .video-choice-info{{background:#fff2e9}}
-.video-shots-selection{{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-top:1px solid #eee4d9;padding-top:10px}}
-.video-shots-count{{font-size:12px;font-weight:700;color:#786f65}}
-.video-shots-tray{{display:flex;flex-wrap:wrap;gap:8px}}
-.video-shots-tray:empty{{display:none}}
-.video-shot-chip{{display:flex;align-items:center;gap:5px;max-width:100%;padding:3px 6px 3px 9px;border:1px solid #e6cebd;border-radius:6px;background:#fff4ec}}
-.video-shot-chip-info{{display:flex;align-items:center;flex-wrap:wrap;gap:5px;font-size:11px;line-height:1.4}}
-.video-shot-chip-info small{{color:#b74227;font-size:10px;font-weight:700}}
-.video-shot-remove{{border:0;border-radius:4px;background:transparent;color:#8c8276;font:inherit;font-size:18px;cursor:pointer;padding:2px 5px}}
-.video-shot-remove:hover{{color:#b74227;background:#fff0e9}}
-.video-shots-warning{{margin:0;color:#9f351f;font-size:12px;line-height:1.5}}
-.video-shots-warning[hidden],.video-shots-clear[hidden]{{display:none}}
-.modal-grid.is-video-grid{{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}}
-.is-video-grid .picker-card-img{{aspect-ratio:4/3;object-fit:contain;background:#f5efe7}}
-.is-video-grid .picker-card-info{{padding:9px 10px;text-align:left}}
-.is-video-grid .picker-card-name{{white-space:normal;font-size:13px;line-height:1.5;min-height:3em}}
-.picker-card-route{{display:block;font-size:11px;color:#8c8276;margin-top:5px;line-height:1.5}}
-.picker-card-desc{{display:block;font-size:12px;color:#6b6257;line-height:1.5;margin-top:4px;min-height:3em}}
-@media(max-width:960px){{.video-shots-choices{{grid-template-columns:repeat(3,minmax(0,1fr))}}}}
-@media(max-width:600px){{.modal-grid.is-video-grid{{grid-template-columns:repeat(2,minmax(0,1fr))}}.is-video-grid .picker-card-info{{padding:7px}}.picker-card-desc{{font-size:11px}}.video-shots-field{{padding:12px}}.video-shots-choices{{grid-template-columns:repeat(2,minmax(0,1fr))}}.video-choice-info{{padding:7px 8px}}.video-library-intro{{min-width:120px}}}}
 
 /* Aspect Ratio Selector */
 .ratio-form-group{{display:flex;flex-direction:column;gap:8px}}
@@ -458,9 +443,11 @@ dialog::backdrop{{background:#000a}}
   .copy-main-btn{{width:100%;justify-content:center}}
   .modal-grid{{grid-template-columns:repeat(auto-fill,minmax(95px,1fr))}}
 }}
-</style></head><body>
+</style>
+{IMAGE_FALLBACK_SCRIPT}
+</head><body>
 <header class="sticky-header">
-<nav class="site-nav" aria-label="画廊导航"><a href="index.html" data-i18n="stylesNav">风格画廊</a><a href="layouts.html" data-i18n="layoutsNav">图型画廊</a><a href="colors.html" data-i18n="colorsNav">色彩画廊</a><a href="assets.html" data-i18n="assetsNav">自建图库</a><a href="video-shots.html" data-i18n="videoShotsNav">视频类型</a><a href="tutorials.html" aria-current="page" data-i18n="tutorialsNav">提示词</a><div class="nav-right"><a class="nav-ext" href="https://github.com/yang0/handraw-style" target="_blank" rel="noopener noreferrer" title="GitHub 仓库"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:-2px;margin-right:4px" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a><a class="nav-ext" href="https://x.com/yang02010" target="_blank" rel="noopener noreferrer" title="X (Twitter) @yang02010"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px;margin-right:4px" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>X (@yang02010)</a><button class="nav-btn" id="wechat-btn" type="button" data-i18n="wechatBtn">💬 创作变现交流群</button><button class="nav-btn" id="lang-btn" type="button" aria-label="Switch Language">🌐 EN / 中</button></div></nav>
+<nav class="site-nav" aria-label="画廊导航"><a href="index.html" data-i18n="stylesNav">风格画廊</a><a href="layouts.html" data-i18n="layoutsNav">图型画廊</a><a href="colors.html" data-i18n="colorsNav">色彩画廊</a><a href="assets.html" data-i18n="assetsNav">自建图库</a><a href="tutorials.html" aria-current="page" data-i18n="tutorialsNav">提示词</a><div class="nav-right"><a class="nav-ext" href="https://github.com/yang0/handraw-style" target="_blank" rel="noopener noreferrer" title="GitHub 仓库"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:-2px;margin-right:4px" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a><a class="nav-ext" href="https://x.com/yang02010" target="_blank" rel="noopener noreferrer" title="X (Twitter) @yang02010"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px;margin-right:4px" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>X (@yang02010)</a><button class="nav-btn" id="lang-btn" type="button" aria-label="Switch Language">🌐 EN / 中</button></div></nav>
 </header>
 <main>
 <!-- Prompt Assembler Studio -->
@@ -490,7 +477,6 @@ dialog::backdrop{{background:#000a}}
                 <button type="button" class="mode-btn is-active" data-mode="pure" data-i18n="modePure">纯图</button>
                 <button type="button" class="mode-btn" data-mode="graphic-text" data-i18n="modeGraphicText">图文</button>
                 <button type="button" class="mode-btn" data-mode="poster" data-i18n="modePoster">海报</button>
-                <button type="button" class="mode-btn" data-mode="video" data-i18n="modeVideo">视频</button>
                 <button type="button" class="mode-btn" data-mode="article-illust" data-i18n="modeArticleIllust">文章插图</button>
                 <button type="button" class="mode-btn" data-mode="article-cover" data-i18n="modeArticleCover">文章封面</button>
                 <button type="button" class="mode-btn" data-mode="photo" data-i18n="modePhoto">摄影</button>
@@ -518,7 +504,7 @@ dialog::backdrop{{background:#000a}}
         </div>
         <div class="step-body">
           <div class="form-group">
-            <textarea id="input-theme" class="text-input text-area" rows="2" placeholder="输入画面主题，例如：秋天的第一杯奶茶 / 窗台晒太阳的猫咪..." aria-label="画面主题或文章内容"></textarea>
+            <textarea id="input-theme" class="text-input text-area" rows="2" placeholder="输入画面主题，亦可输入本地文件或文件夹路径（如：秋天的第一杯奶茶 / 窗台晒太阳的猫咪，或 D:/path/to/...）..." aria-label="画面主题、文件或文件夹路径"></textarea>
           </div>
 
           <!-- Extra fields for poster mode only -->
@@ -530,80 +516,6 @@ dialog::backdrop{{background:#000a}}
             <div class="form-group">
               <label for="input-channel" class="form-label" data-i18n="channelLabel">海报投放渠道：</label>
               <input type="text" id="input-channel" class="text-input" placeholder="例如：小红书 / 微信公众号封面 / 线下门店立牌...">
-            </div>
-          </div>
-
-          <!-- Extra fields for video mode only -->
-          <div class="extra-fields-grid" id="video-extra-fields" hidden>
-            <div class="form-group">
-              <label for="input-video-audience" class="form-label" data-i18n="videoAudienceLabel">受众：</label>
-              <input type="text" id="input-video-audience" class="text-input" placeholder="例如：家庭主妇 / 职场新人 / 考研学生..." data-i18n-placeholder="videoAudiencePlaceholder">
-            </div>
-            <div class="form-group">
-              <label for="input-video-scenario" class="form-label" data-i18n="videoScenarioLabel">业务场景：</label>
-              <input type="text" id="input-video-scenario" class="text-input" placeholder="例如：短视频科普 / 课程演示 / 故事讲述..." data-i18n-placeholder="videoScenarioPlaceholder">
-            </div>
-
-            <!-- Screenshot picker, shared with the visual layout picker -->
-            <div class="form-group video-shots-field" style="grid-column:1 / -1;">
-              <div class="video-shots-heading">
-                <span class="video-library-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
-                <div class="video-library-intro">
-                  <span class="form-label" data-i18n="videoShotsLabel">视频类型库</span>
-                  <span class="video-shots-hint" data-i18n="videoShotsSub">点击截图选择，可多选，也可以让 AI 帮你搭配。</span>
-                </div>
-              </div>
-              <div id="video-shots-choices" class="video-shots-choices" role="group" aria-label="视频类型库"></div>
-              <div class="video-shots-selection">
-                <span id="video-shots-count" class="video-shots-count"></span>
-                <button type="button" id="btn-clear-video-shots" class="video-shots-clear" data-i18n="videoShotsClear" hidden>清空</button>
-              </div>
-              <div id="video-shots-tray" class="video-shots-tray" aria-live="polite"></div>
-              <p id="video-shots-warning" class="video-shots-warning" role="status" hidden></p>
-              <input type="hidden" id="input-video-shots">
-            </div>
-
-            <div class="form-group video-option-item">
-              <span class="form-label" data-i18n="videoScopeLabel">制作范围：</span>
-              <div class="video-btn-group" role="radiogroup" aria-label="制作范围">
-                <button type="button" class="video-opt-btn is-active" data-group="scope" data-val="full" data-i18n="videoScopeFull">完整成片</button>
-                <button type="button" class="video-opt-btn" data-group="scope" data-val="materials" data-i18n="videoScopeMaterials">只准备素材</button>
-              </div>
-            </div>
-
-            <div class="form-group video-option-item">
-              <span class="form-label" data-i18n="videoRendererLabel">渲染方式：</span>
-              <div class="video-btn-group" role="radiogroup" aria-label="渲染方式">
-                <button type="button" class="video-opt-btn is-active" data-group="renderer" data-val="browser" data-i18n="videoRendererBrowser">浏览器</button>
-                <button type="button" class="video-opt-btn" data-group="renderer" data-val="jianying" data-i18n="videoRendererJianying">剪映</button>
-              </div>
-            </div>
-
-            <div class="form-group video-option-item">
-              <span class="form-label" data-i18n="videoVoiceLabel">配音：</span>
-              <div class="video-btn-group" role="radiogroup" aria-label="是否配音">
-                <button type="button" class="video-opt-btn is-active" data-group="voice" data-val="yes" data-i18n="videoVoiceYes">需要配音</button>
-                <button type="button" class="video-opt-btn" data-group="voice" data-val="no" data-i18n="videoVoiceNo">无需配音</button>
-              </div>
-            </div>
-
-            <div class="form-group video-option-item">
-              <span class="form-label" data-i18n="videoSubtitleLabel">字幕：</span>
-              <div class="video-btn-group" role="radiogroup" aria-label="是否需要字幕">
-                <button type="button" class="video-opt-btn is-active" data-group="subtitle" data-val="yes" data-i18n="videoSubtitleYes">需要字幕</button>
-                <button type="button" class="video-opt-btn" data-group="subtitle" data-val="no" data-i18n="videoSubtitleNo">无需字幕</button>
-              </div>
-            </div>
-
-            <div class="video-jianying-note-wrap" style="grid-column: 1 / -1; margin-top: -2px;">
-              <div class="video-jianying-note">
-                <span>💡</span>
-                <div class="video-note-copy">
-                  <span data-i18n="jianyingNote">使用剪映渲染必须先填写剪映草稿箱文件夹位置。</span>
-                  <span data-i18n="volcTtsNote">默认使用火山引擎配音，需要配音可前往官网申请 API Key。</span>
-                  <a href="https://docs.volcengine.com/docs/DoubaoVoice/QuickStartNewConsole?lang=zh" target="_blank" rel="noopener noreferrer" data-i18n="volcTtsGuide">申请指南 ↗</a>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -796,7 +708,7 @@ dialog::backdrop{{background:#000a}}
             <div class="slot-card" id="slot-char-style" hidden>
               <div class="slot-header">
                 <span class="slot-title">🎭 <span data-i18n="slotCharStyle">角色风格</span></span>
-                <span class="slot-optional" data-i18n="optionalCharStyle">可选 (风格/写实)</span>
+                <span class="slot-optional" data-i18n="optionalCharStyle">可选 ({styles_count})</span>
               </div>
               <button type="button" class="slot-trigger" data-picker="char-style">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 2a4.5 4.5 0 0 0 0 9 4.5 4.5 0 0 1 0 9 10 10 0 0 1 0-18z"/></svg>
@@ -819,7 +731,7 @@ dialog::backdrop{{background:#000a}}
             <div class="slot-card" id="slot-scene-style" hidden>
               <div class="slot-header">
                 <span class="slot-title">🌄 <span data-i18n="slotSceneStyle">场景风格</span></span>
-                <span class="slot-optional" data-i18n="optionalSceneStyle">可选 (风格/写实)</span>
+                <span class="slot-optional" data-i18n="optionalSceneStyle">可选 ({styles_count})</span>
               </div>
               <button type="button" class="slot-trigger" data-picker="scene-style">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -896,6 +808,14 @@ dialog::backdrop{{background:#000a}}
           <div class="step-title-wrap">
             <span class="step-badge">5</span>
             <h2 class="step-title output-title" data-i18n="step5Title">拼装生成的出图指令</h2>
+            <label class="fusion-checkbox-wrap" id="batch-checkbox-wrap">
+              <input type="checkbox" id="checkbox-batch" class="fusion-checkbox">
+              <span class="fusion-checkbox-text" data-i18n="batchCheckboxLabel">批量出图</span>
+            </label>
+            <label class="fusion-checkbox-wrap" id="mix-layouts-checkbox-wrap" hidden>
+              <input type="checkbox" id="checkbox-mix-layouts" class="fusion-checkbox">
+              <span class="fusion-checkbox-text" data-i18n="mixLayoutsCheckboxLabel">混合多种图型</span>
+            </label>
           </div>
           <div class="output-actions">
             <button type="button" id="btn-copy-assembled" class="copy-main-btn">
@@ -939,8 +859,7 @@ dialog::backdrop{{background:#000a}}
   </div>
 </dialog>
 
-<!-- WeChat QR Modal -->
-<dialog id="wechat-modal" aria-labelledby="wechat-title" style="width:min(94vw,560px);padding:22px;border:0;border-radius:14px;background:#1e1b18;color:#fff;box-shadow:0 20px 70px #000a;text-align:center"><button class="close" type="button" aria-label="关闭" style="position:absolute;top:12px;right:12px;border:0;border-radius:7px;padding:5px 9px;background:#fff;color:#24211e;cursor:pointer;font:inherit">关闭 ×</button><h3 id="wechat-title" style="margin:4px 0 10px;font-size:17px;color:#fff" data-i18n="wechatTitle">💬 创作变现交流群</h3><p style="margin:0 0 4px;font-size:14px;color:#eee" data-i18n="wechatSub">请优先加群，满了的话也可以尝试加我个人微信</p><p style="margin:0 0 16px;font-size:13px;color:#d67d4d;font-weight:600" data-i18n="wechatNote">请备注：手绘</p><div style="display:flex;justify-content:center;align-items:flex-start;gap:24px;flex-wrap:wrap"><div style="flex:1 1 200px;max-width:240px;background:#fff;padding:10px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.3)"><div style="color:#24211e;font-size:13px;font-weight:700;margin-bottom:6px" data-i18n="wechatGroupLabel">① 优先加入群聊</div><img src="../../../images/wechat_group.png" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/yang0/handraw-style/master/images/wechat_group.png';" alt="手绘交流群二维码" style="display:block;width:100%;height:auto;border-radius:6px"></div><div style="flex:1 1 200px;max-width:240px;background:#fff;padding:10px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.3)"><div style="color:#24211e;font-size:13px;font-weight:700;margin-bottom:6px" data-i18n="wechatPersonalLabel">② 个人微信备用</div><img src="../../../images/wechat_personal.png" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/yang0/handraw-style/master/images/wechat_personal.png';" alt="旺德福个人微信二维码" style="display:block;width:100%;height:auto;border-radius:6px"></div></div><div style="margin-top:16px;padding-top:12px;border-top:1px solid #332f2b;display:flex;justify-content:center;gap:16px;font-size:13px"><a href="https://github.com/yang0/handraw-style" target="_blank" rel="noopener noreferrer" style="color:#d67d4d;text-decoration:none;font-weight:600">GitHub 仓库 ↗</a><a href="https://x.com/yang02010" target="_blank" rel="noopener noreferrer" style="color:#d67d4d;text-decoration:none;font-weight:600">X @yang02010 ↗</a></div></dialog>
+
 
 <script src="../../../images/custom/custom_assets.js" onerror="window.CUSTOM_ASSETS_DATA=null;"></script>
 <script>
@@ -966,34 +885,30 @@ if (window.CUSTOM_ASSETS_DATA && typeof window.CUSTOM_ASSETS_DATA === 'object') 
     }}
   }});
 }}
-const VIDEO_SHOTS_DATA = {shots_json_str};
 const STYLES_DATA = {styles_json_str};
 const LAYOUTS_DATA = {layouts_json_str};
 const COLORS_DATA = {colors_json_str};
 const COLOR_CATEGORIES = {color_categories_json_str};
 const TONES_DATA = {tones_json_str};
 
-const wechatBtn=document.querySelector('#wechat-btn'),wechatModal=document.querySelector('#wechat-modal'),langBtn=document.querySelector('#lang-btn');
+const langBtn=document.querySelector('#lang-btn');
 const inputTheme=document.querySelector('#input-theme'),themeLabelText=document.querySelector('#theme-label-text'),inputAudience=document.querySelector('#input-audience'),inputChannel=document.querySelector('#input-channel'),posterExtraFields=document.querySelector('#poster-extra-fields');
 const inputShootType=document.querySelector('#input-shoot-type'),photoExtraFields=document.querySelector('#photo-extra-fields'),btnClearShootType=document.querySelector('#btn-clear-shoot-type');
-const videoExtraFields=document.querySelector('#video-extra-fields'),inputVideoAudience=document.querySelector('#input-video-audience'),inputVideoScenario=document.querySelector('#input-video-scenario'),inputVideoShots=document.querySelector('#input-video-shots'),btnClearVideoShots=document.querySelector('#btn-clear-video-shots');
 const inputRatio=document.querySelector('#input-ratio'),btnClearRatio=document.querySelector('#btn-clear-ratio');
 const inputMood=document.querySelector('#input-mood'),btnClearMood=document.querySelector('#btn-clear-mood');
 const assembledText=document.querySelector('#assembled-text'),btnCopyAssembled=document.querySelector('#btn-copy-assembled'),copyBtnText=document.querySelector('#copy-btn-text');
 const pickerDialog=document.querySelector('#picker-dialog'),pickerTitle=document.querySelector('#picker-title'),pickerFilters=document.querySelector('#picker-filters'),pickerSearch=document.querySelector('#picker-search'),pickerGrid=document.querySelector('#picker-grid');
 const checkboxFusion=document.querySelector('#checkbox-fusion'),fusionWrap=document.querySelector('#fusion-checkbox-wrap');
 const checkboxTone=document.querySelector('#checkbox-tone'),toneWrap=document.querySelector('#tone-checkbox-wrap'),slotTone=document.querySelector('#slot-tone');
+const checkboxBatch=document.querySelector('#checkbox-batch'),batchWrap=document.querySelector('#batch-checkbox-wrap');
+const checkboxMixLayouts=document.querySelector('#checkbox-mix-layouts'),mixLayoutsWrap=document.querySelector('#mix-layouts-checkbox-wrap');
 const slotsGrid=document.querySelector('#slots-grid'),slotStyle=document.querySelector('#slot-style'),slotCharStyle=document.querySelector('#slot-char-style'),slotSceneStyle=document.querySelector('#slot-scene-style');
 const modalAssetFooter=document.querySelector('#modal-asset-footer'),modalAssetSummary=document.querySelector('#modal-asset-summary');
 const btnModalClearAssets=document.querySelector('#btn-modal-clear-assets'),btnModalConfirmAssets=document.querySelector('#btn-modal-confirm-assets');
 const assetsTrayCards=document.querySelector('#assets-tray-cards'),assetsEmptyTrigger=document.querySelector('#assets-empty-trigger'),btnClearAssets=document.querySelector('#btn-clear-assets');
 
-let currentMode = 'pure'; // 'pure' | 'graphic-text' | 'poster' | 'article-illust' | 'video' | 'photo'
+let currentMode = 'pure'; // 'pure' | 'graphic-text' | 'poster' | 'article-illust' | 'photo'
 let currentWhitespace = 'normal'; // 'normal' | 'moderate' | 'high'
-let videoScope = 'full'; // 'full' | 'materials'
-let videoRenderer = 'browser'; // 'browser' | 'jianying'
-let videoVoice = 'yes'; // 'yes' | 'no'
-let videoSubtitle = 'yes'; // 'yes' | 'no'
 let selectedAssets = [];
 let selectedLayout = null;
 let selectedStyle = null;
@@ -1001,21 +916,14 @@ let selectedCharStyle = null;
 let selectedSceneStyle = null;
 let selectedColor = null;
 let selectedTones = [];
-let selectedVideoShots = [];
 let currentPickerType = null;
 let currentPickerFilter = 'all';
 let isFusionActive = false;
 let isToneActive = false;
+let isBatchActive = false;
+let isMixLayoutsActive = false;
 
-const REALISTIC_ITEM = {{
-  id: 'realistic',
-  isRealistic: true,
-  group: 'all',
-  name: '写实',
-  name_en: 'Realistic',
-  ref: '写实摄影 / 真实电影质感摄影',
-  img: '../../../images/realistic.webp'
-}};
+
 
 const I18N = {{
   zh: {{
@@ -1024,13 +932,13 @@ const I18N = {{
     layoutsNav: "图型画廊",
     colorsNav: "色彩画廊",
     assetsNav: "自建图库",
-    videoShotsNav: "视频类型",
     tutorialsNav: "提示词",
-    wechatBtn: "💬 创作变现交流群",
     assemblerTitle: "🛠️ 提示词拼装器",
     assemblerSub: "交互式点选图型、风格与色彩，实时拼装出图指令。",
     fusionCheckboxLabel: "风格融合",
     toneCheckboxLabel: "影调",
+    batchCheckboxLabel: "批量出图",
+    mixLayoutsCheckboxLabel: "混合多种图型",
     step1Title: "出图模式与留白",
     step2Title: "画面主题与内容",
     step3Title: "画幅比例与情绪",
@@ -1049,7 +957,6 @@ const I18N = {{
     modePoster: "海报",
     modeArticleIllust: "文章插图",
     modeArticleCover: "文章封面",
-    modeVideo: "视频",
     modePhoto: "摄影",
     whitespaceLabel: "留白：",
     whitespaceNormal: "正常",
@@ -1058,47 +965,15 @@ const I18N = {{
     whitespaceModeratePrompt: "【大量留白】",
     whitespaceHighPrompt: "【大量留白，场景只显示必要部分，不要显示全】",
     themeLabel: "主题：",
-    articlePathLabel: "文章文件地址：",
-    articleCoverPathLabel: "文章文件地址或内容：",
+    articlePathLabel: "文件或文件夹地址：",
+    articleCoverPathLabel: "文件/文件夹地址或内容：",
     shootTypeLabel: "拍摄类型：",
     audienceLabel: "受众：",
     channelLabel: "海报投放渠道：",
-    videoAudienceLabel: "受众：",
-    videoAudiencePlaceholder: "例如：家庭主妇 / 职场新人 / 考研学生...",
-    videoAudienceEmptyText: "【输入受众】",
-    videoScenarioLabel: "业务场景：",
-    videoScenarioPlaceholder: "例如：短视频科普 / 课程演示 / 故事讲述...",
-    videoScenarioEmptyText: "【输入业务场景】",
-    videoScopeLabel: "制作范围：",
-    videoScopeFull: "完整成片",
-    videoScopeMaterials: "只准备素材",
-    videoRendererLabel: "渲染方式：",
-    videoRendererBrowser: "浏览器",
-    videoRendererJianying: "剪映",
-    videoVoiceLabel: "配音：",
-    videoVoiceYes: "需要配音",
-    videoVoiceNo: "无需配音",
-    videoSubtitleLabel: "字幕：",
-    videoSubtitleYes: "需要字幕",
-    videoSubtitleNo: "无需字幕",
-    jianyingNote: "使用剪映渲染必须先填写剪映草稿箱文件夹位置。",
-    volcTtsNote: "默认使用火山引擎配音，需要配音可前往官网申请 API Key。",
-    volcTtsGuide: "申请指南 ↗",
-    themePlaceholder: "输入画面主题，例如：秋天的第一杯奶茶 / 窗台晒太阳的猫咪...",
-    themeVideoPlaceholder: "说说你想做什么视频，也可以直接粘贴文章或脚本，或填写本地文章路径。如果对开头台词、结尾互动有要求，也一起告诉我。",
-    videoShotsLabel: "视频类型库",
-    videoShotsSub: "点击截图选择，可多选，也可以让 AI 帮你搭配。",
-    videoShotsAuto: "未选择 · 由 AI 搭配",
-    videoShotsClear: "清空",
-    pickerTitleVideoShot: "选择视频类型 · 可多选",
-    videoShotsCount: "已选择 {{count}} 种视频类型",
-    videoShotsRemove: "移除",
-    videoShotsBoth: "剪映 · 浏览器",
-    videoShotsBrowserOnly: "仅浏览器",
-    videoShotsRouteWarning: "所选 {{ids}} 仅支持浏览器，请调整视频类型或改用浏览器渲染。",
-    themePhotoPlaceholder: "选填：输入特定主题或场景（如：海边夕阳 / 90年代港风），不填由AI推荐...",
-    articlePathPlaceholder: "请输入文章的本地绝对路径，例如：D:\\\\path\\\\to\\\\article.md...",
-    articleCoverPathPlaceholder: "请输入文章的本地绝对路径（例如：D:\\\\path\\\\to\\\\article.md）或直接粘贴文章内容...",
+    themePlaceholder: "输入画面主题，亦可输入本地文件或文件夹路径（例如：秋天的第一杯奶茶 / 窗台晒太阳的猫咪，或 D:\\\\path\\\\to\\\\...）...",
+    themePhotoPlaceholder: "选填：输入特定主题或场景，亦可输入本地文件或文件夹路径（如：海边夕阳 / 90年代港风），不填由AI推荐...",
+    articlePathPlaceholder: "请输入本地文件或文件夹绝对路径（支持单篇或批量配图，例如：D:\\\\path\\\\to\\\\article.md 或文件夹）...",
+    articleCoverPathPlaceholder: "请输入本地文件或文件夹绝对路径（例如：D:\\\\path\\\\to\\\\article.md），或直接粘贴文章内容...",
     articleCoverFixedPrompt: "先设计隐喻再出图，主标题明显，小字少或者没有小字。 其他你帮我设计。",
     shootTypePlaceholder: "点选上方标签，或手动输入/修改拍摄类型...",
     shootTypeCouple: "情侣",
@@ -1149,8 +1024,8 @@ const I18N = {{
     optionalAsset: "可选 ({assets_count})",
     optionalLayout: "可选 ({layouts_count})",
     optionalStyle: "可选 ({styles_count})",
-    optionalCharStyle: "可选 (风格/写实)",
-    optionalSceneStyle: "可选 (风格/写实)",
+    optionalCharStyle: "可选 ({styles_count})",
+    optionalSceneStyle: "可选 ({styles_count})",
     optionalColor: "可选 (36)",
     optionalTone: "可选 ({tones_count}) · 多选",
     layoutNotApplicable: "不适用",
@@ -1172,7 +1047,7 @@ const I18N = {{
     searchPlaceholder: "输入编号或名称过滤...",
     pickerTitleAsset: "选择视觉资产（角色 / 道具 / 场景）",
     pickerTitleLayout: "选择图型 ({layouts_count})",
-    pickerTitleStyle: "选择手绘风格 ({styles_count})",
+    pickerTitleStyle: "选择视觉风格 ({styles_count})",
     pickerTitleCharStyle: "选择角色风格",
     pickerTitleSceneStyle: "选择场景风格",
     styleConflictAlert: "角色风格与场景风格必须不同，请选择不同的风格！",
@@ -1199,14 +1074,9 @@ const I18N = {{
     filterNeutral: "中性色系",
     fallbackPrompt: "其他你帮我选择",
     themeEmptyText: "【输入主题】",
-    articlePathEmptyText: "【输入文章文件地址】",
+    articlePathEmptyText: "【输入文件或文件夹地址】",
     audienceEmptyText: "【输入受众】",
     channelEmptyText: "【输入海报投放渠道】",
-    wechatTitle: "💬 创作变现交流群",
-    wechatSub: "请优先加群，满了的话也可以尝试加我个人微信",
-    wechatNote: "请备注：手绘",
-    wechatGroupLabel: "① 优先加入群聊",
-    wechatPersonalLabel: "② 个人微信备用",
     langBtn: "🌐 English"
   }},
   en: {{
@@ -1215,13 +1085,13 @@ const I18N = {{
     layoutsNav: "Layouts",
     colorsNav: "Colors",
     assetsNav: "Custom Library",
-    videoShotsNav: "Video Types",
     tutorialsNav: "Prompts",
-    wechatBtn: "💬 Creator Community",
     assemblerTitle: "🛠️ Prompt Assembler",
     assemblerSub: "Visually select layout, style, and color to assemble prompt commands in real time.",
     fusionCheckboxLabel: "Style Fusion",
     toneCheckboxLabel: "Tone",
+    batchCheckboxLabel: "Batch Generation",
+    mixLayoutsCheckboxLabel: "Mix Multiple Layouts",
     step1Title: "Mode & Negative Space",
     step2Title: "Theme & Content",
     step3Title: "Aspect Ratio & Mood",
@@ -1240,7 +1110,6 @@ const I18N = {{
     modePoster: "Poster",
     modeArticleIllust: "Article Illustration",
     modeArticleCover: "Article Cover",
-    modeVideo: "Video",
     modePhoto: "Photography",
     whitespaceLabel: "Negative Space:",
     whitespaceNormal: "Normal",
@@ -1249,47 +1118,15 @@ const I18N = {{
     whitespaceModeratePrompt: "[Generous negative space]",
     whitespaceHighPrompt: "[Generous negative space, scene shows only essential parts, do not show in full]",
     themeLabel: "Theme:",
-    articlePathLabel: "Article File Path:",
-    articleCoverPathLabel: "Article File Path or Text:",
+    articlePathLabel: "File or Folder Path:",
+    articleCoverPathLabel: "File / Folder Path or Text:",
     shootTypeLabel: "Shoot Type:",
     audienceLabel: "Audience:",
     channelLabel: "Distribution Channel:",
-    videoAudienceLabel: "Audience:",
-    videoAudiencePlaceholder: "e.g. Homemakers / Young professionals / Students...",
-    videoAudienceEmptyText: "[Enter Audience]",
-    videoScenarioLabel: "Business Scenario:",
-    videoScenarioPlaceholder: "e.g. Short-video education / Course lecture / Storybook...",
-    videoScenarioEmptyText: "[Enter Business Scenario]",
-    videoScopeLabel: "Scope:",
-    videoScopeFull: "Full Video",
-    videoScopeMaterials: "Materials Only",
-    videoRendererLabel: "Rendering:",
-    videoRendererBrowser: "Browser",
-    videoRendererJianying: "Jianying",
-    videoVoiceLabel: "Voiceover:",
-    videoVoiceYes: "Voiceover Needed",
-    videoVoiceNo: "No Voiceover",
-    videoSubtitleLabel: "Subtitles:",
-    videoSubtitleYes: "Subtitles Needed",
-    videoSubtitleNo: "No Subtitles",
-    jianyingNote: "Jianying rendering requires configuring the Jianying draft folder path first.",
-    volcTtsNote: "Voiceover uses Volcengine by default. If you need voiceover, apply for an API key on its official website.",
-    volcTtsGuide: "API key guide ↗",
-    themePlaceholder: "Enter theme, e.g. Autumn milk tea / Cat sunbathing on windowsill...",
-    themeVideoPlaceholder: "Tell us what video you want to make. You can paste an article or script, or provide a local article path. Include any requests for the opening lines or closing call to action.",
-    videoShotsLabel: "Video Type Library",
-    videoShotsSub: "Click images to select multiple types, or let AI choose for you.",
-    videoShotsAuto: "No selection · AI will choose",
-    videoShotsClear: "Clear",
-    pickerTitleVideoShot: "Choose video types · Multi-select",
-    videoShotsCount: "{{count}} video types selected",
-    videoShotsRemove: "Remove",
-    videoShotsBoth: "Jianying · Browser",
-    videoShotsBrowserOnly: "Browser only",
-    videoShotsRouteWarning: "{{ids}} support browser rendering only. Change the types or choose browser rendering.",
-    themePhotoPlaceholder: "Optional: Enter specific theme or setting (e.g. Sunset beach / Vintage cafe), or leave empty for AI recommendation...",
-    articlePathPlaceholder: "Enter absolute local file path, e.g. D:\\\\path\\\\to\\\\article.md...",
-    articleCoverPathPlaceholder: "Enter absolute local file path (e.g. D:\\\\path\\\\to\\\\article.md) or paste article text...",
+    themePlaceholder: "Enter theme, or local file/folder path (e.g. Autumn milk tea / Cat on windowsill, or D:\\\\path\\\\to\\\\dir)...",
+    themePhotoPlaceholder: "Optional: Enter specific theme or setting, or local file/folder path (e.g. Sunset beach / Vintage cafe), or leave empty for AI recommendation...",
+    articlePathPlaceholder: "Enter absolute local file or folder path (supports single or batch illustration, e.g. D:\\\\path\\\\to\\\\article.md or folder)...",
+    articleCoverPathPlaceholder: "Enter absolute local file or folder path (e.g. D:\\\\path\\\\to\\\\article.md), or paste article text...",
     articleCoverFixedPrompt: "Design a visual metaphor first, then generate the image. Ensure the main title is bold and prominent, with few or no small text. Pick the rest of the design for me.",
     shootTypePlaceholder: "Click tags above, or type/edit shoot type...",
     shootTypeCouple: "Couple",
@@ -1340,8 +1177,8 @@ const I18N = {{
     optionalAsset: "Optional ({assets_count})",
     optionalLayout: "Optional ({layouts_count})",
     optionalStyle: "Optional ({styles_count})",
-    optionalCharStyle: "Optional (Style/Realistic)",
-    optionalSceneStyle: "Optional (Style/Realistic)",
+    optionalCharStyle: "Optional ({styles_count})",
+    optionalSceneStyle: "Optional ({styles_count})",
     optionalColor: "Optional (36)",
     optionalTone: "Optional ({tones_count}) · Multi",
     layoutNotApplicable: "N/A",
@@ -1363,7 +1200,7 @@ const I18N = {{
     searchPlaceholder: "Search ID or name...",
     pickerTitleAsset: "Select Visual Asset (Character / Prop / Scene)",
     pickerTitleLayout: "Select Layout ({layouts_count})",
-    pickerTitleStyle: "Select Style ({styles_count})",
+    pickerTitleStyle: "Select Visual Style ({styles_count})",
     pickerTitleCharStyle: "Select Character Style",
     pickerTitleSceneStyle: "Select Scene Style",
     styleConflictAlert: "Character style and scene style must be different!",
@@ -1390,14 +1227,9 @@ const I18N = {{
     filterNeutral: "Classic Neutral Tones",
     fallbackPrompt: "pick the rest for me",
     themeEmptyText: "[Enter Theme]",
-    articlePathEmptyText: "[Enter Article File Path]",
+    articlePathEmptyText: "[Enter File or Folder Path]",
     audienceEmptyText: "[Enter Audience]",
     channelEmptyText: "[Enter Channel]",
-    wechatTitle: "💬 Creator Monetization Community",
-    wechatSub: "Please prioritize joining the group; if full, try adding personal WeChat",
-    wechatNote: "Note: handdraw",
-    wechatGroupLabel: "① Join Group (Priority)",
-    wechatPersonalLabel: "② Personal WeChat (Fallback)",
     langBtn: "🌐 中文"
   }}
 }};
@@ -1483,8 +1315,6 @@ function updatePrompt() {{
       parts.push(isZh ? '文章插图模式' : 'Article illustration mode');
     }} else if (currentMode === 'article-cover') {{
       parts.push(isZh ? '文章封面模式' : 'Article cover mode');
-    }} else if (currentMode === 'video') {{
-      parts.push(isZh ? (videoScope === 'materials' ? '视频素材模式' : '视频模式') : (videoScope === 'materials' ? 'Video materials mode' : 'Video mode'));
     }} else if (currentMode === 'photo') {{
       parts.push(isZh ? '摄影写真模式，请先出3个方案供我挑选' : 'Photo portrait mode, please first propose 3 candidate directions for me to choose from');
     }}
@@ -1497,8 +1327,6 @@ function updatePrompt() {{
       parts.push(isZh ? '文章插图模式' : 'Article illustration mode');
     }} else if (currentMode === 'article-cover') {{
       parts.push(isZh ? '请设计文章封面' : 'Please design an article cover');
-    }} else if (currentMode === 'video') {{
-      parts.push(isZh ? (videoScope === 'materials' ? '请帮我准备手绘视频素材' : '请帮我制作手绘视频') : (videoScope === 'materials' ? 'Please prepare hand-drawn video materials for me' : 'Please produce a hand-drawn video for me'));
     }} else if (currentMode === 'photo') {{
       parts.push(isZh ? '摄影写真模式，请先出3个方案供我挑选' : 'Photo portrait mode, please first propose 3 candidate directions for me to choose from');
     }}
@@ -1538,12 +1366,10 @@ function updatePrompt() {{
   // Style(s)
   if (isFusionActive) {{
     if (selectedCharStyle) {{
-      const charName = selectedCharStyle.isRealistic ? (isZh ? '写实' : 'Realistic') : selectedCharStyle.id;
-      parts.push(isZh ? `角色风格：${{charName}}` : `Character style: ${{charName}}`);
+      parts.push(isZh ? `角色风格：${{selectedCharStyle.id}}` : `Character style: ${{selectedCharStyle.id}}`);
     }}
     if (selectedSceneStyle) {{
-      const sceneName = selectedSceneStyle.isRealistic ? (isZh ? '写实' : 'Realistic') : selectedSceneStyle.id;
-      parts.push(isZh ? `场景风格：${{sceneName}}` : `Scene style: ${{sceneName}}`);
+      parts.push(isZh ? `场景风格：${{selectedSceneStyle.id}}` : `Scene style: ${{selectedSceneStyle.id}}`);
     }}
   }} else {{
     if (selectedStyle) {{
@@ -1594,9 +1420,9 @@ function updatePrompt() {{
   const themeVal = inputTheme.value.trim();
   if (currentMode === 'article-illust') {{
     const articleDisplay = themeVal || t.articlePathEmptyText;
-    parts.push(isZh ? `文章文件地址：${{articleDisplay}}` : `Article file path: ${{articleDisplay}}`);
+    parts.push(isZh ? `文件或文章地址：${{articleDisplay}}` : `File or article path: ${{articleDisplay}}`);
   }} else if (currentMode === 'article-cover') {{
-    const articleDisplay = themeVal || (isZh ? '【输入文章文件地址或内容】' : '[Enter article file path or text]');
+    const articleDisplay = themeVal || (isZh ? '【输入文件/文件夹地址或文章内容】' : '[Enter file/folder path or article text]');
     parts.push(isZh ? `文章：${{articleDisplay}}` : `Article: ${{articleDisplay}}`);
     let scenario = isZh ? '公众号文章封面' : 'WeChat Official Account Cover';
     if (ratioVal === '5:2' || ratioVal === '16:9') scenario = isZh ? 'X文章封面' : 'X Article Cover';
@@ -1627,36 +1453,17 @@ function updatePrompt() {{
     parts.push(isZh ? `海报投放渠道：${{channelDisplay}}` : `Channel: ${{channelDisplay}}`);
   }}
 
-  // Extra fields for video mode
-  if (currentMode === 'video') {{
-    const videoAudienceVal = inputVideoAudience ? inputVideoAudience.value.trim() : '';
-    const videoAudienceDisplay = videoAudienceVal || t.videoAudienceEmptyText;
-    parts.push(isZh ? `受众：${{videoAudienceDisplay}}` : `Audience: ${{videoAudienceDisplay}}`);
 
-    const videoScenarioVal = inputVideoScenario ? inputVideoScenario.value.trim() : '';
-    const videoScenarioDisplay = videoScenarioVal || t.videoScenarioEmptyText;
-    parts.push(isZh ? `业务场景：${{videoScenarioDisplay}}` : `Business Scenario: ${{videoScenarioDisplay}}`);
-
-    const videoShotsVal = inputVideoShots ? inputVideoShots.value.trim() : '';
-    if (videoShotsVal) {{
-      parts.push(isZh ? `视频类型：${{videoShotsVal}}` : `Video types: ${{videoShotsVal}}`);
-    }}
-
-    const scopeText = videoScope === 'materials' ? (isZh ? '只准备素材' : 'Materials only') : (isZh ? '完整成片' : 'Full video');
-    parts.push(isZh ? `制作范围：${{scopeText}}` : `Scope: ${{scopeText}}`);
-
-    const rendererText = videoRenderer === 'jianying' ? (isZh ? '剪映' : 'Jianying') : (isZh ? '浏览器' : 'Browser');
-    parts.push(isZh ? `渲染方式：${{rendererText}}` : `Rendering: ${{rendererText}}`);
-
-    const voiceText = videoVoice === 'yes' ? (isZh ? '需要配音' : 'Voiceover needed') : (isZh ? '无需配音' : 'No voiceover');
-    parts.push(isZh ? `配音：${{voiceText}}` : `Voiceover: ${{voiceText}}`);
-
-    const subtitleText = videoSubtitle === 'yes' ? (isZh ? '需要字幕' : 'Subtitles needed') : (isZh ? '无需字幕' : 'No subtitles');
-    parts.push(isZh ? `字幕：${{subtitleText}}` : `Subtitles: ${{subtitleText}}`);
-  }}
 
   const delimiter = isZh ? '，' : ', ';
-  assembledText.textContent = parts.join(delimiter);
+  let promptText = parts.join(delimiter);
+  if (isBatchActive) {{
+    promptText += isZh ? ' | 批量出图' : ' | Batch Generation';
+    if (isMixLayoutsActive) {{
+      promptText += isZh ? ' | 混合多种图型' : ' | Mix Multiple Layouts';
+    }}
+  }}
+  assembledText.textContent = promptText;
 }}
 
 function updateSlotUI(type) {{
@@ -1715,13 +1522,8 @@ function updateSlotUI(type) {{
     filled.hidden = false;
     img.src = item.img;
     img.alt = item.name;
-    if (item.isRealistic) {{
-      code.textContent = '';
-      name.textContent = currentLang === 'en' ? (item.name_en || 'Realistic') : item.name;
-    }} else {{
-      code.textContent = item.id ? ((type === 'style' || type === 'char-style' || type === 'scene-style') ? `#${{item.id}}` : item.id) : '';
-      name.textContent = '';
-    }}
+    code.textContent = item.id ? ((type === 'style' || type === 'char-style' || type === 'scene-style') ? `#${{item.id}}` : item.id) : '';
+    name.textContent = (type === 'style' || type === 'char-style' || type === 'scene-style') ? (currentLang === 'en' && item.name_en ? item.name_en : (item.ref ? item.ref.split('/')[0].trim() : item.name)) || '' : '';
   }} else {{
     slotEl.classList.remove('has-value');
     trigger.hidden = false;
@@ -1745,9 +1547,7 @@ function setMode(mode) {{
   if (photoExtraFields) {{
     photoExtraFields.hidden = (mode !== 'photo');
   }}
-  if (videoExtraFields) {{
-    videoExtraFields.hidden = (mode !== 'video');
-  }}
+
   const slotLayout = document.querySelector('#slot-layout');
   const optTag = document.querySelector('#slot-layout-optional');
   const isIllust = mode === 'article-illust';
@@ -1776,7 +1576,6 @@ function setMode(mode) {{
     'poster': '9:16',
     'article-illust': '4:3',
     'article-cover': '2.35:1',
-    'video': '16:9',
     'photo': '3:4',
   }};
   const targetRatio = defaultRatios[mode];
@@ -1794,9 +1593,6 @@ function setMode(mode) {{
   }} else if (mode === 'article-cover') {{
     if (themeLabelText) themeLabelText.textContent = I18N[currentLang].articleCoverPathLabel;
     if (inputTheme) inputTheme.placeholder = I18N[currentLang].articleCoverPathPlaceholder;
-  }} else if (mode === 'video') {{
-    if (themeLabelText) themeLabelText.textContent = I18N[currentLang].themeLabel;
-    if (inputTheme) inputTheme.placeholder = I18N[currentLang].themeVideoPlaceholder;
   }} else if (mode === 'photo') {{
     if (themeLabelText) themeLabelText.textContent = I18N[currentLang].themeLabel;
     if (inputTheme) inputTheme.placeholder = I18N[currentLang].themePhotoPlaceholder;
@@ -1826,15 +1622,10 @@ function openPicker(type) {{
   pickerSearch.placeholder = I18N[currentLang].searchPlaceholder;
 
   if (modalAssetFooter) {{
-    modalAssetFooter.hidden = !['asset', 'tone', 'video-shot'].includes(type);
+    modalAssetFooter.hidden = !['asset', 'tone'].includes(type);
   }}
 
-  pickerGrid.classList.toggle('is-video-grid', type === 'video-shot');
-  if (type === 'video-shot') {{
-    pickerTitle.textContent = I18N[currentLang].pickerTitleVideoShot;
-    pickerFilters.innerHTML = '';
-    updateModalVideoShotCount();
-  }} else if (type === 'asset') {{
+   if (type === 'asset') {{
     pickerTitle.textContent = I18N[currentLang].pickerTitleAsset;
     renderAssetFilters();
     updateModalAssetCount();
@@ -1924,10 +1715,18 @@ function renderStyleFilters() {{
     {{ id: 'FE', zh: 'FE 新国风非遗', en: 'FE Traditional' }},
     {{ id: 'FF', zh: 'FF 3D黏土纸雕', en: 'FF 3D & Paper' }},
     {{ id: 'FG', zh: 'FG 动漫和赛璐璐', en: 'FG Anime & Cel' }},
-    {{ id: 'FH', zh: 'FH 先锋综合', en: 'FH Mixed Media' }}
+    {{ id: 'FH', zh: 'FH 先锋综合', en: 'FH Mixed Media' }},
+    {{ id: 'FI', zh: 'FI 写实摄影', en: 'FI Photography' }}
   ];
   pickerFilters.innerHTML = groups.map(g => {{
-    const count = g.id === 'all' ? STYLES_DATA.length : STYLES_DATA.filter(x => x.group === g.id).length;
+    let count;
+    if (g.id === 'all') {{
+      count = STYLES_DATA.length + 1;
+    }} else if (g.id === 'FI') {{
+      count = STYLES_DATA.filter(x => x.group === 'FI').length + 1;
+    }} else {{
+      count = STYLES_DATA.filter(x => x.group === g.id).length;
+    }}
     const label = isZh ? g.zh : g.en;
     const isActive = currentPickerFilter === g.id ? ' is-active' : '';
     return `<button type="button" class="modal-filter-btn${{isActive}}" data-filter="${{g.id}}">${{label}} (${{count}})</button>`;
@@ -1962,9 +1761,7 @@ function renderPickerItems() {{
   let list = [];
   let selectedId = null;
 
-  if (currentPickerType === 'video-shot') {{
-    list = VIDEO_SHOTS_DATA;
-  }} else if (currentPickerType === 'asset') {{
+   if (currentPickerType === 'asset') {{
     list = ASSETS_DATA;
   }} else if (currentPickerType === 'tone') {{
     list = TONES_DATA;
@@ -1972,9 +1769,7 @@ function renderPickerItems() {{
     list = LAYOUTS_DATA;
     selectedId = selectedLayout ? selectedLayout.id : null;
   }} else if (currentPickerType === 'style' || currentPickerType === 'char-style' || currentPickerType === 'scene-style') {{
-    const realisticMatch = !query || '写实'.includes(query) || 'realistic'.includes(query) || '摄影'.includes(query) || 'photo'.includes(query);
-    const filterAllows = currentPickerFilter === 'all';
-    list = (realisticMatch && filterAllows) ? [REALISTIC_ITEM, ...STYLES_DATA] : STYLES_DATA;
+    list = STYLES_DATA;
     if (currentPickerType === 'style') selectedId = selectedStyle ? selectedStyle.id : null;
     else if (currentPickerType === 'char-style') selectedId = selectedCharStyle ? selectedCharStyle.id : null;
     else if (currentPickerType === 'scene-style') selectedId = selectedSceneStyle ? selectedSceneStyle.id : null;
@@ -1984,7 +1779,6 @@ function renderPickerItems() {{
   }}
 
   const filtered = list.filter(item => {{
-    if (item.isRealistic) return true;
     // Category match
     if (currentPickerType === 'asset') {{
       if (currentPickerFilter !== 'all' && item.cat !== currentPickerFilter) return false;
@@ -1999,34 +1793,24 @@ function renderPickerItems() {{
     }}
     // Search match
     if (query) {{
-      const idMatch = item.id && item.id.toLowerCase().includes(query);
-      const legacyMatch = item.legacy_id && item.legacy_id.includes(query);
-      const nameMatch = item.name && item.name.toLowerCase().includes(query);
-      const nameEnMatch = item.name_en && item.name_en.toLowerCase().includes(query);
-      const refMatch = item.ref && item.ref.toLowerCase().includes(query);
-      const tagsMatch = item.tags && item.tags.some(t => String(t).toLowerCase().includes(query));
-      const descMatch = (item.desc_zh && item.desc_zh.toLowerCase().includes(query)) || (item.desc_en && item.desc_en.toLowerCase().includes(query));
-      return idMatch || legacyMatch || nameMatch || nameEnMatch || refMatch || tagsMatch || descMatch;
+      const q = query.toLowerCase();
+      const idMatch = item.id && item.id.toLowerCase().includes(q);
+      const legacyMatch = item.legacy_id && String(item.legacy_id).includes(q);
+      const nameMatch = item.name && item.name.toLowerCase().includes(q);
+      const nameEnMatch = item.name_en && item.name_en.toLowerCase().includes(q);
+      const refMatch = item.ref && item.ref.toLowerCase().includes(q);
+      const tagsMatch = item.tags && item.tags.some(t => String(t).toLowerCase().includes(q));
+      const descMatch = (item.desc_zh && item.desc_zh.toLowerCase().includes(q)) || (item.desc_en && item.desc_en.toLowerCase().includes(q));
+      const groupMatch = (item.group && item.group.toLowerCase().includes(q)) || (item.group_name && item.group_name.toLowerCase().includes(q));
+      const fiMatch = item.group === 'FI' && ('写实'.includes(q) || q.includes('写实') || '摄影'.includes(q) || q.includes('摄影') || '实景'.includes(q) || q.includes('实景') || '真实'.includes(q) || q.includes('真实') || 'photo'.includes(q) || 'realistic'.includes(q));
+      return idMatch || legacyMatch || nameMatch || nameEnMatch || refMatch || tagsMatch || descMatch || groupMatch || fiMatch;
     }}
     return true;
   }});
 
   pickerGrid.innerHTML = filtered.map(item => {{
     const displayName = currentLang === 'en' && item.name_en ? item.name_en : item.name;
-    if (currentPickerType === 'video-shot') {{
-      const isSel = selectedVideoShots.some(x => x.id === item.id);
-      const t = I18N[currentLang];
-      const route = item.jianying ? t.videoShotsBoth : t.videoShotsBrowserOnly;
-      const desc = currentLang === 'en' ? item.desc_en : item.desc_zh;
-      return `<button type="button" class="picker-card${{isSel ? ' is-selected' : ''}}" data-id="${{item.id}}" aria-pressed="${{isSel}}">
-        <img class="picker-card-img" src="${{item.img}}" alt="${{displayName}}" loading="lazy">
-        <span class="picker-card-check" aria-hidden="true">✓</span>
-        <div class="picker-card-info"><span class="picker-card-id">${{item.id}}</span>
-        <span class="picker-card-name">${{displayName}}</span>
-        <span class="picker-card-desc">${{desc}}</span>
-        <span class="picker-card-route">${{route}}</span></div>
-      </button>`;
-    }}
+
     if (currentPickerType === 'asset') {{
       const isSel = selectedAssets.some(x => x.id === item.id);
       return `
@@ -2057,11 +1841,10 @@ function renderPickerItems() {{
     }}
 
     const isSel = selectedId === item.id;
-    const badge = item.isRealistic ? '' : ((currentPickerType === 'style' || currentPickerType === 'char-style' || currentPickerType === 'scene-style') ? `#${{item.id}}` : item.id);
+    const badge = (currentPickerType === 'style' || currentPickerType === 'char-style' || currentPickerType === 'scene-style') ? `#${{item.id}}` : item.id;
     const badgeHtml = badge ? `<span class="picker-card-id">${{badge}}</span>` : '';
-    const extraCls = item.isRealistic ? ' is-realistic' : '';
     return `
-      <button type="button" class="picker-card${{isSel ? ' is-selected' : ''}}${{extraCls}}" data-id="${{item.id}}">
+      <button type="button" class="picker-card${{isSel ? ' is-selected' : ''}}" data-id="${{item.id}}">
         <img class="picker-card-img" src="${{item.img}}" alt="${{displayName}}">
         <div class="picker-card-info">
           ${{badgeHtml}}
@@ -2077,17 +1860,7 @@ function renderPickerItems() {{
       const found = list.find(x => x.id === id);
       if (!found) return;
 
-      if (currentPickerType === 'video-shot') {{
-        const index = selectedVideoShots.findIndex(x => x.id === id);
-        if (index >= 0) selectedVideoShots.splice(index, 1);
-        else selectedVideoShots.push(found);
-        renderVideoShots();
-        updateModalVideoShotCount();
-        renderPickerItems();
-        updatePrompt();
-        pickerGrid.querySelector(`[data-id="${{id}}"]`)?.focus();
-        return;
-      }}
+
       if (currentPickerType === 'asset') {{
         const existIdx = selectedAssets.findIndex(x => x.id === found.id);
         if (existIdx >= 0) {{
@@ -2148,13 +1921,7 @@ pickerDialog.addEventListener('click', e => {{ if (e.target === pickerDialog) pi
 
 if (btnModalClearAssets) {{
   btnModalClearAssets.addEventListener('click', () => {{
-    if (currentPickerType === 'video-shot') {{
-      selectedVideoShots = [];
-      renderVideoShots();
-      updateModalVideoShotCount();
-      renderPickerItems();
-      updatePrompt();
-    }} else if (currentPickerType === 'asset') {{
+     if (currentPickerType === 'asset') {{
       selectedAssets = [];
       updateModalAssetCount();
       renderPickerItems();
@@ -2243,10 +2010,10 @@ document.querySelectorAll('.density-btn').forEach(btn => {{
 function autoResizeTheme() {{
   if (!inputTheme) return;
   inputTheme.style.height = 'auto';
-  inputTheme.style.height = Math.max(inputTheme.scrollHeight, currentMode === 'video' ? 108 : 58) + 'px';
+  inputTheme.style.height = Math.max(inputTheme.scrollHeight, 58) + 'px';
 }}
 
-[inputAudience, inputChannel, inputVideoAudience, inputVideoScenario].forEach(el => {{
+[inputAudience, inputChannel].forEach(el => {{
   if (el) el.addEventListener('input', updatePrompt);
 }});
 if (inputTheme) {{
@@ -2255,22 +2022,6 @@ if (inputTheme) {{
     updatePrompt();
   }});
 }}
-
-// Video option buttons
-document.querySelectorAll('.video-opt-btn').forEach(btn => {{
-  btn.addEventListener('click', () => {{
-    const group = btn.dataset.group;
-    const val = btn.dataset.val;
-    if (group === 'scope') videoScope = val;
-    else if (group === 'renderer') {{ videoRenderer = val; renderVideoShots(); }}
-    else if (group === 'voice') videoVoice = val;
-    else if (group === 'subtitle') videoSubtitle = val;
-    document.querySelectorAll(`.video-opt-btn[data-group="${{group}}"]`).forEach(b => {{
-      b.classList.toggle('is-active', b === btn);
-    }});
-    updatePrompt();
-  }});
-}});
 
 // Ratio Presets and Input handlers
 document.querySelectorAll('.ratio-preset-btn').forEach(btn => {{
@@ -2427,65 +2178,6 @@ if (btnClearShootType) {{
   }});
 }}
 
-// Video type multi-select state, shared by the modal and selected screenshots.
-function updateModalVideoShotCount() {{
-  if (modalAssetSummary) modalAssetSummary.textContent = I18N[currentLang].videoShotsCount.replace('{{count}}', selectedVideoShots.length);
-}}
-
-function renderVideoShots() {{
-  const t = I18N[currentLang];
-  const tray = document.querySelector('#video-shots-tray');
-  const choices = document.querySelector('#video-shots-choices');
-  choices.setAttribute('aria-label', t.videoShotsLabel);
-  choices.innerHTML = VIDEO_SHOTS_DATA.map(item => {{
-    const name = currentLang === 'en' ? item.name_en : item.name;
-    const selected = selectedVideoShots.some(x => x.id === item.id);
-    const route = item.jianying ? t.videoShotsBoth : t.videoShotsBrowserOnly;
-    return `<button type="button" class="video-choice-card${{selected ? ' is-selected' : ''}}" data-shot-id="${{item.id}}" aria-pressed="${{selected}}" aria-label="${{item.id}} ${{name}} · ${{route}}">
-      <img class="video-choice-image" src="${{item.img}}" alt="" loading="lazy">
-      <span class="video-choice-check" aria-hidden="true">✓</span>
-      <span class="video-choice-info"><span class="video-choice-id">${{item.id}}</span><span class="video-choice-name">${{name}}</span><span class="video-choice-route">${{route}}</span></span>
-    </button>`;
-  }}).join('');
-  choices.querySelectorAll('[data-shot-id]').forEach(btn => btn.addEventListener('click', () => {{
-    const id = btn.dataset.shotId;
-    const index = selectedVideoShots.findIndex(x => x.id === id);
-    if (index >= 0) selectedVideoShots.splice(index, 1);
-    else selectedVideoShots.push(VIDEO_SHOTS_DATA.find(x => x.id === id));
-    renderVideoShots();
-    updatePrompt();
-    choices.querySelector(`[data-shot-id="${{id}}"]`)?.focus();
-  }}));
-  document.querySelector('#video-shots-count').textContent = selectedVideoShots.length
-    ? t.videoShotsCount.replace('{{count}}', selectedVideoShots.length) : t.videoShotsAuto;
-  inputVideoShots.value = selectedVideoShots.map(x => x.id).join(currentLang === 'zh' ? '、' : ', ');
-  btnClearVideoShots.hidden = !selectedVideoShots.length;
-  tray.innerHTML = selectedVideoShots.map(item => {{
-    const name = currentLang === 'en' ? item.name_en : item.name;
-    return `<div class="video-shot-chip">
-      <span class="video-shot-chip-info"><small>${{item.id}}</small><span>${{name}}</span></span>
-      <button type="button" class="video-shot-remove" data-remove-video-shot="${{item.id}}" aria-label="${{t.videoShotsRemove}} ${{item.id}} ${{name}}">×</button></div>`;
-  }}).join('');
-  tray.querySelectorAll('[data-remove-video-shot]').forEach(btn => btn.addEventListener('click', () => {{
-    selectedVideoShots = selectedVideoShots.filter(x => x.id !== btn.dataset.removeVideoShot);
-    renderVideoShots();
-    updatePrompt();
-    const next = tray.querySelector('[data-remove-video-shot]');
-    (next || choices.querySelector('.video-choice-card'))?.focus();
-  }}));
-  const unsupported = selectedVideoShots.filter(x => !x.jianying);
-  const warning = document.querySelector('#video-shots-warning');
-  warning.hidden = videoRenderer !== 'jianying' || !unsupported.length;
-  warning.textContent = t.videoShotsRouteWarning.replace('{{ids}}', unsupported.map(x => x.id).join('、'));
-}}
-
-btnClearVideoShots.addEventListener('click', () => {{
-  selectedVideoShots = [];
-  renderVideoShots();
-  updatePrompt();
-  document.querySelector('.video-choice-card')?.focus();
-}});
-
 // Fusion Checkbox Listener
 if (checkboxFusion) {{
   checkboxFusion.addEventListener('change', () => {{
@@ -2518,6 +2210,34 @@ if (checkboxTone) {{
   }});
 }}
 
+// Batch Generation Checkbox Listener
+if (checkboxBatch) {{
+  checkboxBatch.addEventListener('change', () => {{
+    isBatchActive = checkboxBatch.checked;
+    if (batchWrap) batchWrap.classList.toggle('is-active', isBatchActive);
+    if (!isBatchActive) {{
+      isMixLayoutsActive = false;
+      if (checkboxMixLayouts) checkboxMixLayouts.checked = false;
+      if (mixLayoutsWrap) {{
+        mixLayoutsWrap.classList.remove('is-active');
+        mixLayoutsWrap.hidden = true;
+      }}
+    }} else {{
+      if (mixLayoutsWrap) mixLayoutsWrap.hidden = false;
+    }}
+    updatePrompt();
+  }});
+}}
+
+// Mix Multiple Layouts Checkbox Listener
+if (checkboxMixLayouts) {{
+  checkboxMixLayouts.addEventListener('change', () => {{
+    isMixLayoutsActive = checkboxMixLayouts.checked;
+    if (mixLayoutsWrap) mixLayoutsWrap.classList.toggle('is-active', isMixLayoutsActive);
+    updatePrompt();
+  }});
+}}
+
 // Toolbar Actions: Gacha & Reset
 document.querySelector('#btn-gacha').addEventListener('click', () => {{
   // Random layout (skip in article-illust and article-cover mode)
@@ -2534,7 +2254,7 @@ document.querySelector('#btn-gacha').addEventListener('click', () => {{
   }}
 
   if (isFusionActive) {{
-    const pool = [REALISTIC_ITEM, ...STYLES_DATA];
+    const pool = STYLES_DATA;
     selectedCharStyle = pool[Math.floor(Math.random() * pool.length)];
     const remain = pool.filter(x => x.id !== selectedCharStyle.id);
     selectedSceneStyle = remain[Math.floor(Math.random() * remain.length)];
@@ -2548,7 +2268,8 @@ document.querySelector('#btn-gacha').addEventListener('click', () => {{
   }}
 
   // Random style
-  selectedStyle = STYLES_DATA[Math.floor(Math.random() * STYLES_DATA.length)];
+  const stylePool = STYLES_DATA;
+  selectedStyle = stylePool[Math.floor(Math.random() * stylePool.length)];
 
   updateSlotUI('layout');
   updateSlotUI('style');
@@ -2569,26 +2290,10 @@ document.querySelector('#btn-reset').addEventListener('click', () => {{
   inputTheme.style.height = '';
   inputAudience.value = '';
   inputChannel.value = '';
-  if (inputVideoAudience) inputVideoAudience.value = '';
-  if (inputVideoScenario) inputVideoScenario.value = '';
-  videoScope = 'full';
-  videoRenderer = 'browser';
-  videoVoice = 'yes';
-  videoSubtitle = 'yes';
-  document.querySelectorAll('.video-opt-btn').forEach(b => {{
-    const grp = b.dataset.group;
-    const val = b.dataset.val;
-    const shouldActive = (grp === 'scope' && val === 'full') ||
-                         (grp === 'renderer' && val === 'browser') ||
-                         (grp === 'voice' && val === 'yes') ||
-                         (grp === 'subtitle' && val === 'yes');
-    b.classList.toggle('is-active', shouldActive);
-  }});
+
   if (inputShootType) inputShootType.value = '';
   if (btnClearShootType) btnClearShootType.hidden = true;
   document.querySelectorAll('.shoot-type-preset-btn').forEach(b => b.classList.remove('is-active'));
-  selectedVideoShots = [];
-  renderVideoShots();
   if (inputRatio) {{
     inputRatio.value = '';
     if (btnClearRatio) btnClearRatio.hidden = true;
@@ -2598,6 +2303,15 @@ document.querySelector('#btn-reset').addEventListener('click', () => {{
     inputMood.value = '';
     if (btnClearMood) btnClearMood.hidden = true;
     document.querySelectorAll('.mood-preset-btn').forEach(b => b.classList.remove('is-active'));
+  }}
+  isBatchActive = false;
+  isMixLayoutsActive = false;
+  if (checkboxBatch) checkboxBatch.checked = false;
+  if (batchWrap) batchWrap.classList.remove('is-active');
+  if (checkboxMixLayouts) checkboxMixLayouts.checked = false;
+  if (mixLayoutsWrap) {{
+    mixLayoutsWrap.classList.remove('is-active');
+    mixLayoutsWrap.hidden = true;
   }}
   renderAssetsTray();
   updateSlotUI('layout');
@@ -2676,9 +2390,6 @@ function applyLang(lang) {{
   }} else if (currentMode === 'article-cover') {{
     if (themeLabelText) themeLabelText.textContent = t.articleCoverPathLabel;
     if (inputTheme) inputTheme.placeholder = t.articleCoverPathPlaceholder;
-  }} else if (currentMode === 'video') {{
-    if (themeLabelText) themeLabelText.textContent = t.themeLabel;
-    if (inputTheme) inputTheme.placeholder = t.themeVideoPlaceholder;
   }} else if (currentMode === 'photo') {{
     if (themeLabelText) themeLabelText.textContent = t.themeLabel;
     if (inputTheme) inputTheme.placeholder = t.themePhotoPlaceholder;
@@ -2689,9 +2400,6 @@ function applyLang(lang) {{
   if (inputShootType) inputShootType.placeholder = t.shootTypePlaceholder;
   inputAudience.placeholder = t.audiencePlaceholder;
   inputChannel.placeholder = t.channelPlaceholder;
-  if (inputVideoAudience) inputVideoAudience.placeholder = t.videoAudiencePlaceholder;
-  if (inputVideoScenario) inputVideoScenario.placeholder = t.videoScenarioPlaceholder;
-  renderVideoShots();
   autoResizeTheme();
   if (inputRatio) inputRatio.placeholder = t.ratioPlaceholder;
   if (inputMood) inputMood.placeholder = t.moodPlaceholder;
@@ -2715,10 +2423,7 @@ function applyLang(lang) {{
   updateSlotUI('tone');
   updatePrompt();
   if (pickerDialog.open) {{
-    if (currentPickerType === 'video-shot') {{
-      pickerTitle.textContent = t.pickerTitleVideoShot;
-      updateModalVideoShotCount();
-    }} else if (currentPickerType === 'asset') {{
+     if (currentPickerType === 'asset') {{
       pickerTitle.textContent = t.pickerTitleAsset;
       renderAssetFilters();
       updateModalAssetCount();
@@ -2749,24 +2454,17 @@ applyLang(currentLang);
 // URL Query Parameter Integration
 const urlParams = new URLSearchParams(window.location.search);
 const modeParam = urlParams.get('mode');
-const shotParam = urlParams.get('shot') || urlParams.get('video_type');
 const assetParam = urlParams.get('asset');
 const styleParam = urlParams.get('style');
 const layoutParam = urlParams.get('layout');
 const colorParam = urlParams.get('color');
 const toneParam = urlParams.get('tone');
 
-if (modeParam && ['pure', 'graphic-text', 'poster', 'article-illust', 'article-cover', 'video', 'photo'].includes(modeParam)) {{
+if (modeParam && ['pure', 'graphic-text', 'poster', 'article-illust', 'article-cover', 'photo'].includes(modeParam)) {{
   setMode(modeParam);
-}} else if (shotParam) {{
-  setMode('video');
 }}
 
-if (shotParam) {{
-  const tokens = new Set(shotParam.toUpperCase().match(/ST-\\d{{3}}/g) || []);
-  selectedVideoShots = VIDEO_SHOTS_DATA.filter(x => tokens.has(x.id));
-  renderVideoShots();
-}}
+
 
 if (assetParam) {{
   const tokens = assetParam.split(/[,，\\s]+/).map(s => s.trim().toUpperCase()).filter(Boolean);
@@ -2781,7 +2479,7 @@ if (assetParam) {{
 if (styleParam) {{
   const clean = styleParam.trim().replace(/^#/, '');
   const norm = clean.padStart(3, '0');
-  const found = STYLES_DATA.find(x => x.id === norm || x.id === styleParam.trim());
+  const found = STYLES_DATA.find(x => x.id === norm || x.id.toUpperCase() === clean.toUpperCase() || String(x.legacy_id) === clean);
   if (found) {{
     selectedStyle = found;
   }}
@@ -2817,7 +2515,21 @@ if (toneParam) {{
   }}
 }}
 
-if (assetParam || styleParam || layoutParam || colorParam || toneParam || modeParam || shotParam) {{
+const batchParam = urlParams.get('batch');
+if (batchParam === '1' || batchParam === 'true') {{
+  isBatchActive = true;
+  if (checkboxBatch) checkboxBatch.checked = true;
+  if (batchWrap) batchWrap.classList.add('is-active');
+  if (mixLayoutsWrap) mixLayoutsWrap.hidden = false;
+  const mixParam = urlParams.get('mix') || urlParams.get('mix_layouts');
+  if (mixParam === '1' || mixParam === 'true') {{
+    isMixLayoutsActive = true;
+    if (checkboxMixLayouts) checkboxMixLayouts.checked = true;
+    if (mixLayoutsWrap) mixLayoutsWrap.classList.add('is-active');
+  }}
+}}
+
+if (assetParam || styleParam || layoutParam || colorParam || toneParam || modeParam || batchParam) {{
   renderAssetsTray();
   updateSlotUI('layout');
   updateSlotUI('style');

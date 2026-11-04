@@ -12,7 +12,7 @@
 
 > **Struggling to describe art styles? Trouble structuring visual layouts? Simply pick an index number to generate highly recognizable AI image prompts.**
 
-This repository curates **329 distinct hand-drawn illustration styles** (supporting both `FA`~`FH` category IDs and legacy `001`–`329`), **165 composition layout patterns** (`SC-*` Social Cards, `IG-*` Infographics, `SB-*` Comic Storyboards, `IP-*` IP Design, `EC-*` E-commerce), and **36 curated classic monochrome colors** (`C-01`–`C-36`).
+This repository curates **365 distinct hand-drawn and realistic visual styles** (supporting both `FA`~`FI` category IDs and legacy `001`–`367`), **170 composition layout patterns** (`SC-*` Social Cards, `IG-*` Infographics, `SB-*` Comic Storyboards, `IP-*` IP Design, `EC-*` E-commerce), and **36 curated classic monochrome colors** (`C-01`–`C-36`).
 
 Whether you are crafting social media post covers, educational infographics, architectural comparisons, or multi-panel narrative comics, you no longer need to memorize obscure art history terminology or struggle with complex compositions. **Simply choose a style number, layout ID, and theme color, supply your topic, and instantly get verified, high-fidelity bilingual prompts ready to paste into Midjourney, DALL-E 3, Flux, Stable Diffusion, or any other image generator.**
 
@@ -25,7 +25,7 @@ Whether you are crafting social media post covers, educational infographics, arc
 > ### 📚 Official Feishu Knowledge Base is Live
 > 🔗 **[👉 Click to Access Feishu Knowledge Base ↗](https://ecmn3m3i17.feishu.cn/wiki/space/7689222460876524523?ccm_open_type=lark_wiki_spaceLink&open_tab_from=wiki_home)**
 > 
-> 1. 🖼️ **Quick Visual Gallery**: Instant mobile & desktop browsing of all 327 illustration styles and 165 layouts
+> 1. 🖼️ **Quick Visual Gallery**: Instant mobile & desktop browsing of all 365 styles and 170 layouts
 > 2. ❓ **Skill FAQ & Prompt Cheat Sheet**: Setup walkthroughs, troubleshooting tips, and ready-to-use prompt patterns
 > 3. 💡 **Entrepreneurship & Monetization**: Continuously updated real-world case studies and revenue strategies shared by the community
 
@@ -35,8 +35,8 @@ Whether you are crafting social media post covers, educational infographics, arc
 
 | Creator Pain Point | How This Library Solves It |
 | :--- | :--- |
-| **Vague style descriptions lead to style drift** | **Numbered Indexing**: 329 systematically categorized illustration styles (dual-indexed by FA~FH categories and 001–327), eliminating guess-and-pray prompting. |
-| **Monotonous composition; hard to format complex graphics** | **165 Layout Compositions**: 21 Social Cards, 35 Infographics, 68 Comic Storyboards, 13 IP Design, 24 E-commerce ready out-of-the-box. |
+| **Vague style descriptions lead to style drift** | **Numbered Indexing**: 367 systematically categorized visual styles (dual-indexed by FA~FI categories and 001–367), eliminating guess-and-pray prompting. |
+| **Monotonous composition; hard to format complex graphics** | **170 Layout Compositions**: 24 Social Cards, 38 Infographics, 71 Comic Storyboards, 13 IP Design, 24 E-commerce ready out-of-the-box. |
 | **Chaotic color palettes lack a cohesive tonal mood** | **36 Curated Monochrome Colors**: Klein Blue, Sage Green, Hermes Orange, Payne's Grey, etc., setting pure and sophisticated tones with one click. |
 | **Text disconnects from art; awkward typography placement** | **Dual-Mode Workflow**: Seamlessly toggle between "Pure-Image Mode" (pure illustration) and "Graphic-Text Mode" (unified visual-textual composition). |
 | **Models ignore style keywords or lack style fidelity** | **Tiered Model Adaptation & Fallback**: Calibrated keyword activation for native models; automatic Reference Image Fallback (4-grid sheets) for all third-party models. |
@@ -64,6 +64,8 @@ You can install this skill directly into your AI coding assistant (Codex, Claude
 > **"Install this Skill for me: https://github.com/yang0/handraw-style"**
 
 The assistant will automatically clone the repository and configure all styles, layout templates, and reference assets.
+
+This package focuses on static image design. Video production, narration, rendering and the shot gallery now belong to the separate `handraw-video` project. Static video-cover design remains available here.
 
 ---
 
@@ -130,7 +132,7 @@ Finished writing an article or editing a video and need a high-CTR, tasteful cov
 - **Automated Workflow**:
   1. **Core Summary Extraction**: Distills a ~200-word essence of key arguments, narrative hooks, and takeaways;
   2. **Audience Persona Inference**: Evaluates knowledge depth and motivation to construct target audience profile;
-   3. **Style & Color Pairing**: Recommends the optimal match from 327 hand-drawn styles and 36 classic monochrome palettes (e.g., `#FA-018 (#018) Minimal Deadpan Dialogue Cartoon` + `C-01 Klein Blue`);
+   3. **Style & Color Pairing**: Recommends the optimal match from 365 visual styles and 36 classic monochrome palettes (e.g., `#FA-018 (#018) Minimal Deadpan Dialogue Cartoon` + `C-01 Klein Blue`);
    4. **Native Metaphor & Viral Directives**:
       - Article Covers: Injects the proven editorial instruction—*"Design a visual metaphor first, then generate the image. Ensure the main title is bold and prominent, with few or no small text. Pick the rest of the design for me."*;
       - Video Covers / Subtitle Input: Mandatorily injects—*"Video cover design, high clickability and viral internet appeal, visually captivating and eye-catching. Design a visual metaphor first, then generate the image. Ensure the main title is bold and prominent, with few or no small text. Pick the rest of the design for me."*;
@@ -188,7 +190,7 @@ The illustration below shows text integrated harmoniously with the visual compos
 
 By default, the Skill crafts copyable prompts. When you explicitly request image generation, it optimizes the output based on verified model capabilities:
 
-- **Explicitly Calibrated Models (e.g., `gpt-image-2`)**: Full activation hierarchy for all 329 styles: Style/Author Name → Positive Core Traits → Reference Image only when traits alone cannot reliably trigger the style, avoiding unnecessary image passing that might over-constrain the composition.
+- **Explicitly Calibrated Models (e.g., `gpt-image-2`)**: Full activation hierarchy for all 367 styles: Style/Author Name → Positive Core Traits → Reference Image only when traits alone cannot reliably trigger the style, avoiding unnecessary image passing that might over-constrain the composition.
 - **Third-Party & General Models (Midjourney, Flux, Stable Diffusion, Imagen, Gemini, etc.)**: Employs the rock-solid **Reference Image Fallback** strategy. The Skill provides a 1024x1024 4-grid standard reference image or file path, ensuring 100% faithful reproduction of linework, texture, and color palette without prompt drift.
 - **Open for Community Benchmarks**: Capability definitions reside in `skills/handdraw-style-prompter/references/model_capabilities.json`. Pull requests for other model evaluations are warmly welcomed!
 
@@ -206,19 +208,19 @@ Style: FH-039 (193), Theme: Tang Dynasty Night Banquet
 
 ## Featured Styles Preview
 
-Here is a contact sheet preview of featured hand-drawn illustration styles (FA-001–FA-016, formerly 001–016):
+Here is a contact sheet preview of featured hand-drawn illustration styles (FA-001–FA-016, formerly 001–367):
 
 ![Featured Styles Preview (FA-001–FA-016)](images/A_001-016.webp)
 
-- 🖼️ **[👉 Browse All Style Sheets (327 Styles Visual Contact Sheets, indexed by FA~FH / 001–327)](STYLES_en.md)**
-- 📄 **[View Detailed Style Metadata (329 Styles Table & Core Traits)](styles_200_reorganized.md)**
+- 🖼️ **[👉 Browse All Style Sheets (367 Styles Visual Contact Sheets, indexed by FA~FI / 001–367)](STYLES_en.md)**
+- 📄 **[View Detailed Style Metadata (367 Styles Table & Core Traits)](styles_200_reorganized.md)**
 - 💻 *(For offline interactive search and enlargement, open `skills/handdraw-style-prompter/gallery/index.html` in your local browser)*
 
 ---
 
 ## Layout Compositions Showcase
 
-In addition to 329 illustration styles, this library includes **165 composition layout patterns**, covering social cards, data infographics, multi-panel storyboards, IP design, and e-commerce. Combine any style with any layout with a single command.
+In addition to 365 illustration and realistic visual styles, this library includes **170 composition layout patterns**, covering social cards, data infographics, multi-panel storyboards, IP design, and e-commerce. Combine any style with any layout with a single command.
 
 ### 1. Social Cards (21 Layouts)
 
@@ -266,7 +268,7 @@ Ideal for e-commerce single product hero shots, multi-angle views, detail closeu
 
 ---
 
-- 💡 **[👉 Enter Full Layout Visual Sheet to Browse All 165 Layouts & Prompts ↗](LAYOUTS_en.md)**
+- 💡 **[👉 Enter Full Layout Visual Sheet to Browse All 170 Layouts & Prompts ↗](LAYOUTS_en.md)**
 - 💻 *(For offline interactive search and category filtering, open `skills/handdraw-style-prompter/gallery/layouts.html` in your local browser)*
 
 ---
