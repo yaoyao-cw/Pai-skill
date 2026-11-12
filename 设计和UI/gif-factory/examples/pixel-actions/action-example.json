@@ -1,0 +1,19 @@
+{
+  "entries": [
+    {
+      "name": "boy-thumbs-up",
+      "text": "点赞",
+      "atlas": "boy-thumbs-up-atlas.png",
+      "grid": [
+        4,
+        4
+      ],
+      "column_offsets": [
+        18,
+        6,
+        -6,
+        -18
+      ]
+    }
+  ]
+}

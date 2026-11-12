@@ -1,0 +1,30 @@
+<!doctype html><html lang="zh-CN"><body><template><style>
+@font-face{font-family:Hanzi;src:url('assets/fonts/Hanzi.woff2') format('woff2');font-display:block}
+*{box-sizing:border-box}#root{position:absolute;inset:0;overflow:hidden;color:#503B2C;font-family:Hanzi,serif}
+.world{position:absolute;inset:0;overflow:hidden}.paper{position:absolute}.actor{position:absolute;width:512px;height:512px;transform-origin:50% 95%;z-index:4}.pose{width:512px;height:512px;background-repeat:no-repeat;background-size:8192px 512px;background-position:0 0}
+.headline{position:absolute;margin:0;font-size:110px;line-height:1.18;font-weight:400;letter-spacing:0}.line{display:block}.eyebrow{position:absolute;font-size:40px;line-height:1.25}.label{position:absolute;text-align:center;line-height:1.2}.ground{position:absolute;left:0;bottom:0;width:1920px;height:130px;clip-path:polygon(0 8%,9% 3%,19% 7%,30% 1%,44% 5%,60% 2%,75% 6%,90% 2%,100% 5%,100% 100%,0 100%)}
+</style><div id="root" data-composition-id="bread" data-duration="5" data-width="1920" data-height="1080"><div class="world" style="background:#B85E41"><div class="ground" style="background:#DDA872"></div>
+<h1 id="b-title" class="headline" style="left:165px;top:110px;width:1500px;color:#FFF4DA">把热乎，送到你手边。</h1>
+<img id="b-oven" class="paper" src="assets/props/oven-clean.png" style="left:140px;top:390px;width:660px" alt="纸片烤箱">
+<div id="b-door" class="paper" style="left:294px;top:585px;width:350px;height:220px;background:#DDAC6B;border:9px solid #FFF4DA;border-radius:7px;transform-origin:50% 100%"><div style="position:absolute;left:78px;top:24px;width:177px;height:14px;background:#53392B;border-radius:8px"></div></div>
+<img id="b-hand" class="paper" src="assets/props/serve-hand.png" style="left:760px;top:745px;width:680px" alt="手托唯一的盘子">
+<img id="b-bread" class="paper" src="assets/props/bread-only.png" style="left:380px;top:635px;width:360px" alt="无盘面包">
+<svg id="b-steam" class="paper" style="left:1100px;top:460px;width:150px;height:180px" viewBox="0 0 150 180" aria-hidden="true"><path d="M35 170 Q0 130 40 100 T40 15 M100 170 Q65 130 100 100 T100 15" fill="none" stroke="#FFF4DA" stroke-width="9" stroke-linecap="round" stroke-dasharray="300" stroke-dashoffset="300"/></svg>
+<div id="b-chef" class="actor" style="left:1400px;top:470px;"><div id="b-chef-pose" class="pose" style="background-image:url(assets/characters/croissant.webp)"></div></div>
+</div></div><script>(()=>{const tl=gsap.timeline({paused:true});
+tl.fromTo('#b-title',{clipPath:'inset(0% 100% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:.4},.3);
+tl.fromTo('#b-oven',{x:-180,rotation:-5},{x:0,rotation:0,duration:.45,ease:'power2.out'},.05);
+tl.fromTo('#b-door',{scaleY:0},{scaleY:1,duration:.2,ease:'power2.out'},.3);
+tl.to('#b-door',{scaleY:.1,y:60,duration:.4,ease:'power2.inOut'},.8);
+tl.fromTo('#b-hand',{x:1250,y:100,rotation:8},{x:0,y:0,rotation:0,duration:.75,ease:'power3.out'},.6);
+tl.fromTo('#b-bread',{x:0,y:0,scale:.64},{x:340,y:-250,scale:.722,rotation:-10,duration:.54,ease:'power2.out'},1.12);
+tl.to('#b-bread',{x:660,y:-37,scale:1.2,rotation:0,duration:.55,ease:'power2.in'},1.66);
+tl.to('#b-hand',{y:14,duration:.12,ease:'power1.out'},2.19);
+tl.to('#b-hand',{y:0,duration:.2,ease:'power1.inOut'},2.31);
+tl.to('#b-steam path',{strokeDashoffset:0,duration:.55,ease:'power1.out'},2.24);
+tl.fromTo('#b-chef',{x:180,scale:.72},{x:0,scale:.72,duration:.5,ease:'power2.out'},.3);
+tl.fromTo("#b-chef-pose",{backgroundPositionX:"0px"},{backgroundPositionX:"-7680px",duration:1.92,ease:"steps(15)"},0.8);
+tl.to('#b-bread',{x:660,y:-770,rotation:-6,duration:.73,ease:'power2.in'},4.22);
+tl.to('#b-hand',{y:-55,rotation:-8,duration:.22,ease:'power2.out'},4.2);tl.to('#b-hand',{x:1250,duration:.5,ease:'power2.in'},4.42);
+tl.to('#b-steam',{opacity:0,duration:.15},4.22);
+window.__timelines["bread"]=tl;})();</script></template></body></html>

@@ -1,0 +1,25 @@
+{
+  "sha256": "645ebf82abf962afefba6bd467ed35343b0ae158646918b3ef1ace2664c9ad2a",
+  "duration": 15,
+  "width": 1920,
+  "height": 1080,
+  "fps": "30/1",
+  "frames": 450,
+  "has_audio": true,
+  "audio_loudness": {
+    "lufsIntegrated": -16.9,
+    "lufsShortTermMax": -15.8,
+    "samplePeakDb": -3.3,
+    "truePeakDb": -3.3,
+    "clipping": {
+      "count": 0,
+      "firstAt": null
+    }
+  },
+  "audio_warnings": [],
+  "user_acceptance": "accepted exact fusion film; user requested repository publication",
+  "rendering": "16-pose clay character sequences plus deterministic editable layers",
+  "check": "lint/runtime/layout/contrast/craft/audio passed; zero errors and warnings; no automated motion assertions",
+  "review": "decoded output frames, scene/phone sheets, transitions and atlas inspected; sound measured, not human-listened",
+  "global_installation_changed": false
+}

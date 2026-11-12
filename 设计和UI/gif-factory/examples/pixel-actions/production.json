@@ -1,0 +1,243 @@
+{
+  "appearance": "pixel",
+  "movement": "consecutive full-character action",
+  "size": [
+    320,
+    320
+  ],
+  "poses_per_gif": 16,
+  "loop_ms": 1920,
+  "method": "Reference-guided built-in image_gen, one atlas per action; shared crop/scale; nearest-neighbor; fixed captions.",
+  "acceptance": {
+    "status": "user_accepted",
+    "basis": "User accepted the 20-GIF set and requested Skill/gallery publication."
+  },
+  "entries": [
+    {
+      "character": "眼镜男孩",
+      "name": "boy-01",
+      "text": "冲鸭",
+      "file": "boy/01.gif",
+      "sha256": "0ceecda5829681bcf422cd9cfb7b9aa4eb6bff0b1556f48bc343a97bb2e493c4"
+    },
+    {
+      "character": "眼镜男孩",
+      "name": "boy-02",
+      "text": "点赞",
+      "file": "boy/02.gif",
+      "sha256": "4feaba0b45336d0667640742c2f6170c24d94030d1897d674dbb26112078daae"
+    },
+    {
+      "character": "眼镜男孩",
+      "name": "boy-03",
+      "text": "谢谢你",
+      "file": "boy/03.gif",
+      "sha256": "dfe517b278479321b9a6f5b7f001bf4536ed076e8c163ba7cd170a8f61432d9c"
+    },
+    {
+      "character": "眼镜男孩",
+      "name": "boy-04",
+      "text": "让我想想",
+      "file": "boy/04.gif",
+      "sha256": "b4faba51daf333b5cb301e2a7780b04fb6953a699145ef88e9848f6ee7287c22"
+    },
+    {
+      "character": "眼镜男孩",
+      "name": "boy-05",
+      "text": "太棒了",
+      "file": "boy/05.gif",
+      "sha256": "3b80fdf4689ab3f5ecb70896cb04284895277a3f3fd9c3a162cb1552c7058f42"
+    },
+    {
+      "character": "红帽女孩",
+      "name": "hood-01",
+      "text": "你好呀",
+      "file": "hood/01.gif",
+      "sha256": "8cf0a320f5cdcbcd38e02c486b285890d222bc332b63e305c1619b6f536ac7d8"
+    },
+    {
+      "character": "红帽女孩",
+      "name": "hood-02",
+      "text": "谢谢你",
+      "file": "hood/02.gif",
+      "sha256": "bdae8e71dd807bd261a96c74c567469fe040d6e90a1084c7780170a95340f05f"
+    },
+    {
+      "character": "红帽女孩",
+      "name": "hood-03",
+      "text": "加油呀",
+      "file": "hood/03.gif",
+      "sha256": "82d38c20ef5354596f1824aaef6d07825d253efbed303de527ef0a822d5fcff5"
+    },
+    {
+      "character": "红帽女孩",
+      "name": "hood-04",
+      "text": "害羞了",
+      "file": "hood/04.gif",
+      "sha256": "dc7c4af9551f8733dd40a3b10eb0837b1c4915c8059b1d76c90baa9d53439662"
+    },
+    {
+      "character": "红帽女孩",
+      "name": "hood-05",
+      "text": "拜拜",
+      "file": "hood/05.gif",
+      "sha256": "0cfca0007f760a4035509822269e415be54b7da2f3f06f45a70c25f8fddbd864"
+    },
+    {
+      "character": "太空猫",
+      "name": "cat-01",
+      "text": "起飞啦",
+      "file": "cat/01.gif",
+      "sha256": "c9f1b1555c419375feab176dcbecff428a8119d9523c17ad4348b3f575f7ac50"
+    },
+    {
+      "character": "太空猫",
+      "name": "cat-02",
+      "text": "收到",
+      "file": "cat/02.gif",
+      "sha256": "cc358d8e7157f08645c1830d9916f4faf0e170c5dcb4190bfa345df515c7c736"
+    },
+    {
+      "character": "太空猫",
+      "name": "cat-03",
+      "text": "赞一个",
+      "file": "cat/03.gif",
+      "sha256": "577df9deecb4a18019cd2521bac2744f06c066b67b5f31c7d7f3052b7987d49b"
+    },
+    {
+      "character": "太空猫",
+      "name": "cat-04",
+      "text": "伸个懒腰",
+      "file": "cat/04.gif",
+      "sha256": "2d5ab1b859837ed597d6410e8d387f7dc3dfc783fda18e432720443c922730c8"
+    },
+    {
+      "character": "太空猫",
+      "name": "cat-05",
+      "text": "吓一跳",
+      "file": "cat/05.gif",
+      "sha256": "77892ba4f00ef895237af324ac3fc560ef26e51cb90a636ba4816964fa385bee"
+    },
+    {
+      "character": "小企鹅",
+      "name": "penguin-01",
+      "text": "开心扭扭",
+      "file": "penguin/01.gif",
+      "sha256": "3ca8396cea95380ad16183d8d5bc80fd49623b2ee092e3fa8dca698ee7f1dac6"
+    },
+    {
+      "character": "小企鹅",
+      "name": "penguin-02",
+      "text": "谢谢你",
+      "file": "penguin/02.gif",
+      "sha256": "2409bb3e7292310a9d94ce9ec374d2b7866b246cf361b1387b6441f41175c46f"
+    },
+    {
+      "character": "小企鹅",
+      "name": "penguin-03",
+      "text": "困了",
+      "file": "penguin/03.gif",
+      "sha256": "c7a6e8d625f1b4a889ec688bd49a9546a9b76971302fb8e4ce97414890c68a89"
+    },
+    {
+      "character": "小企鹅",
+      "name": "penguin-04",
+      "text": "震惊",
+      "file": "penguin/04.gif",
+      "sha256": "512b4999a6e55f0f9d36ce413b3509ed6abb1c777362e0f2812f1d02bea74d38"
+    },
+    {
+      "character": "小企鹅",
+      "name": "penguin-05",
+      "text": "拜拜",
+      "file": "penguin/05.gif",
+      "sha256": "9b77f6385b09873a3b4d610e32744c8893d3cea06fa68f0209bf6412bb4d3975"
+    }
+  ],
+  "prompts": [
+    {
+      "character": "boy",
+      "text": "点赞",
+      "prompt": "Using supplied sprite as the EXACT character and pixel rendering reference, create ONE sprite animation atlas for ONE looping GIF. Exactly 4 columns x 4 rows, sixteen full-body consecutive poses, equal cells, generous transparent gutters, same scale and ground baseline, fixed central body axis. True crisp pixel art with deliberate square clusters and dark stepped outlines, limited colors, no smooth 3D/illustration shading, no anti-aliased blur. Preserve recognizable face, proportions, all costume pieces, colors, accessories throughout. Do not introduce props, text, numbers, gridlines, background or shadows. Action must involve head and torso plus relevant limbs and hair/cape/scarf/tail follow-through, not frozen body with isolated arm rotation. 16 distinct drawings: frame1 neutral, 2-4 gradually anticipate and begin action, 5-9 perform gesture with gentle evenly spaced transitions, 10-13 recover, 14-16 settle to near frame1 for seamless loop. Keep subtle facial anatomy consistent, hands simple pixel mitten shapes, limbs intact. Full body including ears/helmet/hair/feet always inside cell.\nACTION: shift weight, raise one hand into a clear thumbs-up, nod head and lean chest forward, then lower hand and settle"
+    },
+    {
+      "character": "boy",
+      "text": "谢谢你",
+      "prompt": "Using supplied sprite as the EXACT character and pixel rendering reference, create ONE sprite animation atlas for ONE looping GIF. Exactly 4 columns x 4 rows, sixteen full-body consecutive poses, equal cells, generous transparent gutters, same scale and ground baseline, fixed central body axis. True crisp pixel art with deliberate square clusters and dark stepped outlines, limited colors, no smooth 3D/illustration shading, no anti-aliased blur. Preserve recognizable face, proportions, all costume pieces, colors, accessories throughout. Do not introduce props, text, numbers, gridlines, background or shadows. Action must involve head and torso plus relevant limbs and hair/cape/scarf/tail follow-through, not frozen body with isolated arm rotation. 16 distinct drawings: frame1 neutral, 2-4 gradually anticipate and begin action, 5-9 perform gesture with gentle evenly spaced transitions, 10-13 recover, 14-16 settle to near frame1 for seamless loop. Keep subtle facial anatomy consistent, hands simple pixel mitten shapes, limbs intact. Full body including ears/helmet/hair/feet always inside cell.\nACTION: bring both hands together in front of chest, gently bow head and torso, hair follows, rise and lower hands"
+    },
+    {
+      "character": "boy",
+      "text": "让我想想",
+      "prompt": "Using supplied sprite as the EXACT character and pixel rendering reference, create ONE sprite animation atlas for ONE looping GIF. Exactly 4 columns x 4 rows, sixteen full-body consecutive poses, equal cells, generous transparent gutters, same scale and ground baseline, fixed central body axis. True crisp pixel art with deliberate square clusters and dark stepped outlines, limited colors, no smooth 3D/illustration shading, no anti-aliased blur. Preserve recognizable face, proportions, all costume pieces, colors, accessories throughout. Do not introduce props, text, numbers, gridlines, background or shadows. Action must involve head and torso plus relevant limbs and hair/cape/scarf/tail follow-through, not frozen body with isolated arm rotation. 16 distinct drawings: frame1 neutral, 2-4 gradually anticipate and begin action, 5-9 perform gesture with gentle evenly spaced transitions, 10-13 recover, 14-16 settle to near frame1 for seamless loop. Keep subtle facial anatomy consistent, hands simple pixel mitten shapes, limbs intact. Full body including ears/helmet/hair/feet always inside cell.\nACTION: hand rises to chin, head tilts and eyebrows become thoughtful, body leans to one side, return upright and lower hand"
+    },
+    {
+      "character": "boy",
+      "text": "太棒了",
+      "prompt": "Using supplied sprite as the EXACT character and pixel rendering reference, create ONE sprite animation atlas for ONE looping GIF. Exactly 4 columns x 4 rows, sixteen full-body consecutive poses, equal cells, generous transparent gutters, same scale and ground baseline, fixed central body axis. True crisp pixel art with deliberate square clusters and dark stepped outlines, limited colors, no smooth 3D/illustration shading, no anti-aliased blur. Preserve recognizable face, proportions, all costume pieces, colors, accessories throughout. Do not introduce props, text, numbers, gridlines, background or shadows. Action must involve head and torso plus relevant limbs and hair/cape/scarf/tail follow-through, not frozen body with isolated arm rotation. 16 distinct drawings: frame1 neutral, 2-4 gradually anticipate and begin action, 5-9 perform gesture with gentle evenly spaced transitions, 10-13 recover, 14-16 settle to near frame1 for seamless loop. Keep subtle facial anatomy consistent, hands simple pixel mitten shapes, limbs intact. Full body including ears/helmet/hair/feet always inside cell.\nACTION: bend knees, raise both fists and do a small happy jump, land with bent knees, recover smiling"
+    },
+    {
+      "character": "hood",
+      "text": "谢谢你",
+      "prompt": "Using supplied sprite as the EXACT character and pixel rendering reference, create ONE sprite animation atlas for ONE looping GIF. Exactly 4 columns x 4 rows, sixteen full-body consecutive poses, equal cells, generous transparent gutters, same scale and ground baseline, fixed central body axis. True crisp pixel art with deliberate square clusters and dark stepped outlines, limited colors, no smooth 3D/illustration shading, no anti-aliased blur. Preserve recognizable face, proportions, all costume pieces, colors, accessories throughout. Do not introduce props, text, numbers, gridlines, background or shadows. Action must involve head and torso plus relevant limbs and hair/cape/scarf/tail follow-through, not frozen body with isolated arm rotation. 16 distinct drawings: frame1 neutral, 2-4 gradually anticipate and begin action, 5-9 perform gesture with gentle evenly spaced transitions, 10-13 recover, 14-16 settle to near frame1 for seamless loop. Keep subtle facial anatomy consistent, hands simple pixel mitten shapes, limbs intact. Full body including ears/helmet/hair/feet always inside cell.\nACTION: hold cape edges lightly and perform a small curtsy, head and torso bow, knees bend, cape and satchel follow, recover"
+    },
+    {
+      "character": "hood",
+      "text": "加油呀",
+      "prompt": "Using supplied sprite as the EXACT character and pixel rendering reference, create ONE sprite animation atlas for ONE looping GIF. Exactly 4 columns x 4 rows, sixteen full-body consecutive poses, equal cells, generous transparent gutters, same scale and ground baseline, fixed central body axis. True crisp pixel art with deliberate square clusters and dark stepped outlines, limited colors, no smooth 3D/illustration shading, no anti-aliased blur. Preserve recognizable face, proportions, all costume pieces, colors, accessories throughout. Do not introduce props, text, numbers, gridlines, background or shadows. Action must involve head and torso plus relevant limbs and hair/cape/scarf/tail follow-through, not frozen body with isolated arm rotation. 16 distinct drawings: frame1 neutral, 2-4 gradually anticipate and begin action, 5-9 perform gesture with gentle evenly spaced transitions, 10-13 recover, 14-16 settle to near frame1 for seamless loop. Keep subtle facial anatomy consistent, hands simple pixel mitten shapes, limbs intact. Full body including ears/helmet/hair/feet always inside cell.\nACTION: bring both fists up near chest and do two small alternating fist pumps with coordinated body bounce and head nod, settle"
+    },
+    {
+      "character": "hood",
+      "text": "害羞了",
+      "prompt": "Using supplied sprite as the EXACT character and pixel rendering reference, create ONE sprite animation atlas for ONE looping GIF. Exactly 4 columns x 4 rows, sixteen full-body consecutive poses, equal cells, generous transparent gutters, same scale and ground baseline, fixed central body axis. True crisp pixel art with deliberate square clusters and dark stepped outlines, limited colors, no smooth 3D/illustration shading, no anti-aliased blur. Preserve recognizable face, proportions, all costume pieces, colors, accessories throughout. Do not introduce props, text, numbers, gridlines, background or shadows. Action must involve head and torso plus relevant limbs and hair/cape/scarf/tail follow-through, not frozen body with isolated arm rotation. 16 distinct drawings: frame1 neutral, 2-4 gradually anticipate and begin action, 5-9 perform gesture with gentle evenly spaced transitions, 10-13 recover, 14-16 settle to near frame1 for seamless loop. Keep subtle facial anatomy consistent, hands simple pixel mitten shapes, limbs intact. Full body including ears/helmet/hair/feet always inside cell.\nACTION: bring both hands close to cheeks, tilt head and shift feet inward, blush slightly, return hands down and head upright"
+    },
+    {
+      "character": "hood",
+      "text": "拜拜",
+      "prompt": "Using supplied sprite as the EXACT character and pixel rendering reference, create ONE sprite animation atlas for ONE looping GIF. Exactly 4 columns x 4 rows, sixteen full-body consecutive poses, equal cells, generous transparent gutters, same scale and ground baseline, fixed central body axis. True crisp pixel art with deliberate square clusters and dark stepped outlines, limited colors, no smooth 3D/illustration shading, no anti-aliased blur. Preserve recognizable face, proportions, all costume pieces, colors, accessories throughout. Do not introduce props, text, numbers, gridlines, background or shadows. Action must involve head and torso plus relevant limbs and hair/cape/scarf/tail follow-through, not frozen body with isolated arm rotation. 16 distinct drawings: frame1 neutral, 2-4 gradually anticipate and begin action, 5-9 perform gesture with gentle evenly spaced transitions, 10-13 recover, 14-16 settle to near frame1 for seamless loop. Keep subtle facial anatomy consistent, hands simple pixel mitten shapes, limbs intact. Full body including ears/helmet/hair/feet always inside cell.\nACTION: raise one hand, take a tiny backward step and wave twice, cape swings, return foot and lower hand"
+    },
+    {
+      "character": "cat",
+      "text": "收到",
+      "prompt": "Using supplied sprite as the EXACT character and pixel rendering reference, create ONE sprite animation atlas for ONE looping GIF. Exactly 4 columns x 4 rows, sixteen full-body consecutive poses, equal cells, generous transparent gutters, same scale and ground baseline, fixed central body axis. True crisp pixel art with deliberate square clusters and dark stepped outlines, limited colors, no smooth 3D/illustration shading, no anti-aliased blur. Preserve recognizable face, proportions, all costume pieces, colors, accessories throughout. Do not introduce props, text, numbers, gridlines, background or shadows. Action must involve head and torso plus relevant limbs and hair/cape/scarf/tail follow-through, not frozen body with isolated arm rotation. 16 distinct drawings: frame1 neutral, 2-4 gradually anticipate and begin action, 5-9 perform gesture with gentle evenly spaced transitions, 10-13 recover, 14-16 settle to near frame1 for seamless loop. Keep subtle facial anatomy consistent, hands simple pixel mitten shapes, limbs intact. Full body including ears/helmet/hair/feet always inside cell.\nACTION: raise one mitten to side of helmet in a salute, stand taller and nod, lower mitten and relax, tail settles"
+    },
+    {
+      "character": "cat",
+      "text": "赞一个",
+      "prompt": "Using supplied sprite as the EXACT character and pixel rendering reference, create ONE sprite animation atlas for ONE looping GIF. Exactly 4 columns x 4 rows, sixteen full-body consecutive poses, equal cells, generous transparent gutters, same scale and ground baseline, fixed central body axis. True crisp pixel art with deliberate square clusters and dark stepped outlines, limited colors, no smooth 3D/illustration shading, no anti-aliased blur. Preserve recognizable face, proportions, all costume pieces, colors, accessories throughout. Do not introduce props, text, numbers, gridlines, background or shadows. Action must involve head and torso plus relevant limbs and hair/cape/scarf/tail follow-through, not frozen body with isolated arm rotation. 16 distinct drawings: frame1 neutral, 2-4 gradually anticipate and begin action, 5-9 perform gesture with gentle evenly spaced transitions, 10-13 recover, 14-16 settle to near frame1 for seamless loop. Keep subtle facial anatomy consistent, hands simple pixel mitten shapes, limbs intact. Full body including ears/helmet/hair/feet always inside cell.\nACTION: raise one mitten in a simple readable thumbs up, lean slightly forward and nod, lower hand, tail curls and uncurls"
+    },
+    {
+      "character": "cat",
+      "text": "伸个懒腰",
+      "prompt": "Using supplied sprite as the EXACT character and pixel rendering reference, create ONE sprite animation atlas for ONE looping GIF. Exactly 4 columns x 4 rows, sixteen full-body consecutive poses, equal cells, generous transparent gutters, same scale and ground baseline, fixed central body axis. True crisp pixel art with deliberate square clusters and dark stepped outlines, limited colors, no smooth 3D/illustration shading, no anti-aliased blur. Preserve recognizable face, proportions, all costume pieces, colors, accessories throughout. Do not introduce props, text, numbers, gridlines, background or shadows. Action must involve head and torso plus relevant limbs and hair/cape/scarf/tail follow-through, not frozen body with isolated arm rotation. 16 distinct drawings: frame1 neutral, 2-4 gradually anticipate and begin action, 5-9 perform gesture with gentle evenly spaced transitions, 10-13 recover, 14-16 settle to near frame1 for seamless loop. Keep subtle facial anatomy consistent, hands simple pixel mitten shapes, limbs intact. Full body including ears/helmet/hair/feet always inside cell.\nACTION: bend knees a little then stretch both arms above helmet with whole torso extending, head tips back slightly, lower arms and relax"
+    },
+    {
+      "character": "cat",
+      "text": "吓一跳",
+      "prompt": "Using supplied sprite as the EXACT character and pixel rendering reference, create ONE sprite animation atlas for ONE looping GIF. Exactly 4 columns x 4 rows, sixteen full-body consecutive poses, equal cells, generous transparent gutters, same scale and ground baseline, fixed central body axis. True crisp pixel art with deliberate square clusters and dark stepped outlines, limited colors, no smooth 3D/illustration shading, no anti-aliased blur. Preserve recognizable face, proportions, all costume pieces, colors, accessories throughout. Do not introduce props, text, numbers, gridlines, background or shadows. Action must involve head and torso plus relevant limbs and hair/cape/scarf/tail follow-through, not frozen body with isolated arm rotation. 16 distinct drawings: frame1 neutral, 2-4 gradually anticipate and begin action, 5-9 perform gesture with gentle evenly spaced transitions, 10-13 recover, 14-16 settle to near frame1 for seamless loop. Keep subtle facial anatomy consistent, hands simple pixel mitten shapes, limbs intact. Full body including ears/helmet/hair/feet always inside cell.\nACTION: surprised eyes open wide, shoulders lift, hands lift beside helmet, body recoils a tiny step, then relax and return smiling"
+    },
+    {
+      "character": "penguin",
+      "text": "谢谢你",
+      "prompt": "Using supplied sprite as the EXACT character and pixel rendering reference, create ONE sprite animation atlas for ONE looping GIF. Exactly 4 columns x 4 rows, sixteen full-body consecutive poses, equal cells, generous transparent gutters, same scale and ground baseline, fixed central body axis. True crisp pixel art with deliberate square clusters and dark stepped outlines, limited colors, no smooth 3D/illustration shading, no anti-aliased blur. Preserve recognizable face, proportions, all costume pieces, colors, accessories throughout. Do not introduce props, text, numbers, gridlines, background or shadows. Action must involve head and torso plus relevant limbs and hair/cape/scarf/tail follow-through, not frozen body with isolated arm rotation. 16 distinct drawings: frame1 neutral, 2-4 gradually anticipate and begin action, 5-9 perform gesture with gentle evenly spaced transitions, 10-13 recover, 14-16 settle to near frame1 for seamless loop. Keep subtle facial anatomy consistent, hands simple pixel mitten shapes, limbs intact. Full body including ears/helmet/hair/feet always inside cell.\nACTION: bring flippers together at chest, bow head and whole upper body, scarf tips follow, rise and open flippers"
+    },
+    {
+      "character": "penguin",
+      "text": "困了",
+      "prompt": "Using supplied sprite as the EXACT character and pixel rendering reference, create ONE sprite animation atlas for ONE looping GIF. Exactly 4 columns x 4 rows, sixteen full-body consecutive poses, equal cells, generous transparent gutters, same scale and ground baseline, fixed central body axis. True crisp pixel art with deliberate square clusters and dark stepped outlines, limited colors, no smooth 3D/illustration shading, no anti-aliased blur. Preserve recognizable face, proportions, all costume pieces, colors, accessories throughout. Do not introduce props, text, numbers, gridlines, background or shadows. Action must involve head and torso plus relevant limbs and hair/cape/scarf/tail follow-through, not frozen body with isolated arm rotation. 16 distinct drawings: frame1 neutral, 2-4 gradually anticipate and begin action, 5-9 perform gesture with gentle evenly spaced transitions, 10-13 recover, 14-16 settle to near frame1 for seamless loop. Keep subtle facial anatomy consistent, hands simple pixel mitten shapes, limbs intact. Full body including ears/helmet/hair/feet always inside cell.\nACTION: head slowly droops, eyelids lower, cover beak with one flipper for a yawn, body sways, wake up and recover"
+    },
+    {
+      "character": "penguin",
+      "text": "震惊",
+      "prompt": "Using supplied sprite as the EXACT character and pixel rendering reference, create ONE sprite animation atlas for ONE looping GIF. Exactly 4 columns x 4 rows, sixteen full-body consecutive poses, equal cells, generous transparent gutters, same scale and ground baseline, fixed central body axis. True crisp pixel art with deliberate square clusters and dark stepped outlines, limited colors, no smooth 3D/illustration shading, no anti-aliased blur. Preserve recognizable face, proportions, all costume pieces, colors, accessories throughout. Do not introduce props, text, numbers, gridlines, background or shadows. Action must involve head and torso plus relevant limbs and hair/cape/scarf/tail follow-through, not frozen body with isolated arm rotation. 16 distinct drawings: frame1 neutral, 2-4 gradually anticipate and begin action, 5-9 perform gesture with gentle evenly spaced transitions, 10-13 recover, 14-16 settle to near frame1 for seamless loop. Keep subtle facial anatomy consistent, hands simple pixel mitten shapes, limbs intact. Full body including ears/helmet/hair/feet always inside cell.\nACTION: eyes open wide round, flippers lift out, whole body recoils with a tiny backwards step, then recover to original smile"
+    },
+    {
+      "character": "penguin",
+      "text": "拜拜",
+      "prompt": "Using supplied sprite as the EXACT character and pixel rendering reference, create ONE sprite animation atlas for ONE looping GIF. Exactly 4 columns x 4 rows, sixteen full-body consecutive poses, equal cells, generous transparent gutters, same scale and ground baseline, fixed central body axis. True crisp pixel art with deliberate square clusters and dark stepped outlines, limited colors, no smooth 3D/illustration shading, no anti-aliased blur. Preserve recognizable face, proportions, all costume pieces, colors, accessories throughout. Do not introduce props, text, numbers, gridlines, background or shadows. Action must involve head and torso plus relevant limbs and hair/cape/scarf/tail follow-through, not frozen body with isolated arm rotation. 16 distinct drawings: frame1 neutral, 2-4 gradually anticipate and begin action, 5-9 perform gesture with gentle evenly spaced transitions, 10-13 recover, 14-16 settle to near frame1 for seamless loop. Keep subtle facial anatomy consistent, hands simple pixel mitten shapes, limbs intact. Full body including ears/helmet/hair/feet always inside cell.\nACTION: raise one flipper high and wave twice while leaning body and stepping one foot, scarf follows, lower flipper and settle"
+    }
+  ],
+  "sources": {
+    "boy": "User-provided character image, converted to pixel art. Private original is not included.",
+    "hood_cat_penguin": "Original AI-generated characters from this conversation."
+  }
+}

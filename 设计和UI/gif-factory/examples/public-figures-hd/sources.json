@@ -1,0 +1,25 @@
+{
+  "制作": "修正版：Tibo为Thibault Sottiaux @thsottiaux；Dario为Anthropic的Dario Amodei。只重做这两张，马斯克及黄仁勋GIF逐字节保留。台词为趣味二创。",
+  "参考资料": [
+    {
+      "人": "Elon Musk",
+      "作者": "Gage Skidmore",
+      "来源": "https://commons.wikimedia.org/wiki/File:Elon_Musk_by_Gage_Skidmore_2.jpg",
+      "许可": "CC BY-SA 3.0 https://creativecommons.org/licenses/by-sa/3.0/ ; 马斯克图经AI改编及GIF动效合成，该改编按同许可提供。"
+    },
+    {
+      "人": "Thibault Sottiaux @thsottiaux",
+      "来源": "https://www.turingtree.com/people/thibault-sottiaux"
+    },
+    {
+      "人": "Dario Amodei",
+      "来源": "https://www.anthropic.com/company/leadership"
+    },
+    {
+      "人": "Jensen Huang",
+      "来源": "https://commons.wikimedia.org/wiki/File:Jensen_Huang_Stanford_2026-04-30_010_(cropped).jpg"
+    }
+  ],
+  "本次更新": "仅Dario改严肃表情，台词改已封号；预览无标题。台词为趣味二创，不表示真实封号事件。",
+  "清晰度优化": "同一份原始人物素材重新合成，512×512直接渲染，LANCZOS缩放与BICUBIC连续形变；去掉160像素中间画布和最近邻放大。保留已封号和严肃表情，视频无标题。"
+}

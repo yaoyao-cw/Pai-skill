@@ -1,0 +1,349 @@
+{
+  "status": "assistant-reviewed repair candidates; user acceptance pending",
+  "changes": [
+    "Reviewed 4-pose identity anchors before filling 16 whole-character drawings.",
+    "Reduced exaggerated facial/mouth changes while preserving coordinated face/torso/limb acting.",
+    "Corrected atlas-column extraction offsets caused by inconsistent grid spacing without fitting each pose independently.",
+    "Doraemon: omitted one isolated inconsistent source pose, held preceding blink for 200ms; 15 distinct drawings, 1600ms loop.",
+    "Anya: 16 distinct drawings, 1600ms loop."
+  ],
+  "crop_offsets": {
+    "anya": [
+      11,
+      4,
+      -5,
+      -11
+    ],
+    "doraemon": [
+      23,
+      8,
+      -9,
+      -24
+    ]
+  },
+  "reviews": {
+    "anya": {
+      "audit": {
+        "gif": "阿尼亚-喜欢你.gif",
+        "sha256": "d1dde1b174103f23d2cfd84b49dae2a7b4968ecb2f712bf3c6e334f2046c0a45",
+        "size": [
+          512,
+          512
+        ],
+        "decoded_frames": 16,
+        "distinct_frames": 16,
+        "loop_ms": 1600,
+        "durations_ms": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "technical_status": "passed",
+        "errors": [],
+        "transition_change": [
+          0.11021691119195771,
+          0.06725867955324623,
+          0.08874204134580042,
+          0.07903232539835273,
+          0.10448663943949081,
+          0.054875650005549295,
+          0.09863803027572352,
+          0.0631497789955677,
+          0.0850545001715699,
+          0.07654630299957133,
+          0.07836394608734078,
+          0.07036155938202253,
+          0.08054523590606726,
+          0.07739614929941441,
+          0.06964241167204796,
+          0.06192327312604431
+        ],
+        "transition_candidates": [],
+        "warning": "Transition scores are hints. Blinks can score high; ugly faces can score low. Visual review is required."
+      },
+      "visual_review": {
+        "sha256": "d1dde1b174103f23d2cfd84b49dae2a7b4968ecb2f712bf3c6e334f2046c0a45",
+        "reviewer": "assistant: native-size decoded sheets and face details; local browser normal playback, frame stepping and loop seam",
+        "frames": [
+          {
+            "index": 0,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 0
+          },
+          {
+            "index": 1,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 1
+          },
+          {
+            "index": 2,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 2
+          },
+          {
+            "index": 3,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 3
+          },
+          {
+            "index": 4,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 4
+          },
+          {
+            "index": 5,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 5
+          },
+          {
+            "index": 6,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 6
+          },
+          {
+            "index": 7,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 7
+          },
+          {
+            "index": 8,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 8
+          },
+          {
+            "index": 9,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 9
+          },
+          {
+            "index": 10,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 10
+          },
+          {
+            "index": 11,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 11
+          },
+          {
+            "index": 12,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 12
+          },
+          {
+            "index": 13,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 13
+          },
+          {
+            "index": 14,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 14
+          },
+          {
+            "index": 15,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 15
+          }
+        ],
+        "playback": "pass",
+        "loop_seam": "pass",
+        "user_acceptance": "pending",
+        "notes": "Closed-eye smiles and modest head tilt are intentional. Character construction and gesture checked at source/native output size."
+      },
+      "gate_result": {
+        "technical_status": "passed",
+        "visual_status": "reviewed",
+        "reviewer": "assistant: native-size decoded sheets and face details; local browser normal playback, frame stepping and loop seam",
+        "user_acceptance": "pending"
+      }
+    },
+    "doraemon": {
+      "audit": {
+        "gif": "哆啦A梦-交给我.gif",
+        "sha256": "5af5fb9521d4c14a5c479152b43cdd78f000b92f2a46dda30f0179450253930f",
+        "size": [
+          512,
+          512
+        ],
+        "decoded_frames": 15,
+        "distinct_frames": 15,
+        "loop_ms": 1600,
+        "durations_ms": [
+          100,
+          200,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "technical_status": "passed",
+        "errors": [],
+        "transition_change": [
+          0.10726634139861767,
+          0.07236404852978318,
+          0.14854158091457825,
+          0.15151585222937952,
+          0.08580931182474326,
+          0.07539753575807467,
+          0.10268264867118126,
+          0.11901792120333447,
+          0.10509340751052838,
+          0.14587784358294728,
+          0.08797929190841108,
+          0.14538043340525586,
+          0.1641745645978675,
+          0.17542036219934332,
+          0.044060502304054845
+        ],
+        "transition_candidates": [],
+        "warning": "Transition scores are hints. Blinks can score high; ugly faces can score low. Visual review is required."
+      },
+      "visual_review": {
+        "sha256": "5af5fb9521d4c14a5c479152b43cdd78f000b92f2a46dda30f0179450253930f",
+        "reviewer": "assistant: native-size decoded sheets and face details; local browser normal playback, frame stepping and loop seam",
+        "frames": [
+          {
+            "index": 0,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 0
+          },
+          {
+            "index": 1,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 1
+          },
+          {
+            "index": 2,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 3
+          },
+          {
+            "index": 3,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 4
+          },
+          {
+            "index": 4,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 5
+          },
+          {
+            "index": 5,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 6
+          },
+          {
+            "index": 6,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 7
+          },
+          {
+            "index": 7,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 8
+          },
+          {
+            "index": 8,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 9
+          },
+          {
+            "index": 9,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 10
+          },
+          {
+            "index": 10,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 11
+          },
+          {
+            "index": 11,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 12
+          },
+          {
+            "index": 12,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 13
+          },
+          {
+            "index": 13,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 14
+          },
+          {
+            "index": 14,
+            "decision": "pass",
+            "issues": [],
+            "source_cell": 15
+          }
+        ],
+        "playback": "pass",
+        "loop_seam": "pass",
+        "user_acceptance": "pending",
+        "notes": "Closed-eye smiles and modest head tilt are intentional. Character construction and gesture checked at source/native output size. Original source cell 2 was removed; source cell 1 holds for 200ms. Two single-frame repair attempts were rejected instead of inserting a style mismatch."
+      },
+      "gate_result": {
+        "technical_status": "passed",
+        "visual_status": "reviewed",
+        "reviewer": "assistant: native-size decoded sheets and face details; local browser normal playback, frame stepping and loop seam",
+        "user_acceptance": "pending"
+      }
+    }
+  },
+  "limits": "Hand-drawn microdetails may still vary. Recorded assistant visual review does not establish user acceptance or guarantee all future generations are stable."
+}

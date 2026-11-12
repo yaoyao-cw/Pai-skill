@@ -16,6 +16,7 @@
 | `hand-drawn-styles/` | 内置 22 种手绘画风配方 + 3.1 稳定版，输出可复制的生图提示词（不生图） | [threerocks/hand-drawn-styles](https://github.com/threerocks/hand-drawn-styles) |
 | `design-style/` | 设计风格库：styles / layouts / gallery 视觉风格与版式参考（含 Remotion 源码） | [guanmo-ai/design-style](https://github.com/guanmo-ai/design-style) |
 | `huashu-design/` | 花叔Design：用 HTML 做高保真原型、PPTX、动画、信息图与设计评审，先出三个方向初稿 | [alchaincyf/huashu-design](https://github.com/alchaincyf/huashu-design) |
+| `gif-factory/` | GIF 工厂：表情包、光栅卡、动态海报、动态签名、电影片头（40 种字体排版）、动态绘本、品牌短片 | [WoYun520/gif-factory](https://github.com/WoYun520/gif-factory) |
 
 ## 安装
 
@@ -29,4 +30,5 @@ cp -R 设计和UI/anatomy ~/.grok/skills/anatomy
 cp -R 设计和UI/hand-drawn-styles ~/.grok/skills/hand-drawn-styles
 cp -R 设计和UI/huashu-design ~/.grok/skills/huashu-design
 cp -R 设计和UI/design-style ~/.grok/skills/design-style
+cp -R 设计和UI/gif-factory ~/.grok/skills/gif-factory
 ```

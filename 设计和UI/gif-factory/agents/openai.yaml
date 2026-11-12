@@ -1,0 +1,4 @@
+interface:
+  display_name: "GIF 工厂"
+  short_description: "用图片和文字做表情包、变画卡、海报、签名、片头、绘本和品牌短片"
+  default_prompt: "使用 $pixel-gif-sticker-pack，按我的需求选择做法，保留已定素材和画风，制作并检查实际作品。"
