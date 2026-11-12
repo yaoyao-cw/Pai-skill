@@ -1,0 +1,8 @@
+<!doctype html><html lang="zh-CN"><body><template><style>
+@font-face{font-family:Hanzi;src:url('assets/fonts/Hanzi.woff2') format('woff2');font-display:block}
+*{box-sizing:border-box}#root{position:absolute;inset:0;overflow:hidden;color:#503B2C;font-family:Hanzi,serif}
+.world{position:absolute;inset:0;overflow:hidden}.paper{position:absolute}.actor{position:absolute;width:512px;height:512px;transform-origin:50% 95%;z-index:4}.pose{width:512px;height:512px;background-repeat:no-repeat;background-size:8192px 512px;background-position:0 0}
+.headline{position:absolute;margin:0;font-size:110px;line-height:1.18;font-weight:400;letter-spacing:0}.line{display:block}.eyebrow{position:absolute;font-size:40px;line-height:1.25}.label{position:absolute;text-align:center;line-height:1.2}.ground{position:absolute;left:0;bottom:0;width:1920px;height:130px;clip-path:polygon(0 8%,9% 3%,19% 7%,30% 1%,44% 5%,60% 2%,75% 6%,90% 2%,100% 5%,100% 100%,0 100%)}
+</style><div id="root" data-composition-id="effects" data-duration="15" data-width="1920" data-height="1080"><div class="world" style="pointer-events:none">
+<div id="f-wipe" class="paper" data-layout-allow-overflow style="left:0;top:0;width:1920px;height:1160px;background:#B85E41;clip-path:polygon(0 2%,10% 0,20% 3%,35% 1%,50% 4%,70% 0,90% 3%,100% 1%,100% 100%,0 100%)"></div>
+</div></div><script>(()=>{const tl=gsap.timeline({paused:true});tl.fromTo('#f-wipe',{y:1160},{y:-40,duration:.32,ease:'power3.inOut'},4.7);tl.to('#f-wipe',{y:-1200,duration:.32,ease:'power3.inOut'},5.02);window.__timelines["effects"]=tl;})();</script></template></body></html>

@@ -1,0 +1,153 @@
+{
+  "individual_cards": [
+    {
+      "name": "蜘蛛侠",
+      "filename": "01-spider-man.gif",
+      "size": [
+        480,
+        720
+      ],
+      "frames": 32,
+      "duration_ms": 6000,
+      "loop": 0,
+      "bytes": 2499437,
+      "origin": "网络现成拼脸素材，用户指定保留的首版",
+      "sha256": "3c26ef2b131e3e398eaf8ccc7dc0778235ab1e830c08319d8127c24998b3d313"
+    },
+    {
+      "name": "恶灵骑士",
+      "filename": "02-ghost-rider.gif",
+      "size": [
+        480,
+        720
+      ],
+      "frames": 32,
+      "duration_ms": 6000,
+      "loop": 0,
+      "bytes": 2162213,
+      "origin": "参考构图引导生成的人脸/骷髅双联画",
+      "sha256": "ec548337bc35692cd7d3919da7f834eaf2ba0de2bb179ca9c1af6d8d36093a7b"
+    },
+    {
+      "name": "毒液",
+      "filename": "03-venom.gif",
+      "size": [
+        480,
+        720
+      ],
+      "frames": 32,
+      "duration_ms": 6000,
+      "loop": 0,
+      "bytes": 2227476,
+      "origin": "参考构图引导生成的人脸/毒液双联画",
+      "sha256": "6cee63753a5e1ccc5fbb44aec75d8456c19498ec144e7937a9fdab4bc871b2c9"
+    },
+    {
+      "name": "钢铁侠",
+      "filename": "04-iron-man.gif",
+      "size": [
+        480,
+        720
+      ],
+      "frames": 32,
+      "duration_ms": 6000,
+      "loop": 0,
+      "bytes": 2169055,
+      "origin": "网络现成拼脸素材",
+      "sha256": "3beb6d668a695849d03e90b44328f32841dd7f1318676eb6820c7e51ae3fc66b"
+    },
+    {
+      "name": "蝙蝠侠",
+      "filename": "05-batman.gif",
+      "size": [
+        480,
+        720
+      ],
+      "frames": 32,
+      "duration_ms": 6000,
+      "loop": 0,
+      "bytes": 2219143,
+      "origin": "现成布鲁斯与蝙蝠侠照片配对，眼位/下巴统一裁切对位",
+      "sha256": "640ac7198ad181851af6f3c464845115a9f9fae9849cd271fa71abeddc18852c"
+    },
+    {
+      "name": "黑豹",
+      "filename": "06-black-panther.gif",
+      "size": [
+        480,
+        720
+      ],
+      "frames": 32,
+      "duration_ms": 6000,
+      "loop": 0,
+      "bytes": 1137091,
+      "origin": "现成数字绘画",
+      "sha256": "be3bc32b77f1ec7951668f8193e0a6478920eff51c200761d947631c598a0490"
+    },
+    {
+      "name": "金刚狼",
+      "filename": "07-wolverine.gif",
+      "size": [
+        480,
+        720
+      ],
+      "frames": 32,
+      "duration_ms": 6000,
+      "loop": 0,
+      "bytes": 1999531,
+      "origin": "Daniel Vasquez绘制的矢量插画",
+      "sha256": "8f039f4fb0d3b89fa8206c48971891b36ae3e01207f2c6e9668554f081640626"
+    },
+    {
+      "name": "美国队长",
+      "filename": "08-captain-america.gif",
+      "size": [
+        480,
+        720
+      ],
+      "frames": 32,
+      "duration_ms": 6000,
+      "loop": 0,
+      "bytes": 2286418,
+      "origin": "现成人脸/面罩合成图，面罩一侧为灰度",
+      "sha256": "f46f02c642d00994be1d07689fb43ac3b2be0323af0038cb9649d4e231249c66"
+    },
+    {
+      "name": "死侍",
+      "filename": "09-deadpool.gif",
+      "size": [
+        480,
+        720
+      ],
+      "frames": 32,
+      "duration_ms": 6000,
+      "loop": 0,
+      "bytes": 1973761,
+      "origin": "现成演员/角色拼脸素材",
+      "sha256": "cdb7ea2de0a1581c7c725563f97ba93cb6c3db826aff4540bf15017bdd0b8250"
+    }
+  ],
+  "overview": {
+    "size": [
+      960,
+      1392
+    ],
+    "frames": 32,
+    "duration_ms": 6000,
+    "loop": 0,
+    "bytes": 9640195,
+    "fixed_gutter_max_change": 0,
+    "each_card_dynamic_mean_max": [
+      81.84962277091907,
+      51.04356084962277,
+      47.932358646262,
+      65.84566561642661,
+      67.38129340277777,
+      36.981824417009605,
+      71.45973722565158,
+      68.34434209962276,
+      83.49490151320302
+    ],
+    "seam_mean": 0.0
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "appearance": "handmade clay look, HD non-pixel pose sequence",
+  "subject": "original bakery mascots",
+  "movement": "16 generated full-body poses per GIF",
+  "files": [
+    "01-croissant.gif",
+    "02-toast.gif",
+    "03-coffee.gif",
+    "04-pull.gif"
+  ],
+  "user_acceptance": "Original trio and exact fusion film accepted by user; pull GIF uses the film actor poses",
+  "limit": "Not rigged continuous 3D; acceptance does not guarantee new generations"
+}

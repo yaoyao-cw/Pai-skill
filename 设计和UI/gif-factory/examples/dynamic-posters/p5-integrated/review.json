@@ -1,0 +1,137 @@
+[
+  {
+    "file": "01-rin.gif",
+    "name": "镜音铃",
+    "title": "TURN IT UP",
+    "size": [
+      720,
+      960
+    ],
+    "duration_ms": 6000,
+    "frames": 26,
+    "loop": 0,
+    "fixed_footer_max_change": 0,
+    "seam_equal": true,
+    "bytes": 6497532
+  },
+  {
+    "file": "02-luka.gif",
+    "name": "流歌",
+    "title": "NIGHT ECHOES",
+    "size": [
+      720,
+      960
+    ],
+    "duration_ms": 6000,
+    "frames": 26,
+    "loop": 0,
+    "fixed_footer_max_change": 0,
+    "seam_equal": true,
+    "bytes": 7611477
+  },
+  {
+    "file": "03-teto.gif",
+    "name": "Teto",
+    "title": "BREAK THE LOOP",
+    "size": [
+      720,
+      960
+    ],
+    "duration_ms": 6000,
+    "frames": 26,
+    "loop": 0,
+    "fixed_footer_max_change": 0,
+    "seam_equal": true,
+    "bytes": 7491568
+  },
+  {
+    "file": "04-yuki.gif",
+    "name": "结城理",
+    "title": "BLUE HOUR",
+    "size": [
+      720,
+      960
+    ],
+    "duration_ms": 6000,
+    "frames": 26,
+    "loop": 0,
+    "fixed_footer_max_change": 0,
+    "seam_equal": true,
+    "bytes": 6366964
+  },
+  {
+    "file": "05-miku.gif",
+    "name": "初音",
+    "title": "LIVE LOUD",
+    "size": [
+      720,
+      960
+    ],
+    "duration_ms": 6000,
+    "frames": 26,
+    "loop": 0,
+    "fixed_footer_max_change": 0,
+    "seam_equal": true,
+    "bytes": 7067733
+  },
+  {
+    "file": "06-naruto.gif",
+    "name": "鸣人",
+    "title": "CHARGE UP",
+    "size": [
+      720,
+      960
+    ],
+    "duration_ms": 6000,
+    "frames": 26,
+    "loop": 0,
+    "fixed_footer_max_change": 0,
+    "seam_equal": true,
+    "bytes": 7254947
+  },
+  {
+    "file": "07-luffy.gif",
+    "name": "路飞",
+    "title": "SET SAIL",
+    "size": [
+      720,
+      960
+    ],
+    "duration_ms": 6000,
+    "frames": 26,
+    "loop": 0,
+    "fixed_footer_max_change": 0,
+    "seam_equal": true,
+    "bytes": 7274904
+  },
+  {
+    "file": "08-gojo.gif",
+    "name": "五条悟",
+    "title": "LIMIT LESS",
+    "size": [
+      720,
+      960
+    ],
+    "duration_ms": 6000,
+    "frames": 26,
+    "loop": 0,
+    "fixed_footer_max_change": 0,
+    "seam_equal": true,
+    "bytes": 6375510
+  },
+  {
+    "file": "09-goku.gif",
+    "name": "悟空",
+    "title": "GO BEYOND",
+    "size": [
+      720,
+      960
+    ],
+    "duration_ms": 6000,
+    "frames": 26,
+    "loop": 0,
+    "fixed_footer_max_change": 0,
+    "seam_equal": true,
+    "bytes": 6851577
+  }
+]

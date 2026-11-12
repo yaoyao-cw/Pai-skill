@@ -1,0 +1,25 @@
+<!doctype html><html lang="zh-CN"><body><template><style>
+@font-face{font-family:Hanzi;src:url('assets/fonts/Hanzi.woff2') format('woff2');font-display:block}
+*{box-sizing:border-box}#root{position:absolute;inset:0;overflow:hidden;color:#503B2C;font-family:Hanzi,serif}
+.world{position:absolute;inset:0;overflow:hidden}.paper{position:absolute}.actor{position:absolute;width:512px;height:512px;transform-origin:50% 95%;z-index:4}.pose{width:512px;height:512px;background-repeat:no-repeat;background-size:8192px 512px;background-position:0 0}
+.headline{position:absolute;margin:0;font-size:110px;line-height:1.18;font-weight:400;letter-spacing:0}.line{display:block}.eyebrow{position:absolute;font-size:40px;line-height:1.25}.label{position:absolute;text-align:center;line-height:1.2}.ground{position:absolute;left:0;bottom:0;width:1920px;height:130px;clip-path:polygon(0 8%,9% 3%,19% 7%,30% 1%,44% 5%,60% 2%,75% 6%,90% 2%,100% 5%,100% 100%,0 100%)}
+</style><div id="root" data-composition-id="close" data-duration="5" data-width="1920" data-height="1080"><div class="world" style="background:#F3EAD6"><div class="ground" style="background:#D2D8B3"></div>
+<h1 id="e-title" class="headline" style="left:145px;top:160px;width:610px;font-size:104px"><span class="line">把好心情，</span><span class="line">一起打包。</span></h1>
+<div id="e-bag" class="paper" style="left:805px;top:465px;width:920px;height:551px;transform-origin:50% 100%;clip-path:inset(-1200px 0px 0px 0px)" data-layout-allow-overflow>
+<img id="e-back" src="assets/props/bag.webp" style="position:absolute;inset:0;width:920px;height:551px" alt="外带袋背面">
+<img id="e-bread" class="paper" src="assets/props/bread-only.png" style="left:220px;top:-20px;width:390px;z-index:1" alt="面包落入外带袋">
+<div id="e-toast" class="actor" style="left:35px;top:-220px;z-index:2"><div id="e-toast-pose" class="pose" style="background-image:url(assets/characters/toast.webp)"></div></div><div id="e-coffee" class="actor" style="left:360px;top:-220px;z-index:2"><div id="e-coffee-pose" class="pose" style="background-image:url(assets/characters/coffee.webp)"></div></div>
+<img id="e-front" src="assets/props/bag-front.webp" style="position:absolute;inset:0;width:920px;height:551px;z-index:3" alt="外带袋正面">
+<div id="e-name" class="label" data-var-text="brandName" style="left:110px;top:290px;width:700px;font-size:102px;z-index:5">慢慢面包店</div>
+<div id="e-cta" class="label" data-var-text="cta" style="left:180px;top:405px;width:560px;font-size:50px;z-index:5">来坐一会儿。</div></div>
+<div id="e-chef" class="actor" style="left:110px;top:470px;"><div id="e-chef-pose" class="pose" style="background-image:url(assets/characters/croissant.webp)"></div></div>
+</div></div><script>(()=>{const tl=gsap.timeline({paused:true});
+tl.fromTo('#e-back',{y:470},{y:0,duration:.55,ease:'back.out(1.05)'},.04);tl.fromTo('#e-front',{y:470},{y:0,duration:.55,ease:'back.out(1.05)'},.04);
+tl.fromTo('#e-bread',{y:-600,rotation:-8},{y:100,rotation:0,duration:.66,ease:'power2.in'},.25);
+tl.fromTo('#e-toast',{y:410,scale:.65,opacity:0},{y:0,scale:.65,opacity:1,duration:.65,ease:'back.out(1.1)'},1.01);
+tl.fromTo('#e-coffee',{y:410,scale:.65,opacity:0},{y:0,scale:.65,opacity:1,duration:.65,ease:'back.out(1.1)'},1.21);
+tl.fromTo('#e-name',{clipPath:'inset(0% 100% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:.38,ease:'power2.out'},1.14);
+tl.fromTo('#e-cta',{opacity:0},{opacity:1,duration:.2},1.6);
+tl.fromTo('#e-title',{clipPath:'inset(0% 100% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:.45},.65);
+tl.fromTo('#e-chef',{x:-150,scale:.92},{x:0,scale:.92,duration:.5,ease:'power2.out'},.15);
+tl.fromTo("#e-chef-pose",{backgroundPositionX:"0px"},{backgroundPositionX:"-7680px",duration:1.92,ease:"steps(15)"},0.6);tl.fromTo("#e-toast-pose",{backgroundPositionX:"0px"},{backgroundPositionX:"-7680px",duration:1.92,ease:"steps(15)"},1.63);tl.fromTo("#e-coffee-pose",{backgroundPositionX:"0px"},{backgroundPositionX:"-7680px",duration:1.92,ease:"steps(15)"},1.81);window.__timelines["close"]=tl;})();</script></template></body></html>

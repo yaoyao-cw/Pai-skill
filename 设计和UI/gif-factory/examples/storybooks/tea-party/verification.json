@@ -1,0 +1,25 @@
+{
+  "file": "realbook-writing.mp4",
+  "width": 1920,
+  "height": 1080,
+  "fps": 6.0,
+  "nominal_fps": 6.0,
+  "duration": 54.0,
+  "decoded_frames": 324,
+  "checks_passed": true,
+  "errors": [],
+  "audio": [
+    {
+      "codec_name": "h264",
+      "codec_type": "video"
+    },
+    {
+      "codec_name": "aac",
+      "codec_type": "audio",
+      "sample_rate": "48000",
+      "channels": 2
+    }
+  ],
+  "writing_cues": 15,
+  "completed_text_frames": 15
+}

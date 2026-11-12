@@ -1,0 +1,24 @@
+<!doctype html><html lang="zh-CN"><body><template><style>
+@font-face{font-family:Hanzi;src:url('assets/fonts/Hanzi.woff2') format('woff2');font-display:block}
+*{box-sizing:border-box}#root{position:absolute;inset:0;overflow:hidden;color:#503B2C;font-family:Hanzi,serif}
+.world{position:absolute;inset:0;overflow:hidden}.paper{position:absolute}.actor{position:absolute;width:512px;height:512px;transform-origin:50% 95%;z-index:4}.pose{width:512px;height:512px;background-repeat:no-repeat;background-size:8192px 512px;background-position:0 0}
+.headline{position:absolute;margin:0;font-size:110px;line-height:1.18;font-weight:400;letter-spacing:0}.line{display:block}.eyebrow{position:absolute;font-size:40px;line-height:1.25}.label{position:absolute;text-align:center;line-height:1.2}.ground{position:absolute;left:0;bottom:0;width:1920px;height:130px;clip-path:polygon(0 8%,9% 3%,19% 7%,30% 1%,44% 5%,60% 2%,75% 6%,90% 2%,100% 5%,100% 100%,0 100%)}
+</style><div id="root" data-composition-id="open" data-duration="5" data-width="1920" data-height="1080"><div class="world" style="background:#F3EAD6"><div class="ground" style="background:#D2D8B3"></div>
+<div class="eyebrow" style="left:170px;top:105px" data-var-text="brandName">慢慢面包店</div>
+<h1 id="a-title" class="headline" style="left:790px;top:145px;width:1000px"><span class="line">把今天，慢慢打开。</span></h1>
+
+<div id="a-panel0" class="paper" style="left:790px;top:320px;width:250px;height:683px;overflow:hidden;transform-origin:0% 50%"><img src="assets/props/shop-panel0.webp" style="position:absolute;left:0;top:0;width:250px;height:683px" alt="纸片店铺第1折"></div><div id="a-panel1" class="paper" style="left:1040px;top:320px;width:250px;height:683px;overflow:hidden;transform-origin:0% 50%"><img src="assets/props/shop-panel1.webp" style="position:absolute;left:0;top:0;width:250px;height:683px" alt="纸片店铺第2折"></div><div id="a-panel2" class="paper" style="left:1290px;top:320px;width:250px;height:683px;overflow:hidden;transform-origin:0% 50%"><img src="assets/props/shop-panel2.webp" style="position:absolute;left:0;top:0;width:250px;height:683px" alt="纸片店铺第3折"></div><div id="a-name" class="label" style="left:940px;top:344px;width:455px;font-size:51px" data-var-text="brandName">慢慢面包店</div>
+<div id="a-chef" class="actor" style="left:150px;top:455px;"><div id="a-chef-pose" class="pose" style="background-image:url(assets/characters/croissant-pull.webp)"></div></div>
+<div id="a-tab" class="paper" style="left:605px;top:748px;width:190px;height:29px;background:#B85E41;border:3px solid #F3EAD6;transform-origin:100% 50%"></div>
+</div></div><script>(()=>{const tl=gsap.timeline({paused:true});tl.fromTo("#a-chef-pose",{backgroundPositionX:"0px"},{backgroundPositionX:"-7680px",duration:2.35,ease:"steps(15)"},0.23);
+tl.set('#a-tab',{opacity:0},0);tl.to('#a-tab',{opacity:1,duration:.1},.75);tl.fromTo('#a-tab',{scaleX:1},{scaleX:1.65,duration:.6,ease:'power2.inOut'},1.05);
+tl.to('#a-tab',{opacity:0,duration:.1},1.65);
+
+tl.fromTo('#a-panel0',{scaleX:0},{scaleX:1,duration:.36,ease:'power2.out'},1.24);
+tl.fromTo('#a-panel1',{scaleX:0},{scaleX:1,duration:.36,ease:'power2.out'},1.48);
+tl.fromTo('#a-panel2',{scaleX:0},{scaleX:1,duration:.36,ease:'power2.out'},1.72);
+tl.fromTo('#a-name',{opacity:0},{opacity:1,duration:.12},2.02);
+tl.fromTo('#a-title',{clipPath:'inset(0% 100% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:.45,ease:'power2.out'},2.15);
+tl.to('#a-chef',{rotation:-2,y:-8,duration:.16,ease:'power1.out'},3.4);
+tl.to('#a-chef',{rotation:0,y:0,duration:.22,ease:'power1.inOut'},3.56);
+window.__timelines["open"]=tl;})();</script></template></body></html>
