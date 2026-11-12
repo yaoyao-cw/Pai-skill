@@ -39,4 +39,4 @@ GIF 工厂：根据需求选择表情包、光栅变画卡、动态海报、动�
 ## 归档布局
 
 - GitHub `yaoyao-cw/Pai-skill`: 完整上游工作区（不含 `.git`）+ 本 SOURCE.md + 推文原图，位于 `设计和UI/gif-factory/`。
-- Drive 185 `Pai/Pai-skill/设计和UI/gif-factory/` 与 Drive 477 `Pai-skill/设计和UI/gif-factory/`: 关键文件散放（`SOURCE.md`、`README.md`、`SKILL.md`、`LICENSE`、`GUIDE.md`、推文原图）+ 完整上游树分卷 zip（`gif-factory-upstream-7390042.zip` 及 `.z01` 起的分卷，单卷不超过 90MB）。合并：`zip -s 0 gif-factory-upstream-7390042.zip --out gif-factory-upstream-7390042-full.zip`。
+- Drive 185 `Pai/Pai-skill/设计和UI/gif-factory/` 与 Drive 477 `Pai-skill/设计和UI/gif-factory/`: 关键文件散放（`SOURCE.md`、`README.md`、`SKILL.md`、`LICENSE`、`GUIDE.md`、`GALLERY.md`、推文原图）+ 完整上游树分卷（`gif-factory-upstream-7390042.zip.part-00` 至 `part-06`，每卷不超过 90MB；完整包 552MB，799 个文件）。合并：`cat gif-factory-upstream-7390042.zip.part-* > gif-factory-upstream-7390042.zip`。完整 zip SHA256：`623f7784d6118e8b83c0e0f47dfe6cf4c02112c0801ed8636d6b8ebdcb5dc0e6`。
