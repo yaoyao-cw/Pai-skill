@@ -10,6 +10,7 @@
 | `yichen-jianying-edit/` | 匹配版剪映上无界面生成/修改原生草稿，或按明确要求导出原生 MP4 | [mcncarl/yichen-skills](https://github.com/mcncarl/yichen-skills/tree/main/yichen-jianying-edit) |
 | `cy-carousel/` | AI 科技类小红书图文轮播（封面＋10 页，真实素材 + 手排） | [chengyi-ai/cy-carousel-skill](https://github.com/chengyi-ai/cy-carousel-skill) |
 | `openzine/` | PDF 或图片文件夹转可翻页 3D 电子书（独立 HTML，离线可用） | [JosssphZhou/openzine](https://github.com/JosssphZhou/openzine) |
+| `maitian-publish/` | 成片整理成 B站/小红书/抖音/视频号/YouTube/X/IG 发布素材与工程，交给麦田分发 | [CzzzzzzJ/mdldm-maitian](https://github.com/CzzzzzzJ/mdldm-maitian) |
 
 ## 安装
 
@@ -20,4 +21,5 @@ cp -R 自媒体/Easel/skills/openclaw/card-xiaohongshu ~/.grok/skills/card-xiaoh
 cp -R 自媒体/yichen-jianying-edit ~/.grok/skills/yichen-jianying-edit
 cp -R 自媒体/cy-carousel ~/.grok/skills/cy-carousel
 cp -R 自媒体/openzine ~/.grok/skills/openzine
+cp -R 自媒体/maitian-publish ~/.grok/skills/maitian-publish
 ```
