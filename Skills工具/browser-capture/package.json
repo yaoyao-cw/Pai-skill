@@ -1,0 +1,39 @@
+{
+  "name": "browser-capture",
+  "version": "4.0.0",
+  "description": "Zero-dependency browser CDP + stealth Hook capture & reverse-engineering skill for BitBrowser, AdsPower, and Chrome/VisibleV8",
+  "license": "MIT",
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/duwqijlk/browser-capture.git"
+  },
+  "homepage": "https://github.com/duwqijlk/browser-capture#readme",
+  "bugs": {
+    "url": "https://github.com/duwqijlk/browser-capture/issues"
+  },
+  "bin": {
+    "browser-capture": "./bin/capture.cjs"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "start": "node bin/capture.cjs",
+    "help": "node bin/capture.cjs --help",
+    "test": "node --test tests/capture.test.cjs tests/repair.test.cjs tests/providers.test.cjs tests/modes.test.cjs tests/reverse-kit.test.cjs tests/worker-e2e.test.cjs"
+  },
+  "keywords": [
+    "cdp",
+    "chrome-devtools-protocol",
+    "reverse-engineering",
+    "anti-debug",
+    "packet-capture",
+    "har",
+    "bitbrowser",
+    "adspower",
+    "visiblev8",
+    "ai-skill",
+    "wasm"
+  ]
+}
