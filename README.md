@@ -40,6 +40,7 @@ PAI 的 agent skill 仓库。按领域分目录存放可被 Grok / Claude / 其�
 Skills工具/
   luban/                          鲁班：打磨可传播的 Skill 资产（LearnPrompt）
   kitter/                         Kitter CLI skill 库管理（what1f）
+  browser-capture/                浏览器 CDP + Hook 抓包与逆向 skill / CLI（duwqijlk，MIT；能力为上游自称，未作运行验证）
 ```
 
 ## 安装
@@ -70,6 +71,7 @@ cp -R 自媒体/openzine ~/.grok/skills/openzine
 cp -R 自媒体/handraw-style ~/.grok/skills/handraw-style
 cp -R Skills工具/luban ~/.grok/skills/luban
 cp -R Skills工具/kitter ~/.grok/skills/kitter
+cp -R Skills工具/browser-capture ~/.grok/skills/browser-capture
 ```
 
 新开一轮对话后才会被发现。

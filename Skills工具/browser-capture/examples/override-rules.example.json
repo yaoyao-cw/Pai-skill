@@ -1,0 +1,27 @@
+{
+  "rules": [
+    {
+      "name": "patch-antidebug-flags",
+      "urlPattern": "*app*.js*",
+      "resourceType": "Script",
+      "replace": [
+        {
+          "regex": "isDevToolsOpen\\s*=\\s*true",
+          "flags": "g",
+          "with": "isDevToolsOpen=false"
+        },
+        {
+          "match": "window.location.href='about:blank'",
+          "with": "void 0"
+        }
+      ]
+    },
+    {
+      "name": "swap-local-sign-script",
+      "urlPattern": "https://target.example/static/sign.js*",
+      "resourceType": "Script",
+      "file": "./patched-sign.example.js",
+      "contentType": "application/javascript; charset=utf-8"
+    }
+  ]
+}

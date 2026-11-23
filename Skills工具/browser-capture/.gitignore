@@ -1,0 +1,31 @@
+# Local capture outputs & runtime state
+browser-captures/
+controllers/
+runs/
+captures/
+output/
+*.har
+*.heapsnapshot
+*.heapprofile
+*.jsonl
+*.log
+
+# Dependencies & caches
+node_modules/
+.npm/
+
+# Local override configs containing site-specific secrets
+rules.local.json
+*.local.json
+.env
+.env.*
+
+# Editor & OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.tmp
+_backup*
